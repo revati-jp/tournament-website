@@ -1,10 +1,27 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 
 import svelte from "@astrojs/svelte";
 
 // https://astro.build/config
 export default defineConfig({
+  fonts: [
+    {
+      name: "Noto Sans JP",
+      cssVariable: "--font-noto-sans-jp",
+      provider: fontProviders.fontsource(),
+    },
+    {
+      name: "Zalando Sans Expanded",
+      cssVariable: "--font-zalando-sans-expanded",
+      provider: fontProviders.fontsource(),
+    },
+    {
+      name: "Sofia Sans Extra Condensed",
+      cssVariable: "--font-sofia-sans-extra-condensed",
+      provider: fontProviders.fontsource(),
+    },
+  ],
   vite: {
     css: {
       preprocessorOptions: {

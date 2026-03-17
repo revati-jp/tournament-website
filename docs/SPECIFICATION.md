@@ -23,7 +23,7 @@
 ## 使用技術
 
 - pnpm
-- Astro
+- Astro v6
     - Svelte（インテグレーション）
     - SCSS
     - TypeScript
@@ -36,7 +36,12 @@ Figma 参照。
     - 青: `#1b44ad`
     - 黄: `#e4ff00`
 - フォント
-    - 太さまで
+    - Noto Sans JP (日本語メインフォント)
+      <!-- 太さ未確定 -->
+    - Zalando Sans Expanded (ヘッダー・フッターのナビゲーション用)
+      <!-- 太さ未確定 -->
+    - Sofia Sans Extra Condensed (その他見出し等で使用)
+      <!-- 太さ未確定 -->
 - ブレイクポイント: 788px（従来通り）
 
 ## 運用
