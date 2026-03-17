@@ -45,8 +45,8 @@ Figma 参照。
     - `main`: 開発
     - `feat/*`, `fix/*`: トピック
     - `production`: プロダクション
-- 整形等: Prettier + ESLint ? 前に言ってた Oxfmt?
-- デプロイ: Cloudflare Workers（試用）
+- 整形等: Prettier + ESLint
+- デプロイ: Cloudflare Workers
 - バージョニング: 無し
 
 ## その他要件
