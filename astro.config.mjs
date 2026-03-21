@@ -20,6 +20,7 @@ export default defineConfig({
       name: "Sofia Sans Extra Condensed",
       cssVariable: "--font-sofia-sans-extra-condensed",
       provider: fontProviders.fontsource(),
+      weights: [900]
     },
   ],
   vite: {

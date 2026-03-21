@@ -1,0 +1,45 @@
+---
+interface Props {
+  primary: string;
+  secondary: string;
+}
+
+const { primary, secondary } = Astro.props;
+---
+
+<div>
+  <h1 class="primary">{primary}</h1>
+  <span class="slash">//</span>
+  <span class="secondary">{secondary}</span>
+</div>
+
+
+<style lang="scss">
+  div {
+    display: flex;
+    align-items: baseline;
+    gap: 0.3em;
+    margin: 1rem 0;
+
+    // 下線
+    border-bottom: 2px solid rgba($color-text, 0.2);
+  }
+
+  .primary {
+    margin: 0;
+    margin-left: 0.15em;
+    margin-right: 0.1em;
+    font-family: var(--font-sofia-sans-extra-condensed);
+    font-weight: 900;
+    font-size: 2.5rem;
+  }
+
+  .secondary,
+  .slash {
+    position: relative;
+    top: -0.1em;
+    color: rgba($color-text, 0.75);
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+</style>

@@ -1,8 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SectionTitle from '../components/ui/SectionTitle.astro';
+import Button from '../components/ui/Button.astro';
 ---
 
 <Layout title="Home">
-	<h1>Astro</h1>
-	<p>Hello World!</p>
+	<SectionTitle primary="ABOUT" secondary="大会について" />
+	<SectionTitle primary="SCHEDULE" secondary="大会スケジュール" />
+	<SectionTitle primary="RULE" secondary="大会ルール" />
+	<SectionTitle primary="TEAMS" secondary="出場チーム" />
+
+	<Button variant="contained" color="primary">REVATIについて</Button>
+	<Button variant="contained" color="secondary">REVATIについて</Button>
+	<Button variant="contained" color="gray">REVATIについて</Button>
+	<Button variant='outlined' color='primary'>REVATIについて</Button>
+	<Button variant='outlined' color='secondary'>REVATIについて</Button>
+	<Button variant='outlined' color='gray'>REVATIについて</Button>
 </Layout>
