@@ -1,11 +1,12 @@
 ---
 interface Props {
-  variant?: 'contained' | 'outlined';
-  color?: 'primary' | 'secondary' | 'gray';
+  variant?: "contained" | "outlined";
+  color?: "primary" | "secondary" | "gray";
 }
 
-const { variant = 'contained', color = 'primary' } = Astro.props;
+const { variant = "contained", color = "primary" } = Astro.props;
 ---
+
 <div class={`button ${variant} ${color}`}>
   <slot />
 </div>
@@ -39,7 +40,10 @@ const { variant = 'contained', color = 'primary' } = Astro.props;
 
     &.outlined {
       /* borderの太さの差分をpaddingで補正し、必ず同じサイズになるようにする */
-      padding: calc(#{$pad-y} + #{$border-width-contained} - #{$border-width-outlined}) calc(#{$pad-x} + #{$border-width-contained} - #{$border-width-outlined});
+      padding: calc(
+          #{$pad-y} + #{$border-width-contained} - #{$border-width-outlined}
+        )
+        calc(#{$pad-x} + #{$border-width-contained} - #{$border-width-outlined});
       border: $border-width-outlined solid transparent;
       background-color: transparent;
     }

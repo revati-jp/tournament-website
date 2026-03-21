@@ -1,4 +1,4 @@
-export const WEBSITE_TITLE = "REVATI Community CUP \"Gateway\"";
+export const WEBSITE_TITLE = 'REVATI Community CUP "Gateway"';
 
 export const WEBSITE_URL = "https://gateway.revati.jp";
 

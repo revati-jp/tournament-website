@@ -5,5 +5,5 @@
   "assets": {
     "directory": "./dist",
     // "not_found_handling": "404-page" // `src/pages/404.astro`
-  }
+  },
 }
