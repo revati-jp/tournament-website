@@ -1,0 +1,107 @@
+---
+interface Props {
+  number: number;
+  name: string;
+  members: string[];
+}
+
+const { number, name, members } = Astro.props;
+---
+
+<div class="card">
+  <div class="header">
+    <div class="number">
+      {String(number).padStart(2, "0")}
+    </div>
+    <div class="team-name">{name}</div>
+  </div>
+
+  <div class="body">
+    <ul class="members">
+      {members.map((member) => <li>{member}</li>)}
+    </ul>
+  </div>
+
+  <div class="overlay">
+    <span class="team-name">{name}</span>
+  </div>
+</div>
+
+<style lang="scss">
+  .card {
+    position: relative;
+    min-width: 400px;
+    border: 3px solid #303030;
+    border-radius: 6px;
+    overflow: hidden;
+
+    background: linear-gradient(90deg, #080a0f 70%, #202226);
+    color: white;
+
+    .header {
+      display: flex;
+      align-items: stretch;
+
+      .number {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 3rem;
+        aspect-ratio: 1 / 1;
+        background-color: $color-secondary;
+        color: black;
+        font-family: var(--font-sofia-sans-extra-condensed);
+        font-size: 2rem;
+        font-weight: bold;
+        border-bottom-right-radius: 5px;
+      }
+
+      .team-name {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+        letter-spacing: 0.05em;
+      }
+    }
+
+    .body {
+      width: 70%;
+
+      .members {
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 1rem;
+
+        li {
+          display: flex;
+          align-items: center;
+          padding: 0.1rem;
+          border-radius: 3px;
+        }
+
+        li::before {
+          content: "・";
+        }
+      }
+    }
+
+    .overlay {
+      position: absolute;
+      top: 50%;
+      right: 1rem;
+      transform: translateY(-50%);
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: black;
+      opacity: 0.5;
+      letter-spacing: 0.14em;
+      pointer-events: none;
+      white-space: nowrap;
+      user-select: none;
+    }
+  }
+</style>

@@ -2,6 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import SectionTitle from '../components/ui/SectionTitle.astro';
 import Button from '../components/ui/Button.astro';
+import TeamCard from '../components/ui/TeamCard.astro';
+
+const sironekos = Array(6).fill("しろねこ");
 ---
 
 <Layout title="Home">
@@ -16,4 +19,22 @@ import Button from '../components/ui/Button.astro';
 	<Button variant='outlined' color='primary'>REVATIについて</Button>
 	<Button variant='outlined' color='secondary'>REVATIについて</Button>
 	<Button variant='outlined' color='gray'>REVATIについて</Button>
+
+	<div class="team-container">
+		<TeamCard number={1} name="しろねこ" members={sironekos} />
+		<TeamCard number={2} name="しろねこ" members={sironekos} />
+		<TeamCard number={3} name="しろねこ" members={sironekos} />
+		<TeamCard number={4} name="しろねこ" members={sironekos} />
+	</div>
 </Layout>
+
+<style lang="scss">
+	.team-container {
+		justify-self: flex-start;
+
+		margin: 1.5rem;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1rem;
+	}
+</style>
