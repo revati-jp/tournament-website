@@ -2,9 +2,9 @@
 
 ## 概要
 
-- 名前: REVATI Community CUP "Gateway"（旧~~REVATI Challengers CUP Vol.2~~）
-- URL: https://gateway.revati.jp （旧 ~~https://challengers.revati.jp~~）
-- リポジトリ: https://github.com/revati-jp/gateway-website
+- 名前: REVATI Community CUP（旧~~REVATI Challengers CUP Vol.2~~）
+- URL: https://tournament.revati.jp （旧 ~~https://challengers.revati.jp~~）
+- リポジトリ: https://github.com/revati-jp/tournament-website
 - 対応言語: 日本語のみ
 
 ## サイトマップ

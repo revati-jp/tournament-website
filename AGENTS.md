@@ -1,7 +1,7 @@
 # AGENTS.md Instructions
 
 本プロジェクトは、日本を拠点とするeスポーツチーム REVATI (revati.jp) が開催する、
-REVATI Community CUP "Gateway" という Overwatch の大会の公式ウェブサイト (gateway.revati.jp) です。
+REVATI Community CUP という Overwatch の大会の公式ウェブサイト (tournament.revati.jp) です。
 
 大会コンセプトは「まだ見ぬ才能に、輝きの場を」です。
 
@@ -12,7 +12,7 @@ REVATI Community CUP "Gateway" という Overwatch の大会の公式ウェブ�
 - フロントエンド: Astro v6, Svelte（インテグレーション）, SCSS
 - 言語: TypeScript（strict モード）
 - ホスティング: Cloudflare Workers
-- リポジトリ: https://github.com/revati-jp/studio-website
+- リポジトリ: https://github.com/revati-jp/tournament-website
 
 ## コマンド
 

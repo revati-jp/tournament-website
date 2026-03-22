@@ -1,5 +1,5 @@
 {
-  "name": "gateway-website",
+  "name": "tournament-website",
   "private": true,
   "type": "module",
   "scripts": {
