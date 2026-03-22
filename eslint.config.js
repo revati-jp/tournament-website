@@ -1,10 +1,12 @@
+// @ts-check
+import { defineConfig } from "eslint/config";
 import eslint from "@eslint/js";
 import tsEslint from "typescript-eslint";
 import globals from "globals";
 
 import eslintPluginAstro from "eslint-plugin-astro";
 
-export default [
+export default defineConfig([
   eslint.configs.recommended,
   ...tsEslint.configs.recommended,
   ...eslintPluginAstro.configs.recommended,
@@ -26,4 +28,4 @@ export default [
   {
     ignores: ["src/layouts/Layout.astro"],
   },
-];
+]);
