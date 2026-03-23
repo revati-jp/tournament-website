@@ -1,5 +1,5 @@
 ---
-import Layout from "../../../layouts/Layout.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
 import SectionTitle from "../../../components/ui/SectionTitle.astro";
 import Button from "../../../components/ui/Button.astro";
 import TeamCard from "../../../components/ui/TeamCard.astro";
@@ -8,7 +8,7 @@ import BoxArrowUpRightIcon from "../../../components/icons/BoxArrowUpRightIcon.a
 const sironekos = Array(6).fill("しろねこ");
 ---
 
-<Layout title="Home">
+<BaseLayout title="Home">
   <SectionTitle primary="ABOUT" secondary="大会について" />
   <SectionTitle primary="SCHEDULE" secondary="大会スケジュール" />
   <SectionTitle primary="RULE" secondary="大会ルール" />
@@ -34,7 +34,7 @@ const sironekos = Array(6).fill("しろねこ");
     <TeamCard number={3} name="しろねこ" members={sironekos} />
     <TeamCard number={4} name="しろねこ" members={sironekos} />
   </div>
-</Layout>
+</BaseLayout>
 
 <style lang="scss">
   .team-container {

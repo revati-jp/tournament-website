@@ -43,7 +43,7 @@
 │   ├── constants
 │   │   └── tournaments.ts — 大会の情報を定義
 │   ├── layouts
-│   │   └── Layout.astro
+│   │   └── BaseLayout.astro
 │   ├── pages
 │   │   ├── community ― 大会種類 "Community CUP" のディレクトリ
 │   │   │   └── gateway ― Community CUP の大会 "Gateway" のディレクトリ

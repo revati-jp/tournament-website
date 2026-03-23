@@ -3,15 +3,15 @@ import {
   getLatestTournament,
   getPathToTournament,
 } from "../constants/tournaments";
-import Layout from "../layouts/Layout.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const latestTournament = getLatestTournament();
 ---
 
-<Layout title="Home">
+<BaseLayout title="Home">
   <p>
     最新の大会: <a href={getPathToTournament(latestTournament)}
       >{latestTournament.label}</a
     >
   </p>
-</Layout>
+</BaseLayout>

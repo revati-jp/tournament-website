@@ -26,6 +26,6 @@ export default defineConfig([
     },
   },
   {
-    ignores: ["src/layouts/Layout.astro"],
+    ignores: ["src/layouts/BaseLayout.astro"],
   },
 ]);

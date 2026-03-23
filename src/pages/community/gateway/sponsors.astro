@@ -1,17 +1,17 @@
 ---
-import Layout from "../../../layouts/Layout.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
 import SectionTitle from "../../../components/ui/SectionTitle.astro";
 import SponsorCard from "../../../components/ui/SponsorCard.astro";
 import { SPONSORS } from "../../../constants/sponsors";
 ---
 
-<Layout title="Sponsors">
+<BaseLayout title="Sponsors">
   <SectionTitle primary="SPONSORS" secondary="スポンサー" />
 
   <div class="sponsor-container">
     {SPONSORS.map((sponsor) => <SponsorCard sponsor={sponsor} />)}
   </div>
-</Layout>
+</BaseLayout>
 
 <style lang="scss">
   .sponsor-container {
