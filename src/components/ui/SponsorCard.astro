@@ -1,0 +1,139 @@
+---
+import { Image } from "astro:assets";
+import type { Sponsor } from "../../types";
+import BoxArrowUpRightIcon from "../icons/BoxArrowUpRightIcon.astro";
+import Button from "./Button.astro";
+import IconButton from "./IconButton.astro";
+
+import TwitterXIcon from "../icons/TwitterXIcon.astro";
+import InstagramIcon from "../icons/InstagramIcon.astro";
+import LineIcon from "../icons/LineIcon.astro";
+
+interface Props {
+  sponsor: Sponsor;
+}
+
+const { sponsor } = Astro.props;
+---
+
+<div class="card">
+  <div class="logo">
+    {
+      typeof sponsor.logoImage === "string" ? (
+        <img src={sponsor.logoImage} alt={sponsor.name} />
+      ) : (
+        <Image src={sponsor.logoImage} alt={sponsor.name} />
+      )
+    }
+  </div>
+  <div class="body">
+    <div class="info">
+      <p class="name">{sponsor.name}</p>
+      <p class="description">{sponsor.description}</p>
+    </div>
+    <div class="links">
+      <div class="website">
+        <Button href={sponsor.website} target="_blank"
+          >公式サイト <BoxArrowUpRightIcon /></Button
+        >
+      </div>
+      <div class="socials">
+        {
+          sponsor.socials.twitter && (
+            <div class="social-x">
+              <IconButton href={sponsor.socials.twitter} target="_blank">
+                <TwitterXIcon size={24} />
+              </IconButton>
+            </div>
+          )
+        }
+        {
+          sponsor.socials.instagram && (
+            <div class="social-instagram">
+              <IconButton href={sponsor.socials.instagram} target="_blank">
+                <InstagramIcon size={24} />
+              </IconButton>
+            </div>
+          )
+        }
+        {
+          sponsor.socials.line && (
+            <div class="social-line">
+              <IconButton href={sponsor.socials.line} target="_blank">
+                <LineIcon size={24} />
+              </IconButton>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+  // 要素横幅670pxあたりが限界
+  .card {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    border: 2px solid rgba($color-text, 0.2);
+    border-radius: 6px;
+
+    .logo {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.6rem;
+      border-right: 2px solid rgba($color-text, 0.2);
+
+      img {
+        max-width: 100%;
+        max-height: 100px;
+        object-fit: contain;
+      }
+    }
+
+    .body {
+      width: 50%;
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+
+      .info {
+        flex-grow: 1;
+        padding: 0 0.4rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid rgba($color-text, 0.2);
+
+        .name {
+          margin: 0;
+          margin-bottom: 0.5rem;
+          font-size: 1.8rem;
+          font-weight: bold;
+        }
+
+        .description {
+          // ちょっと薄い白
+          color: rgba($color-text, 0.85);
+        }
+      }
+
+      .links {
+        padding: 0 0.2rem;
+        padding-top: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .website {
+        }
+
+        .socials {
+          display: flex;
+          gap: 0.2rem;
+        }
+      }
+    }
+  }
+</style>
