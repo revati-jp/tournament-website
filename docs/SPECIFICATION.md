@@ -44,6 +44,8 @@
 │   ├── layouts
 │   │   └── Layout.astro
 │   ├── pages
+│   │   ├── community ― 大会種類 "Community CUP" のディレクトリ
+│   │   │   └── gateway ― Community CUP の大会 "Gateway" のディレクトリ
 │   │   └── index.astro — 最新の大会ホームへリダイレクト
 │   ├── styles
 │   ├── types
