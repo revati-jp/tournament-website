@@ -4,14 +4,15 @@ interface Props {
   color?: "primary" | "secondary" | "gray";
   /** hrefが指定された場合はroot要素として`a`が使用される */
   href?: string;
+  target?: string;
 }
 
-const { variant = "contained", color = "primary", href } = Astro.props;
+const { variant = "contained", color = "primary", href, target } = Astro.props;
 ---
 
 {
   href ? (
-    <a href={href} class={`button ${variant} ${color}`}>
+    <a href={href} target={target} class={`button ${variant} ${color}`}>
       <slot />
     </a>
   ) : (

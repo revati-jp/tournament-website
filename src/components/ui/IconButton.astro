@@ -1,0 +1,41 @@
+---
+interface Props {
+  /** hrefが指定された場合はroot要素として`a`が使用される */
+  href?: string;
+  target?: string;
+}
+const { href, target } = Astro.props;
+---
+
+{
+  href ? (
+    <a href={href} target={target} class="icon-button">
+      <slot />
+    </a>
+  ) : (
+    <div class="icon-button">
+      <slot />
+    </div>
+  )
+}
+
+<style lang="scss">
+  .icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.35rem;
+    color: var(--color-text);
+
+    &:hover {
+      background-color: var(--color-hover);
+    }
+  }
+</style>
