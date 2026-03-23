@@ -25,6 +25,34 @@
 
 ※古い大会のウェブページからの自動リダイレクトは行わない。[後述](#その他要件)の通り軽い誘導は行う。
 
+## ディレクトリ構造
+
+```
+├── astro.config.mjs
+├── docs
+│   └── SPECIFICATION.md
+├── eslint.config.js
+├── package.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+├── public — 静的ファイル
+├── scripts — ビルドやデプロイ用のスクリプト
+├── src
+│   ├── components
+│   ├── constants
+│   │   └── tournaments.ts — 大会の情報を定義
+│   ├── layouts
+│   │   └── Layout.astro
+│   ├── pages
+│   │   └── index.astro — 最新の大会ホームへリダイレクト
+│   ├── styles
+│   ├── types
+│   └── utils
+├── svelte.config.js
+├── tsconfig.json
+└── wrangler.jsonc
+```
+
 ## 使用技術
 
 - pnpm
