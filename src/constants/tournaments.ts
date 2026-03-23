@@ -15,7 +15,9 @@ export const TOURNAMENTS: Tournament[] = [
 ];
 
 export function getLatestTournament(): Tournament {
-  return TOURNAMENTS[0];
+  const latest = TOURNAMENTS[0];
+  if (latest === undefined) throw new Error("Tournament not found");
+  return latest;
 }
 
 export function getLatestTournamentByType(type: TournamentType): Tournament {
