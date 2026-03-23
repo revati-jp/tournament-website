@@ -2,14 +2,24 @@
 interface Props {
   variant?: "contained" | "outlined";
   color?: "primary" | "secondary" | "gray";
+  /** hrefが指定された場合はroot要素として`a`が使用される */
+  href?: string;
 }
 
-const { variant = "contained", color = "primary" } = Astro.props;
+const { variant = "contained", color = "primary", href } = Astro.props;
 ---
 
-<div class={`button ${variant} ${color}`}>
-  <slot />
-</div>
+{
+  href ? (
+    <a href={href} class={`button ${variant} ${color}`}>
+      <slot />
+    </a>
+  ) : (
+    <div class={`button ${variant} ${color}`}>
+      <slot />
+    </div>
+  )
+}
 
 <style lang="scss">
   @use "sass:color";
