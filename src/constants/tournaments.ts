@@ -6,11 +6,13 @@ export const TOURNAMENTS: Tournament[] = [
     label: 'REVATI Community CUP "Gateway"',
     slug: "gateway",
     type: "community",
+    description: "gatewayのdescription",
   },
   {
     label: "Temporary-CUP Vol.1",
     slug: "vol1",
     type: "tmp-cup",
+    description: "vol1のdescription",
   },
 ];
 
@@ -27,6 +29,14 @@ export function getLatestTournamentByType(type: TournamentType): Tournament {
   return latest;
 }
 
-export function getPathToTournament(tournament: Tournament): string {
+//TODO - 型安全にする?
+export function getTournamentBySlug(slug: string): Tournament {
+  const tournament = TOURNAMENTS.find((t) => t.slug === slug);
+  if (tournament === undefined)
+    throw new Error(`Tournament not found for slug: ${slug}`);
+  return tournament;
+}
+
+export function getPathToTournament(tournament: Tournament) {
   return `/${tournament.type}/${tournament.slug}`;
 }

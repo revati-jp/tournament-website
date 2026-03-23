@@ -1,0 +1,46 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import { WEBSITE_BASE_URL } from "../utils";
+import {
+  getPathToTournament,
+  getTournamentBySlug,
+} from "../constants/tournaments";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+const tournament = getTournamentBySlug("gateway");
+
+const websiteUrl = WEBSITE_BASE_URL + getPathToTournament(tournament);
+const websiteTitle = tournament.label;
+const fullTitle = `${websiteTitle} | ${title}`;
+
+// const absThumbnailPath = websiteUrl + {header image src};
+---
+
+<BaseLayout>
+  <Fragment slot="head">
+    <!-- <meta name="thumbnail" content={absThumbnailPath} /> -->
+
+    <meta property="og:site_name" content={websiteTitle} />
+    <meta name="twitter:site" content={websiteUrl} />
+    <!-- ↓ Sass 変数 `$color-accent` -->
+    <!-- <meta name="theme-color" content="" /> -->
+
+    <title>{fullTitle}</title>
+    <meta name="title" content={fullTitle} />
+    <meta name="description" content={tournament.description} />
+
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={tournament.description} />
+
+    <!-- <meta property="og:image" content={absThumbnailPath} /> -->
+
+    <slot name="head" />
+  </Fragment>
+
+  <slot />
+</BaseLayout>

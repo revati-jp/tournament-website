@@ -1,18 +1,9 @@
 ---
 import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
-import { COPYRIGHT, WEBSITE_TITLE, WEBSITE_URL } from "../utils";
+import { COPYRIGHT, WEBSITE_BASE_URL } from "../utils";
 
-interface Props {
-  title: string;
-}
-
-const { title } = Astro.props;
-
-// const absThumbnailPath = WEBSITE_URL + {header image src};
-const fullTitle = `${WEBSITE_TITLE} | ${title}`;
-const DESCRIPTION = "";
-const canonicalUrl = WEBSITE_URL + Astro.url.pathname;
+const canonicalUrl = WEBSITE_BASE_URL + Astro.url.pathname;
 ---
 
 <!doctype html>
@@ -26,17 +17,12 @@ const canonicalUrl = WEBSITE_URL + Astro.url.pathname;
       name="format-detection"
       content="telephone=no, address=no, email=no"
     />
-    <!-- <meta name="thumbnail" content={absThumbnailPath} /> -->
     <!-- <meta
       name="google-site-verification"
       content=""
     /> -->
 
-    <meta property="og:site_name" content={WEBSITE_TITLE} />
     <meta property="og:locale" content="ja_JP" />
-    <meta name="twitter:site" content={WEBSITE_URL} />
-    <!-- ↓ Sass 変数 `$color-accent` -->
-    <!-- <meta name="theme-color" content="" /> -->
 
     <meta name="keywords" content="revati" />
     <meta
@@ -45,21 +31,15 @@ const canonicalUrl = WEBSITE_URL + Astro.url.pathname;
     />
     <meta name="copyright" content={COPYRIGHT} />
 
-    <slot name="head" />
-
-    <title>{fullTitle}</title>
-    <meta name="title" content={fullTitle} />
-    <meta name="description" content={DESCRIPTION} />
-
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={DESCRIPTION} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-    <!-- <meta property="og:image" content={absThumbnailPath} /> -->
 
     <link rel="canonical" href={canonicalUrl} />
 
+    <slot name="head" />
+
+    <!-- //TODO - フォントを子レイアウト側で定義するかどうか検討 -->
     <Font cssVariable="--font-noto-sans-jp" />
     <Font cssVariable="--font-zalando-sans-expanded" />
     <Font cssVariable="--font-sofia-sans-extra-condensed" />
@@ -67,6 +47,7 @@ const canonicalUrl = WEBSITE_URL + Astro.url.pathname;
     <ClientRouter />
   </head>
   <body>
+    <!-- //TODO - Header/Footerを子レイアウト側で定義するかどうか検討 -->
     <!-- Header -->
 
     <main transition:animate="fade">
