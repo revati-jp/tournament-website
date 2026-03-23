@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import SectionTitle from "../components/ui/SectionTitle.astro";
 import Button from "../components/ui/Button.astro";
 import TeamCard from "../components/ui/TeamCard.astro";
-import BoxArrowUpRightIcon from '../components/icons/BoxArrowUpRightIcon.astro';
+import BoxArrowUpRightIcon from "../components/icons/BoxArrowUpRightIcon.astro";
 
 const sironekos = Array(6).fill("しろねこ");
 ---
@@ -14,12 +14,24 @@ const sironekos = Array(6).fill("しろねこ");
   <SectionTitle primary="RULE" secondary="大会ルール" />
   <SectionTitle primary="TEAMS" secondary="出場チーム" />
 
-  <Button variant="contained" color="primary">REVATIについて <BoxArrowUpRightIcon /></Button>
-  <Button variant="contained" color="secondary">REVATIについて <BoxArrowUpRightIcon /></Button>
-  <Button variant="contained" color="gray">REVATIについて <BoxArrowUpRightIcon /></Button>
-  <Button variant="outlined" color="primary">REVATIについて <BoxArrowUpRightIcon /></Button>
-  <Button variant="outlined" color="secondary">REVATIについて <BoxArrowUpRightIcon /></Button>
-  <Button variant="outlined" color="gray">REVATIについて <BoxArrowUpRightIcon /></Button>
+  <Button variant="contained" color="primary"
+    >REVATIについて <BoxArrowUpRightIcon /></Button
+  >
+  <Button variant="contained" color="secondary"
+    >REVATIについて <BoxArrowUpRightIcon /></Button
+  >
+  <Button variant="contained" color="gray"
+    >REVATIについて <BoxArrowUpRightIcon /></Button
+  >
+  <Button variant="outlined" color="primary"
+    >REVATIについて <BoxArrowUpRightIcon /></Button
+  >
+  <Button variant="outlined" color="secondary"
+    >REVATIについて <BoxArrowUpRightIcon /></Button
+  >
+  <Button variant="outlined" color="gray"
+    >REVATIについて <BoxArrowUpRightIcon /></Button
+  >
 
   <div class="team-container">
     <TeamCard number={1} name="しろねこ" members={sironekos} />
