@@ -6,6 +6,8 @@ import {
   getTournamentBySlug,
 } from "../constants/tournaments";
 
+import keyVisual from "../assets/gateway/kv_full.webp";
+
 interface Props {
   title: string;
 }
@@ -18,12 +20,12 @@ const websiteUrl = WEBSITE_BASE_URL + getPathToTournament(tournament);
 const websiteTitle = tournament.label;
 const fullTitle = `${websiteTitle} | ${title}`;
 
-// const absThumbnailPath = websiteUrl + {header image src};
+const absThumbnailPath = websiteUrl + keyVisual.src;
 ---
 
 <BaseLayout>
   <Fragment slot="head">
-    <!-- <meta name="thumbnail" content={absThumbnailPath} /> -->
+    <meta name="thumbnail" content={absThumbnailPath} />
 
     <meta property="og:site_name" content={websiteTitle} />
     <meta name="twitter:site" content={websiteUrl} />
@@ -37,7 +39,7 @@ const fullTitle = `${websiteTitle} | ${title}`;
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={tournament.description} />
 
-    <!-- <meta property="og:image" content={absThumbnailPath} /> -->
+    <meta property="og:image" content={absThumbnailPath} />
 
     <slot name="head" />
   </Fragment>
