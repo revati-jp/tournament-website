@@ -96,6 +96,7 @@ Discord 上の資料を参照。
 
 ## z-index
 
-| z-index | エンティティ | パス                                                                                                     |
-| ------: | ------------ | -------------------------------------------------------------------------------------------------------- |
-|     255 | ヘッダー     | [`src/components/layout/header/Header.astro>style>header`](../src/components/layout/header/Header.astro) |
+| z-index | エンティティ     | パス                                                                                                                            |
+| ------: | ---------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+|     256 | ドロワーメニュー | [`src/components/layout/header/MobileDrawer.svelte>style>.drawer-overlay`](../src/components/layout/header/MobileDrawer.svelte) |
+|     255 | ヘッダー         | [`src/components/layout/header/Header.astro>style>header`](../src/components/layout/header/Header.astro)                        |

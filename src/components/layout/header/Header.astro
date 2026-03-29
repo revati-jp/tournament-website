@@ -1,9 +1,11 @@
 ---
 import { Image } from "astro:assets";
-import TwitterXIcon from "../../icons/TwitterXIcon.astro";
-import YouTubeIcon from "../../icons/YouTubeIcon.astro";
-import RevatiIcon from "../../icons/RevatiIcon.astro";
+import MobileDrawer from "./MobileDrawer.svelte";
+import { BREAKPOINT_HB } from "../../../utils/variables";
 
+import twitterXIcon from "../../../assets/logos/x_logo_white.svg";
+import youtubeIcon from "../../../assets/logos/yt_icon_mono_dark.webp";
+import revatiIcon from "../../../assets/revati/icon_white.svg";
 import gatewayLogo from "../../../assets/gateway/Gateway-logo_white_680x448.webp";
 
 const navItems = [
@@ -15,30 +17,97 @@ const navItems = [
   { label: "SPONSORS", href: "/community/gateway/#sponsors" },
 ];
 
-const socialLinks = [
+const SOCIALS = [
   {
-    label: "X",
+    label: "X.com",
     href: "https://x.com/revati_jp",
-    icon: TwitterXIcon,
     size: 28,
+    iconImg: twitterXIcon,
   },
   {
     label: "YouTube",
     href: "https://www.youtube.com/@revati_jp",
-    icon: YouTubeIcon,
     size: 34,
+    iconImg: youtubeIcon,
   },
   {
     label: "REVATI",
     href: "https://revati.jp",
-    icon: RevatiIcon,
     size: 38,
+    iconImg: revatiIcon,
   },
 ];
+
+// Svelte コンポーネント `MobileDrawer` に渡すためのシリアライズ可能なソーシャルリンクデータ。
+const mobileSocialLinks = SOCIALS.map(({ label, href, size, iconImg }) => ({
+  label,
+  href,
+  size,
+  iconImg: {
+    path: iconImg.src,
+    width: iconImg.width,
+    height: iconImg.height,
+  },
+}));
 ---
 
+<!--
+  ハンバーガーボタンは Astro の HTML として SSR レンダリングし、
+  ドロワーオーバーレイは Svelte（header の外側）で制御する。
+
+  【header の外にドロワーを置く理由】
+  header に backdrop-filter が設定されているため、その子孫の position: fixed は
+  ビューポートではなく header を基準にしてしまう（CSS stacking context の仕様）。
+
+  【ボタン状態の同期方法】
+  ボタンクリック → document に "open-mobile-drawer" / "close-mobile-drawer" イベントを dispatch
+  → Svelte が受け取り isOpen を更新 / Svelte が閉じるときも同イベントを dispatch
+  → Header の script が受け取り aria-expanded とアイコンを更新
+-->
 <header>
   <div class="container">
+    <div class="mobile-menu-btn-container">
+      <!--
+        ≡ と × の 2 つのアイコンを持ち、CSS で切り替える。
+        aria-expanded="true" のとき ≡ を非表示にし × を表示する。
+      -->
+      <button
+        id="hamburger-btn"
+        class="hamburger-btn"
+        aria-label="メニューを開く"
+        aria-expanded="false"
+      >
+        <svg
+          class="icon-menu"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        >
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <svg
+          class="icon-close"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        >
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
     <div class="logo-container">
       <a href="/community/gateway" aria-label="ホームへ移動">
         <Image
@@ -68,7 +137,7 @@ const socialLinks = [
       <nav>
         <ul>
           {
-            socialLinks.map((item) => (
+            SOCIALS.map((item) => (
               <li>
                 <a
                   href={item.href}
@@ -76,7 +145,11 @@ const socialLinks = [
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <item.icon size={item.size} />
+                  <Image
+                    src={item.iconImg}
+                    alt={item.label}
+                    width={item.size}
+                  />
                 </a>
               </li>
             ))
@@ -86,6 +159,74 @@ const socialLinks = [
     </div>
   </div>
 </header>
+
+<!--
+  ドロワーは header の外側（兄弟要素）に配置する。
+  詳細は上記コメント参照。
+-->
+<MobileDrawer
+  client:media={BREAKPOINT_HB}
+  navItems={navItems}
+  socialLinks={mobileSocialLinks}
+/>
+
+<script>
+  /**
+   * ハンバーガーボタンとドロワーの開閉を連携するセットアップ処理。
+   *
+   * Astro の View Transitions（ClientRouter）使用時、ページ遷移（ページ内リンク含む）の
+   * たびにヘッダーの DOM が入れ替わるため、astro:page-load で毎回ボタンを再登録する。
+   *
+   * document レベルのイベントリスナー（open/close-mobile-drawer）は
+   * 重複登録しないよう AbortController で前回のものをキャンセルしてから再登録する。
+   */
+  let controller: AbortController | null = null;
+
+  document.addEventListener("astro:page-load", () => {
+    // 前回のリスナーをすべてキャンセルする
+    controller?.abort();
+    controller = new AbortController();
+    const { signal } = controller;
+
+    const btn = document.getElementById("hamburger-btn");
+    if (btn === null) return;
+
+    // ボタンクリック: 現在の開閉状態を aria-expanded で判定してトグルする
+    btn.addEventListener(
+      "click",
+      () => {
+        const isOpen = btn.getAttribute("aria-expanded") === "true";
+        document.dispatchEvent(
+          new CustomEvent(
+            isOpen ? "close-mobile-drawer" : "open-mobile-drawer",
+          ),
+        );
+      },
+      { signal },
+    );
+
+    // ドロワーが開いたとき: ボタンを × に切り替える
+    document.addEventListener(
+      "open-mobile-drawer",
+      () => {
+        btn.setAttribute("aria-expanded", "true");
+        btn.setAttribute("aria-label", "メニューを閉じる");
+      },
+      { signal },
+    );
+
+    // ドロワーが閉じたとき: ボタンを ≡ に戻す
+    // （ESC キー・ナビゲーションクリック・ブレイクポイント超えによる自動クローズも含む）
+    document.addEventListener(
+      "close-mobile-drawer",
+      () => {
+        btn.setAttribute("aria-expanded", "false");
+        btn.setAttribute("aria-label", "メニューを開く");
+      },
+      { signal },
+    );
+  });
+</script>
 
 <style lang="scss">
   header {
@@ -107,10 +248,76 @@ const socialLinks = [
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
+
+    /*
+     * モバイル時: 1fr auto 1fr にすることで
+     * 左（ハンバーガーボタン）と右（空き）が均等になり、ロゴが真に中央に配置される。
+     */
+    @include hb {
+      grid-template-columns: 1fr auto 1fr;
+    }
+  }
+
+  .mobile-menu-btn-container {
+    display: none;
+
+    @include hb {
+      display: flex;
+      align-items: center;
+      grid-column: 1 / 2;
+    }
+  }
+
+  .hamburger-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 48px;
+    height: 48px;
+    background: none;
+    border: none;
+    color: $color-text;
+    cursor: pointer;
+    padding: 8px;
+    margin-left: 14px;
+    -webkit-tap-highlight-color: transparent;
+
+    svg {
+      position: absolute;
+      transition:
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.3s ease;
+    }
+
+    // × アイコンは初期状態で縮小・回転させて見えないようにする
+    .icon-close {
+      opacity: 0;
+      transform: scale(0.5) rotate(-45deg);
+    }
+
+    // 開いたとき: ≡ を弾き飛ばすように消し、× をふわりと出現・回転させる
+    &[aria-expanded="true"] {
+      .icon-menu {
+        opacity: 0;
+        transform: scale(0.5) rotate(45deg);
+      }
+
+      .icon-close {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+      }
+    }
   }
 
   .logo-container {
     grid-column: 1 / 2;
+
+    @include hb {
+      grid-column: 2 / 3;
+      display: flex;
+      justify-content: center;
+    }
   }
 
   .logo {
@@ -120,6 +327,10 @@ const socialLinks = [
     box-sizing: border-box;
     padding: 14px;
     margin-left: 14px;
+
+    @include hb {
+      margin-left: 0;
+    }
   }
 
   ul {
@@ -139,6 +350,10 @@ const socialLinks = [
     ul {
       gap: 24px;
     }
+
+    @include hb {
+      display: none;
+    }
   }
 
   .nav-item-inner {
@@ -157,6 +372,10 @@ const socialLinks = [
 
     a {
       color: $color-text;
+    }
+
+    @include hb {
+      display: none;
     }
   }
 </style>
