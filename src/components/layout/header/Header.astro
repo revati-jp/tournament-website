@@ -1,0 +1,162 @@
+---
+import { Image } from "astro:assets";
+import TwitterXIcon from "../../icons/TwitterXIcon.astro";
+import YouTubeIcon from "../../icons/YouTubeIcon.astro";
+import RevatiIcon from "../../icons/RevatiIcon.astro";
+
+import gatewayLogo from "../../../assets/gateway/Gateway-logo_white_680x448.webp";
+
+const navItems = [
+  { label: "TOP", href: "#" },
+  { label: "ABOUT", href: "/community/gateway/#about" },
+  { label: "SCHEDULE", href: "/community/gateway/#schedule" },
+  { label: "REGULATIONS", href: "/community/gateway/#regulations" },
+  { label: "TEAMS", href: "/community/gateway/#teams" },
+  { label: "SPONSORS", href: "/community/gateway/#sponsors" },
+];
+
+const socialLinks = [
+  {
+    label: "X",
+    href: "https://x.com/revati_jp",
+    icon: TwitterXIcon,
+    size: 28,
+  },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/@revati_jp",
+    icon: YouTubeIcon,
+    size: 34,
+  },
+  {
+    label: "REVATI",
+    href: "https://revati.jp",
+    icon: RevatiIcon,
+    size: 38,
+  },
+];
+---
+
+<header>
+  <div class="container">
+    <div class="logo-container">
+      <a href="/community/gateway" aria-label="ホームへ移動">
+        <Image
+          src={gatewayLogo}
+          alt='REVATI Community CUP "Gateway"'
+          class="logo"
+          loading="eager"
+        />
+      </a>
+    </div>
+    <div class="nav-container">
+      <nav>
+        <ul>
+          {
+            navItems.map((item) => (
+              <li>
+                {/* ↓ 整形によって予期せぬ空白文字が入るため */}
+                {/* prettier-ignore */}
+                <a href={item.href} class="nav-item-inner">{item.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+    <div class="socials-container">
+      <nav>
+        <ul>
+          {
+            socialLinks.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  aria-label={item.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <item.icon size={item.size} />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<style lang="scss">
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: $header-height;
+    $filter: blur(16px);
+    backdrop-filter: $filter;
+    -webkit-backdrop-filter: $filter;
+    background-color: rgba($color-background, 0.75);
+    z-index: 255;
+  }
+
+  .container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+  }
+
+  .logo-container {
+    grid-column: 1 / 2;
+  }
+
+  .logo {
+    display: block;
+    height: $header-height;
+    width: auto;
+    box-sizing: border-box;
+    padding: 14px;
+    margin-left: 14px;
+  }
+
+  ul {
+    display: flex;
+    list-style: none;
+    font-family: var(--font-zalando-sans-expanded);
+    font-weight: 500;
+    font-size: 20px;
+    justify-content: center;
+    padding: 0;
+    align-items: center;
+  }
+
+  .nav-container {
+    grid-column: 2 / 3;
+
+    ul {
+      gap: 24px;
+    }
+  }
+
+  .nav-item-inner {
+    color: $color-text;
+    text-decoration: none;
+    margin-right: 12px;
+  }
+
+  .socials-container {
+    grid-column: 3 / 4;
+    margin-right: 48px;
+
+    ul {
+      gap: 22px;
+    }
+
+    a {
+      color: $color-text;
+    }
+  }
+</style>

@@ -15,6 +15,7 @@ export default defineConfig({
       name: "Zalando Sans Expanded",
       cssVariable: "--font-zalando-sans-expanded",
       provider: fontProviders.fontsource(),
+      weights: [500],
     },
     {
       name: "Sofia Sans Extra Condensed",
@@ -30,6 +31,7 @@ export default defineConfig({
           additionalData: [
             '@use "/src/styles/_color.scss" as *;',
             '@use "/src/styles/_mixin.scss" as *;',
+            '@use "/src/styles/_dimension.scss" as *;',
           ].join("\n"),
         },
       },

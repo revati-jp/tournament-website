@@ -5,6 +5,7 @@ import {
   getPathToTournament,
   getTournamentBySlug,
 } from "../constants/tournaments";
+import Header from "../components/layout/header/Header.astro";
 
 import keyVisual from "../assets/gateway/kv_full.webp";
 
@@ -44,5 +45,7 @@ const absThumbnailPath = websiteUrl + keyVisual.src;
     <slot name="head" />
   </Fragment>
 
+  <Header />
   <slot />
+  <!-- Footer -->
 </BaseLayout>
