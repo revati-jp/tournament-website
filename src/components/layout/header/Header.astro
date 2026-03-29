@@ -180,13 +180,32 @@ const mobileSocialLinks = SOCIALS.map(({ label, href, size, iconImg }) => ({
    * document レベルのイベントリスナー（open/close-mobile-drawer）は
    * 重複登録しないよう AbortController で前回のものをキャンセルしてから再登録する。
    */
-  let controller: AbortController | null = null;
+  type HeaderScriptState = {
+    controller: AbortController | null;
+    onPageLoad: (() => void) | null;
+  };
 
-  document.addEventListener("astro:page-load", () => {
+  const headerWindow = window as Window & {
+    __revatiHeaderScriptState?: HeaderScriptState;
+  };
+
+  const state: HeaderScriptState =
+    headerWindow.__revatiHeaderScriptState ?? {
+      controller: null,
+      onPageLoad: null,
+    };
+
+  // script の再評価時に多重登録しないよう、前回の登録を明示的に解除する。
+  if (state.onPageLoad !== null) {
+    document.removeEventListener("astro:page-load", state.onPageLoad);
+  }
+  state.controller?.abort();
+
+  const onPageLoad = () => {
     // 前回のリスナーをすべてキャンセルする
-    controller?.abort();
-    controller = new AbortController();
-    const { signal } = controller;
+    state.controller?.abort();
+    state.controller = new AbortController();
+    const { signal } = state.controller;
 
     const btn = document.getElementById("hamburger-btn");
     if (btn === null) return;
@@ -225,7 +244,11 @@ const mobileSocialLinks = SOCIALS.map(({ label, href, size, iconImg }) => ({
       },
       { signal },
     );
-  });
+  };
+
+  document.addEventListener("astro:page-load", onPageLoad);
+  state.onPageLoad = onPageLoad;
+  headerWindow.__revatiHeaderScriptState = state;
 </script>
 
 <style lang="scss">
