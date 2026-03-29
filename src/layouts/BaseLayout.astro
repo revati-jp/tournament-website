@@ -47,14 +47,9 @@ const canonicalUrl = WEBSITE_BASE_URL + Astro.url.pathname;
     <ClientRouter />
   </head>
   <body>
-    <!-- //TODO - Header/Footerを子レイアウト側で定義するかどうか検討 -->
-    <!-- Header -->
-
     <main transition:animate="fade">
       <slot />
     </main>
-
-    <!-- Footer -->
   </body>
 </html>
 
@@ -64,7 +59,14 @@ const canonicalUrl = WEBSITE_BASE_URL + Astro.url.pathname;
   }
 
   body {
-    background-color: $color-background;
     color: $color-text;
+    margin: 0;
+  }
+
+  main {
+    min-height: calc(100vh - $header-height);
+    // この背景色を body に指定すると、ヘッダーのバックドロップのぼかし効果が正常に動作しなくなる。
+    background-color: $color-background;
+    padding-top: $header-height;
   }
 </style>

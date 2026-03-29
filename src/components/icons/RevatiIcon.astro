@@ -1,0 +1,21 @@
+---
+import revatiIcon from "../../../src/assets/revati/icon_white.svg";
+import { Image } from "astro:assets";
+
+interface Props {
+  size?: number;
+}
+
+const { size = 16 } = Astro.props;
+---
+
+<Image src={revatiIcon} alt="REVATI" width={size} height={size} class="icon" />
+
+<style lang="scss">
+  .icon {
+    &::selection,
+    &::-moz-selection {
+      background: none;
+    }
+  }
+</style>

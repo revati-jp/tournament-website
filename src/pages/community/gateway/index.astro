@@ -9,13 +9,21 @@ const sironekos = Array(6).fill("しろねこ");
 ---
 
 <GatewayLayout title="TOP">
-  <SectionTitle primary="ABOUT" secondary="大会について" />
-  <SectionTitle primary="SCHEDULE" secondary="大会スケジュール" />
-  <SectionTitle primary="RULE" secondary="大会ルール" />
-  <SectionTitle primary="TEAMS" secondary="出場チーム" />
-  <SectionTitle primary="SPONSORS" secondary="スポンサー" />
-  <section>
-    <a href="/community/gateway/sponsors">スポンサーはこちら</a>
+  <section id="about">
+    <SectionTitle primary="ABOUT" secondary="大会について" />
+  </section>
+  <section id="schedule">
+    <SectionTitle primary="SCHEDULE" secondary="大会スケジュール" />
+  </section>
+  <section id="regulations">
+    <SectionTitle primary="REGULATIONS" secondary="大会ルール" />
+  </section>
+  <section id="teams">
+    <SectionTitle primary="TEAMS" secondary="出場チーム" />
+  </section>
+  <section id="sponsors">
+    <SectionTitle primary="SPONSORS" secondary="スポンサー" />
+    <p><a href="/community/gateway/sponsors">スポンサーはこちら</a></p>
   </section>
 
   <Button variant="contained" color="primary">REVATIについて</Button>

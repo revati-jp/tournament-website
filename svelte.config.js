@@ -9,6 +9,7 @@ const config = {
       prependData: [
         '@use "src/styles/_color.scss" as *;',
         '@use "src/styles/_mixin.scss" as *;',
+        '@use "src/styles/_dimension.scss" as *;',
       ].join("\n"),
     },
   }),
