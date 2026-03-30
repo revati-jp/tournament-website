@@ -189,11 +189,10 @@ const mobileSocialLinks = SOCIALS.map(({ label, href, size, iconImg }) => ({
     __revatiHeaderScriptState?: HeaderScriptState;
   };
 
-  const state: HeaderScriptState =
-    headerWindow.__revatiHeaderScriptState ?? {
-      controller: null,
-      onPageLoad: null,
-    };
+  const state: HeaderScriptState = headerWindow.__revatiHeaderScriptState ?? {
+    controller: null,
+    onPageLoad: null,
+  };
 
   // script の再評価時に多重登録しないよう、前回の登録を明示的に解除する。
   if (state.onPageLoad !== null) {
