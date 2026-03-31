@@ -26,7 +26,7 @@
 
 ※古い大会のウェブページからの自動リダイレクトは行わない。[後述](#その他要件)の通り軽い誘導は行う。
 
-## ディレクトリ構造
+## ディレクトリ構造（主要）
 
 ```
 ├── astro.config.mjs
@@ -39,11 +39,14 @@
 ├── public — 静的ファイル
 ├── scripts — ビルドやデプロイ用のスクリプト
 ├── src
-│   ├── components
+│   ├── assets
+│   ├── components — 再利用可能な汎用コンポーネント
+│   │   └── icons — アイコンコンポーネント
 │   ├── constants
-│   │   └── tournaments.ts — 大会の情報を定義
+│   │   └── tournaments.ts — 大会の情報や関連するユーティリティを定義
 │   ├── layouts
-│   │   └── BaseLayout.astro
+│   │   ├── BaseLayout.astro — 全大会サイト共通のレイアウト
+│   │   └── GatewayLayout.astro — Community CUP Gateway 大会のレイアウト
 │   ├── pages
 │   │   ├── community ― 大会種類 "Community CUP" のディレクトリ
 │   │   │   └── gateway ― Community CUP の大会 "Gateway" のディレクトリ
