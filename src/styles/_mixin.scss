@@ -1,15 +1,1 @@
-// Sass 変数 `$bp-hamburger-btn` を更新する際は、`/src/utils/variables.ts` 内の JavaScript 定数 `BREAKPOINT_HB` も更新してください。
-// ※ `$bp-hamburger-btn` = (`BREAKPOINT_HB` の数値) + 1
-$bp-hamburger-btn: 1175px;
-
-@mixin not-hb {
-  @media screen and (min-width: $bp-hamburger-btn) {
-    @content;
-  }
-}
-
-@mixin hb {
-  @media screen and (max-width: #{$bp-hamburger-btn - 1}) {
-    @content;
-  }
-}
+// ウェブサイト全体共通の汎用 mixin をここに定義（現時点では空）

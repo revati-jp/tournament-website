@@ -255,11 +255,11 @@ const mobileSocialLinks = SOCIALS.map(({ label, href, size, iconImg }) => ({
     top: 0;
     left: 0;
     width: 100vw;
-    height: $header-height;
+    height: commGateway.$header-height;
     $filter: blur(16px);
     backdrop-filter: $filter;
     -webkit-backdrop-filter: $filter;
-    background-color: rgba($color-background, 0.75);
+    background-color: rgba(commGateway.$color-background, 0.75);
     z-index: 255;
   }
 
@@ -274,7 +274,7 @@ const mobileSocialLinks = SOCIALS.map(({ label, href, size, iconImg }) => ({
      * モバイル時: 1fr auto 1fr にすることで
      * 左（ハンバーガーボタン）と右（空き）が均等になり、ロゴが真に中央に配置される。
      */
-    @include hb {
+    @include commGateway.hb {
       grid-template-columns: 1fr auto 1fr;
     }
   }
@@ -282,7 +282,7 @@ const mobileSocialLinks = SOCIALS.map(({ label, href, size, iconImg }) => ({
   .mobile-menu-btn-container {
     display: none;
 
-    @include hb {
+    @include commGateway.hb {
       display: flex;
       align-items: center;
       grid-column: 1 / 2;
@@ -298,7 +298,7 @@ const mobileSocialLinks = SOCIALS.map(({ label, href, size, iconImg }) => ({
     height: 48px;
     background: none;
     border: none;
-    color: $color-text;
+    color: commGateway.$color-text;
     cursor: pointer;
     padding: 8px;
     margin-left: 14px;
@@ -334,7 +334,7 @@ const mobileSocialLinks = SOCIALS.map(({ label, href, size, iconImg }) => ({
   .logo-container {
     grid-column: 1 / 2;
 
-    @include hb {
+    @include commGateway.hb {
       grid-column: 2 / 3;
       display: flex;
       justify-content: center;
@@ -343,13 +343,13 @@ const mobileSocialLinks = SOCIALS.map(({ label, href, size, iconImg }) => ({
 
   .logo {
     display: block;
-    height: $header-height;
+    height: commGateway.$header-height;
     width: auto;
     box-sizing: border-box;
     padding: 14px;
     margin-left: 14px;
 
-    @include hb {
+    @include commGateway.hb {
       margin-left: 0;
     }
   }
@@ -372,13 +372,13 @@ const mobileSocialLinks = SOCIALS.map(({ label, href, size, iconImg }) => ({
       gap: 24px;
     }
 
-    @include hb {
+    @include commGateway.hb {
       display: none;
     }
   }
 
   .nav-item-inner {
-    color: $color-text;
+    color: commGateway.$color-text;
     text-decoration: none;
     margin-right: 12px;
   }
@@ -392,10 +392,10 @@ const mobileSocialLinks = SOCIALS.map(({ label, href, size, iconImg }) => ({
     }
 
     a {
-      color: $color-text;
+      color: commGateway.$color-text;
     }
 
-    @include hb {
+    @include commGateway.hb {
       display: none;
     }
   }

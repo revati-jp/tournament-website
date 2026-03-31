@@ -62,24 +62,36 @@ const { variant = "contained", color = "primary", href, target } = Astro.props;
 
     &.primary {
       &.contained {
-        background-color: $color-primary;
-        color: $color-text;
-        border-color: color.adjust($color-primary, $lightness: -15%);
+        background-color: commGateway.$color-primary;
+        color: commGateway.$color-text;
+        border-color: color.adjust(
+          commGateway.$color-primary,
+          $lightness: -15%
+        );
 
         &:hover {
-          color: color.adjust($color-text, $lightness: -15%);
-          background-color: color.adjust($color-primary, $lightness: -15%);
-          border-color: color.adjust($color-primary, $lightness: -25%);
+          color: color.adjust(commGateway.$color-text, $lightness: -15%);
+          background-color: color.adjust(
+            commGateway.$color-primary,
+            $lightness: -15%
+          );
+          border-color: color.adjust(
+            commGateway.$color-primary,
+            $lightness: -25%
+          );
         }
       }
 
       &.outlined {
-        color: $color-primary;
-        border-color: $color-primary;
+        color: commGateway.$color-primary;
+        border-color: commGateway.$color-primary;
 
         &:hover {
-          color: color.adjust($color-primary, $lightness: -15%);
-          border-color: color.adjust($color-primary, $lightness: -15%);
+          color: color.adjust(commGateway.$color-primary, $lightness: -15%);
+          border-color: color.adjust(
+            commGateway.$color-primary,
+            $lightness: -15%
+          );
           background-color: rgba(#000, 0.2); // 背景も少し暗く
         }
       }
@@ -87,24 +99,36 @@ const { variant = "contained", color = "primary", href, target } = Astro.props;
 
     &.secondary {
       &.contained {
-        background-color: $color-secondary;
-        color: $color-background; // 文字が読めるように背景色(暗色)を使用
-        border-color: color.adjust($color-secondary, $lightness: -15%);
+        background-color: commGateway.$color-secondary;
+        color: commGateway.$color-background; // 文字が読めるように背景色(暗色)を使用
+        border-color: color.adjust(
+          commGateway.$color-secondary,
+          $lightness: -15%
+        );
 
         &:hover {
-          color: color.adjust($color-background, $lightness: -15%);
-          background-color: color.adjust($color-secondary, $lightness: -15%);
-          border-color: color.adjust($color-secondary, $lightness: -25%);
+          color: color.adjust(commGateway.$color-background, $lightness: -15%);
+          background-color: color.adjust(
+            commGateway.$color-secondary,
+            $lightness: -15%
+          );
+          border-color: color.adjust(
+            commGateway.$color-secondary,
+            $lightness: -25%
+          );
         }
       }
 
       &.outlined {
-        color: $color-secondary;
-        border-color: $color-secondary;
+        color: commGateway.$color-secondary;
+        border-color: commGateway.$color-secondary;
 
         &:hover {
-          color: color.adjust($color-secondary, $lightness: -15%);
-          border-color: color.adjust($color-secondary, $lightness: -15%);
+          color: color.adjust(commGateway.$color-secondary, $lightness: -15%);
+          border-color: color.adjust(
+            commGateway.$color-secondary,
+            $lightness: -15%
+          );
           background-color: rgba(#000, 0.2);
         }
       }
@@ -114,11 +138,11 @@ const { variant = "contained", color = "primary", href, target } = Astro.props;
       $color-gray: #71737a;
       &.contained {
         background-color: $color-gray;
-        color: $color-text;
+        color: commGateway.$color-text;
         border-color: color.adjust($color-gray, $lightness: -15%);
 
         &:hover {
-          color: color.adjust($color-text, $lightness: -15%);
+          color: color.adjust(commGateway.$color-text, $lightness: -15%);
           background-color: color.adjust($color-gray, $lightness: -15%);
           border-color: color.adjust($color-gray, $lightness: -25%);
         }
@@ -128,7 +152,7 @@ const { variant = "contained", color = "primary", href, target } = Astro.props;
         border-color: $color-gray;
 
         &:hover {
-          color: color.adjust($color-text, $lightness: -15%);
+          color: color.adjust(commGateway.$color-text, $lightness: -15%);
           border-color: color.adjust($color-gray, $lightness: -15%);
           background-color: rgba(#000, 0.2);
         }

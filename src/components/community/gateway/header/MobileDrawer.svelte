@@ -119,7 +119,7 @@
 	ドロワーオーバーレイ。
 	header の外側（兄弟要素）に配置されているため、
 	position: fixed がビューポート基準で正しく動作する。
-	top: $header-height にすることで、ヘッダー部分を上書きせず
+	top: commGateway.$header-height にすることで、ヘッダー部分を上書きせず
 	元のヘッダーをそのまま表示させる。
 -->
 {#if isOpen}
@@ -176,18 +176,18 @@
 <style lang="scss">
 	/*
 	 * ドロワーオーバーレイ:
-	 * - top: $header-height にすることで、ヘッダー領域を覆わず
+	 * - top: commGateway.$header-height にすることで、ヘッダー領域を覆わず
 	 *   元のヘッダーをそのまま表示させる。
 	 * - overflow: hidden でコンテンツのはみ出しを防ぐ。
 	 */
 	.drawer-overlay {
 		position: fixed;
-		top: $header-height;
+		top: commGateway.$header-height;
 		left: 0;
 		right: 0;
 		bottom: 0;
 		z-index: 256;
-		background-color: $color-background;
+		background-color: commGateway.$color-background;
 		overflow: hidden;
 	}
 
@@ -220,7 +220,7 @@
 		}
 
 		li {
-			border-bottom: 1px solid rgba($color-text, 0.12);
+			border-bottom: 1px solid rgba(commGateway.$color-text, 0.12);
 		}
 
 		a {
@@ -228,7 +228,7 @@
 			align-items: center;
 			justify-content: space-between;
 			padding: 18px 8px;
-			color: $color-text;
+			color: commGateway.$color-text;
 			text-decoration: none;
 			font-family: var(--font-zalando-sans-expanded);
 			font-weight: 500;
@@ -246,7 +246,7 @@
 
 			@media (hover: hover) {
 				&:hover {
-					background-color: rgba($color-text, 0.04);
+					background-color: rgba(commGateway.$color-text, 0.04);
 
 					span {
 						transform: translateX(8px);
@@ -259,7 +259,7 @@
 			}
 
 			&:active {
-				background-color: rgba($color-text, 0.06);
+				background-color: rgba(commGateway.$color-text, 0.06);
 			}
 		}
 	}
@@ -279,7 +279,7 @@
 		}
 
 		a {
-			color: $color-text;
+			color: commGateway.$color-text;
 			display: flex;
 			align-items: center;
 			justify-content: center;

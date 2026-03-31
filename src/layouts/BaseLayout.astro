@@ -53,19 +53,21 @@ const canonicalUrl = WEBSITE_BASE_URL + Astro.url.pathname;
 </html>
 
 <style lang="scss">
+  // TODO: 大会 commGateway 専用の変数をここから移動する
+
   html {
     font-family: var(--font-noto-sans-jp), sans-serif;
   }
 
   body {
-    color: $color-text;
+    color: commGateway.$color-text;
     margin: 0;
   }
 
   main {
-    min-height: calc(100vh - $header-height);
+    min-height: calc(100vh - commGateway.$header-height);
     // この背景色を body に指定すると、ヘッダーのバックドロップのぼかし効果が正常に動作しなくなる。
-    background-color: $color-background;
-    padding-top: $header-height;
+    background-color: commGateway.$color-background;
+    padding-top: commGateway.$header-height;
   }
 </style>

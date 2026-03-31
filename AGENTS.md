@@ -27,11 +27,10 @@ REVATI Community CUP という Overwatch の大会の公式ウェブサイト (t
   - 厳格な等価演算子（`===` や `!==`）を使用
   - 条件式における暗黙的なブール型の使用を禁止（例: `if (0 < count)` や `if (user !== null)`）
 - バニラ CSS ではなく SCSS を使用
-  - `src/styles/` ディレクトリに、汎用 SCSS ファイルとして `_color.scss` や `_mixin.scss`、`_dimension.scss` が含まれている。
-    - `_color.scss` には文字色や、プライマリ/セカンダリ/アクセントカラーなど、プロジェクト全体で使用される色が Sass 変数として定義されている。
-    - `_mixin.scss` には、特定の画面幅に絞るための mixin、特別なフォントを使用するための mixin、その他幾つかの汎用 mixin 、そしてブレイクポイントが定義されている。
-    - `_dimension.scss` にはヘッダーの高さなど、プロジェクト全体で使用される寸法情報が Sass 変数として定義されている。
-    - 複数のコンポーネントやファイルで共有されるもの**のみ**を、これらのファイルに追加すること。
+  - `src/styles/` 配下は「全体共通」と「大会専用」で分ける。
+    - 全体共通は `_color.scss` と `_mixin.scss`。
+    - 各大会専用は `src/styles/<tournament-type>/<tournament>/` 配下（例: `src/styles/community/gateway/`）に `_color.scss` / `_mixin.scss` / `_dimension.scss` などを配置する。
+    - どちらにせよ、複数のコンポーネントやファイルで共有されるもの**のみ**をこれらのファイルに追加する。
 - コメントやドキュメンテーションは日本語で記述
 
 ## その他の指示
