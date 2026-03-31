@@ -1,6 +1,6 @@
-import type { Sponsor } from "../types";
+import type { Sponsor } from "../../../types";
 
-export const SPONSORS: Sponsor[] = [
+export const GATEWAY_SPONSORS: Sponsor[] = [
   {
     name: "TEST SPONSOR",
     description:
