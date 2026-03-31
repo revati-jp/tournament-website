@@ -59,6 +59,9 @@
 └── wrangler.jsonc
 ```
 
+※ `src/assets/` や `public/images/`、`src/components/`、`src/styles/` などのディレクトリについては、
+各大会ウェブサイト専用のものは `src/assets/<tournament-type>/<tournament>/` のように大会ごとにサブディレクトリを切る。
+
 ## 使用技術
 
 - pnpm
