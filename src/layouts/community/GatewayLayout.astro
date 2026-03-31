@@ -6,6 +6,8 @@ import {
   getTournament,
 } from "../../constants/tournaments";
 import Header from "../../components/community/gateway/header/Header.astro";
+import { Font } from "astro:assets";
+import { COPYRIGHT } from "../../utils";
 
 import keyVisual from "../../assets/community/gateway/kv_full.webp";
 
@@ -36,12 +38,19 @@ const absThumbnailPath = websiteUrl + keyVisual.src;
     <title>{fullTitle}</title>
     <meta name="title" content={fullTitle} />
     <meta name="description" content={tournament.description} />
+    <meta name="copyright" content={COPYRIGHT} />
+    <meta property="og:locale" content="ja_JP" />
 
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={tournament.description} />
 
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta property="og:image" content={absThumbnailPath} />
 
+    <Font cssVariable="--font-noto-sans-jp" />
+    <Font cssVariable="--font-zalando-sans-expanded" />
+    <Font cssVariable="--font-sofia-sans-extra-condensed" />
     <link
       rel="icon"
       type="image/png"
@@ -59,6 +68,21 @@ const absThumbnailPath = websiteUrl + keyVisual.src;
   </Fragment>
 
   <Header />
-  <slot />
+
+  <main transition:animate="fade">
+    <slot />
+  </main>
+
   <!-- Footer -->
 </BaseLayout>
+
+<style lang="scss">
+  main {
+    font-family: var(--font-noto-sans-jp), sans-serif;
+    color: commGateway.$color-text;
+    min-height: calc(100vh - commGateway.$header-height);
+    // この背景色を body に指定すると、ヘッダーのバックドロップのぼかし効果が正常に動作しなくなる。
+    background-color: commGateway.$color-background;
+    padding-top: commGateway.$header-height;
+  }
+</style>

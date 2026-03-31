@@ -1,7 +1,6 @@
 ---
-import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
-import { COPYRIGHT, WEBSITE_BASE_URL } from "../utils";
+import { WEBSITE_BASE_URL } from "../utils";
 
 const canonicalUrl = WEBSITE_BASE_URL + Astro.url.pathname;
 ---
@@ -21,53 +20,27 @@ const canonicalUrl = WEBSITE_BASE_URL + Astro.url.pathname;
       content=""
     /> -->
 
-    <meta property="og:locale" content="ja_JP" />
-
     <meta name="keywords" content="revati" />
     <meta
       name="author"
       content="Rinrin.rs <rinrin0413.valley@gmail.com>, RetoRuto9900K <tutinoko2048@gmail.com>"
     />
-    <meta name="copyright" content={COPYRIGHT} />
 
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="canonical" href={canonicalUrl} />
 
     <slot name="head" />
 
-    <!-- //TODO - フォントを子レイアウト側で定義するかどうか検討 -->
-    <Font cssVariable="--font-noto-sans-jp" />
-    <Font cssVariable="--font-zalando-sans-expanded" />
-    <Font cssVariable="--font-sofia-sans-extra-condensed" />
-
     <ClientRouter />
   </head>
   <body>
-    <main transition:animate="fade">
-      <slot />
-    </main>
+    <slot />
   </body>
 </html>
 
 <style lang="scss">
-  // TODO: 大会 commGateway 専用の変数をここから移動する
-
-  html {
-    font-family: var(--font-noto-sans-jp), sans-serif;
-  }
-
   body {
-    color: commGateway.$color-text;
     margin: 0;
-  }
-
-  main {
-    min-height: calc(100vh - commGateway.$header-height);
-    // この背景色を body に指定すると、ヘッダーのバックドロップのぼかし効果が正常に動作しなくなる。
-    background-color: commGateway.$color-background;
-    padding-top: commGateway.$header-height;
   }
 </style>
