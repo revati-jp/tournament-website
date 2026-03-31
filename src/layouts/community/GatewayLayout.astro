@@ -65,19 +65,43 @@ const absThumbnailPath = websiteUrl + keyVisual.src;
     <slot name="head" />
   </Fragment>
 
-  <Header />
-
-  <main transition:animate="fade">
-    <slot />
-  </main>
-
-  <!-- Footer -->
+  <div class="gateway-container">
+    <Header />
+    <main transition:animate="fade">
+      <slot />
+    </main>
+    <!-- Footer -->
+  </div>
 </BaseLayout>
 
 <style lang="scss">
-  main {
+  :global(*) {
+    scrollbar-color: commGateway.$color-primary transparent;
+    scroll-margin-top: calc(commGateway.$header-height + 12px);
+  }
+
+  :global(:focus-visible) {
+    outline: 3px solid #ffc400;
+    outline-offset: 3px;
+  }
+
+  :global(::selection) {
+    color: commGateway.$color-background;
+    background: commGateway.$color-primary;
+  }
+
+  :global(a) {
+    color: commGateway.$color-primary;
+  }
+
+  .gateway-container {
     font-family: var(--font-noto-sans-jp), sans-serif;
+    font-style: normal;
+    font-size: 16px;
     color: commGateway.$color-text;
+  }
+
+  main {
     min-height: calc(100vh - commGateway.$header-height);
     // この背景色を body に指定すると、ヘッダーのバックドロップのぼかし効果が正常に動作しなくなる。
     background-color: commGateway.$color-background;
