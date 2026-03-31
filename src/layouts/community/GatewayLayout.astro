@@ -1,13 +1,13 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
-import { WEBSITE_BASE_URL } from "../utils";
+import BaseLayout from "../BaseLayout.astro";
+import { WEBSITE_BASE_URL } from "../../utils";
 import {
   getPathToTournament,
   getTournamentBySlug,
-} from "../constants/tournaments";
-import Header from "../components/community/gateway/header/Header.astro";
+} from "../../constants/tournaments";
+import Header from "../../components/community/gateway/header/Header.astro";
 
-import keyVisual from "../assets/community/gateway/kv_full.webp";
+import keyVisual from "../../assets/community/gateway/kv_full.webp";
 
 interface Props {
   title: string;
