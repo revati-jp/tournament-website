@@ -45,6 +45,7 @@ REVATI Community CUP という Overwatch の大会の公式ウェブサイト (t
 - 仕様書: `docs/SPECIFICATION.md`
   - ウェブサイト概要
   - サイトマップ
+  - ディレクトリ構造
   - カラーパレットやフォント
   - ブランチ運用
   - z-index リスト
