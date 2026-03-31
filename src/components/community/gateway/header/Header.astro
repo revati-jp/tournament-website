@@ -63,7 +63,7 @@ const mobileSocialLinks = SOCIALS.map(({ label, href, size, iconImg }) => ({
   → Svelte が受け取り isOpen を更新 / Svelte が閉じるときも同イベントを dispatch
   → Header の script が受け取り aria-expanded とアイコンを更新
 -->
-<header>
+<header transition:name="gateway-header">
   <div class="container">
     <div class="mobile-menu-btn-container">
       <!--
