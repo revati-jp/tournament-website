@@ -3,7 +3,7 @@ import BaseLayout from "../BaseLayout.astro";
 import { WEBSITE_BASE_URL } from "../../utils";
 import {
   getPathToTournament,
-  getTournamentBySlug,
+  getTournament,
 } from "../../constants/tournaments";
 import Header from "../../components/community/gateway/header/Header.astro";
 
@@ -15,7 +15,7 @@ interface Props {
 
 const { title } = Astro.props;
 
-const tournament = getTournamentBySlug("gateway");
+const tournament = getTournament("community", "gateway");
 
 const websiteUrl = WEBSITE_BASE_URL + getPathToTournament(tournament);
 const websiteTitle = tournament.label;
@@ -30,8 +30,8 @@ const absThumbnailPath = websiteUrl + keyVisual.src;
 
     <meta property="og:site_name" content={websiteTitle} />
     <meta name="twitter:site" content={websiteUrl} />
-    <!-- ↓ Sass 変数 `$color-accent` -->
-    <!-- <meta name="theme-color" content="" /> -->
+    <!-- ↓ Sass 変数 `$color-secondary` -->
+    <meta name="theme-color" content="#e4ff00" />
 
     <title>{fullTitle}</title>
     <meta name="title" content={fullTitle} />
