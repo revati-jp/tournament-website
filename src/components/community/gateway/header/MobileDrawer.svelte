@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BREAKPOINT_HB } from '../../../../utils/variables';
+	import { BREAKPOINT_HB } from '../../../../utils/community/gateway';
 
 	interface NavItem {
 		label: string;
