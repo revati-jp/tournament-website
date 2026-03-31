@@ -5,7 +5,10 @@ import { WEBSITE_BASE_URL } from "../utils";
 const canonicalUrl = WEBSITE_BASE_URL + Astro.url.pathname;
 ---
 
-<!doctype html>
+<!--
+  © 2026 REVATI | BSD 3-Clause "New" or "Revised" License
+  リポジトリ: https://github.com/revati-jp/tournament-website
+--><!doctype html>
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
@@ -20,13 +23,15 @@ const canonicalUrl = WEBSITE_BASE_URL + Astro.url.pathname;
       content=""
     /> -->
 
+    <meta property="og:url" content={canonicalUrl} />
+    <meta name="twitter:site" content="@revati_jp" />
+    <meta property="og:locale" content="ja_JP" />
+
     <meta name="keywords" content="revati" />
     <meta
       name="author"
-      content="Rinrin.rs <rinrin0413.valley@gmail.com>, RetoRuto9900K <tutinoko2048@gmail.com>"
+      content="Rinrin.rs <rinrin0413.rs@gmail.com>, RetoRuto9900K <tutinoko2048@gmail.com>"
     />
-
-    <meta property="og:url" content={canonicalUrl} />
 
     <link rel="canonical" href={canonicalUrl} />
 
