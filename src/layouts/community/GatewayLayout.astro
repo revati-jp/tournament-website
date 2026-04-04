@@ -2,6 +2,7 @@
 import { Font } from "astro:assets";
 import BaseLayout from "../BaseLayout.astro";
 import Header from "../../components/community/gateway/header/Header.astro";
+import Footer from "../../components/community/gateway/footer/Footer.astro";
 import { WEBSITE_BASE_URL, COPYRIGHT } from "../../utils";
 import {
   getPathToTournament,
@@ -71,7 +72,7 @@ const absThumbnailPath = websiteUrl + keyVisual.src;
         <slot />
       </div>
     </main>
-    <!-- Footer -->
+    <Footer />
   </div>
 </BaseLayout>
 

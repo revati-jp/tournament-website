@@ -13,3 +13,10 @@ $bp-hamburger-btn: 1175px;
     @content;
   }
 }
+
+$bp-footer-stacking: 700px;
+@mixin footer-stacking {
+  @media screen and (max-width: $bp-footer-stacking) {
+    @content;
+  }
+}
