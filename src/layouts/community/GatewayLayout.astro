@@ -1,13 +1,12 @@
 ---
+import { Font } from "astro:assets";
 import BaseLayout from "../BaseLayout.astro";
-import { WEBSITE_BASE_URL } from "../../utils";
+import Header from "../../components/community/gateway/header/Header.astro";
+import { WEBSITE_BASE_URL, COPYRIGHT } from "../../utils";
 import {
   getPathToTournament,
   getTournament,
 } from "../../constants/tournaments";
-import Header from "../../components/community/gateway/header/Header.astro";
-import { Font } from "astro:assets";
-import { COPYRIGHT } from "../../utils";
 
 import keyVisual from "../../assets/community/gateway/kv_full.webp";
 
@@ -68,7 +67,9 @@ const absThumbnailPath = websiteUrl + keyVisual.src;
   <div class="gateway-container">
     <Header />
     <main transition:animate="fade">
-      <slot />
+      <div class="inner">
+        <slot />
+      </div>
     </main>
     <!-- Footer -->
   </div>
@@ -76,7 +77,7 @@ const absThumbnailPath = websiteUrl + keyVisual.src;
 
 <style lang="scss">
   :global(*) {
-    scrollbar-color: commGateway.$color-primary transparent;
+    scrollbar-color: commGateway.$color-primary commGateway.$color-background;
     scroll-margin-top: calc(commGateway.$header-height + 12px);
   }
 
@@ -106,5 +107,14 @@ const absThumbnailPath = websiteUrl + keyVisual.src;
     // この背景色を body に指定すると、ヘッダーのバックドロップのぼかし効果が正常に動作しなくなる。
     background-color: commGateway.$color-background;
     padding-top: commGateway.$header-height;
+
+    .inner {
+      width: min(100% - 80px, commGateway.$max-content-width-desktop);
+      margin-inline: auto;
+
+      @include commGateway.hb {
+        width: min(100% - 40px, commGateway.$max-content-width-mobile);
+      }
+    }
   }
 </style>
