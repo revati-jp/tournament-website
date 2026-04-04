@@ -150,6 +150,7 @@ const { variant = "contained", color = "primary", href, target } = Astro.props;
 
       &.outlined {
         border-color: $color-gray;
+        color: commGateway.$color-text;
 
         &:hover {
           color: color.adjust(commGateway.$color-text, $lightness: -15%);

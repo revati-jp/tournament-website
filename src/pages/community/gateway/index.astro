@@ -1,56 +1,207 @@
 ---
+import { Image } from "astro:assets";
 import GatewayLayout from "../../../layouts/community/GatewayLayout.astro";
 import SectionTitle from "../../../components/community/gateway/ui/SectionTitle.astro";
 import Button from "../../../components/community/gateway/ui/Button.astro";
 import TeamCard from "../../../components/community/gateway/ui/TeamCard.astro";
 import BoxArrowUpRightIcon from "../../../components/icons/BoxArrowUpRightIcon.astro";
+import { GATEWAY_SPONSORS } from "../../../constants/community/gateway/sponsors";
+import {
+  REVATI_TWITTER_URL,
+  REVATI_YOUTUBE_URL,
+} from "../../../utils/variables";
 
 const sironekos = Array(6).fill("しろねこ");
 ---
 
 <GatewayLayout title="TOP">
-  <section id="about">
-    <SectionTitle primary="ABOUT" secondary="大会について" />
-  </section>
-  <section id="schedule">
-    <SectionTitle primary="SCHEDULE" secondary="大会スケジュール" />
-  </section>
-  <section id="regulations">
-    <SectionTitle primary="REGULATIONS" secondary="大会ルール" />
-  </section>
-  <section id="teams">
-    <SectionTitle primary="TEAMS" secondary="出場チーム" />
-  </section>
-  <section id="sponsors">
-    <SectionTitle primary="SPONSORS" secondary="スポンサー" />
-    <p><a href="/community/gateway/sponsors">スポンサーはこちら</a></p>
-  </section>
+  <div class="section-container">
+    <section id="about">
+      <SectionTitle primary="ABOUT" secondary="大会について" />
+      <!-- //TODO: section bodyのインデントが必要 -->
+      REVATI Community Cup "Gateway" は、Overwatchの競技シーンでの活躍を目指す若き才能を育てることを目的とする、REVATI主催のコミュニティ大会です。<br
+      />
+      Overwatchの競技コミュニティへの貢献・定期的な開催を目指しています。
+    </section>
 
-  <Button variant="contained" color="primary">REVATIについて</Button>
-  <Button href="https://revati.jp" target="_blank"
-    >REVATIについて <BoxArrowUpRightIcon /></Button
-  >
-  <Button variant="contained" color="secondary">REVATIについて</Button>
-  <Button variant="contained" color="gray">REVATIについて</Button>
-  <Button variant="outlined" color="primary">REVATIについて</Button>
-  <Button variant="outlined" color="secondary">REVATIについて</Button>
-  <Button variant="outlined" color="gray">REVATIについて</Button>
+    <section id="schedule">
+      <SectionTitle primary="SCHEDULE" secondary="大会スケジュール" />
+      <table class="schedule-table">
+        <tbody>
+          <tr>
+            <th scope="row">[<span class="bold">予選</span> / 配信なし]</th>
+            <td>
+              <time class="datetime" datetime="2026-05-02">2026.5.2</time>
+              <span class="day">(Sat)</span> -
+              <time class="datetime" datetime="2026-05-03">5.3</time>
+              <span class="day">(Sun)</span>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">[<span class="bold">本戦</span> / 配信あり]</th>
+            <td>
+              <time class="datetime" datetime="2026-05-05">2026.5.5</time>
+              <span class="day">(Tue)</span> -
+              <time class="datetime" datetime="2026-05-06">5.6</time>
+              <span class="day">(Wed)</span>
+              <time class="datetime time" datetime="2026-05-06T13:00:00"
+                >13:00~</time
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">
+        ※予定時刻のため、変更になる可能性があります。変更の際は <a
+          href={REVATI_TWITTER_URL}
+          target="_blank"
+          ><span class="bold">X</span>
+          <BoxArrowUpRightIcon size={12} /></a
+        > でお知らせいたします。
+      </p>
+    </section>
 
-  <div class="team-container">
-    <TeamCard number={1} name="しろねこ" members={sironekos} />
-    <TeamCard number={2} name="しろねこ" members={sironekos} />
-    <TeamCard number={3} name="しろねこ" members={sironekos} />
-    <TeamCard number={4} name="しろねこ" members={sironekos} />
+    <section id="regulations">
+      <SectionTitle primary="REGULATIONS" secondary="大会ルール" />
+      <table class="regulations-table">
+        <tbody>
+          <tr>
+            <th scope="row" rowspan="2">[フォーマット]</th>
+            <td>(予選) <span class="bold">グループ別ラウンドロビン</span></td>
+          </tr>
+          <tr>
+            <td>(本戦) <span class="bold">ダブルエリミネーション</span></td>
+          </tr>
+          <tr>
+            <th scope="row">[マッププール]</th>
+            <td><span class="bold">OWCS 2026 Stage 1に準ずる</span></td>
+          </tr>
+          <tr>
+            <th scope="row">[大会配信]</th>
+            <td><span class="bold">YouTube</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        <Button
+          variant="outlined"
+          color="gray"
+          href="/community/gateway/regulations">詳しいルールはこちら</Button
+        >
+        <Button href={REVATI_YOUTUBE_URL} target="_blank">
+          REVATI YouTube <BoxArrowUpRightIcon />
+        </Button>
+      </p>
+    </section>
+
+    <section id="teams">
+      <SectionTitle primary="TEAMS" secondary="出場チーム" />
+      <p class="note">※本戦に出場するチームのみ掲載しています。</p>
+      <div class="team-container">
+        <TeamCard number={1} name="しろねこ" members={sironekos} />
+        <TeamCard number={2} name="しろねこ" members={sironekos} />
+        <TeamCard number={3} name="しろねこ" members={sironekos} />
+        <TeamCard number={4} name="しろねこ" members={sironekos} />
+      </div>
+    </section>
+
+    <section id="sponsors">
+      <SectionTitle primary="SPONSORS" secondary="スポンサー" />
+      <p>
+        {
+          GATEWAY_SPONSORS.map((sponsor) =>
+            typeof sponsor.logoImage === "string" ? (
+              <img src={sponsor.logoImage} alt={sponsor.name} height="50" />
+            ) : (
+              <Image src={sponsor.logoImage} alt={sponsor.name} height="50" />
+            ),
+          )
+        }
+      </p>
+      <p><a href="/community/gateway/sponsors">スポンサーはこちら</a></p>
+    </section>
   </div>
 </GatewayLayout>
 
 <style lang="scss">
-  .team-container {
-    justify-self: flex-start;
+  .section-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
 
-    margin: 1.5rem;
+  .bold {
+    font-weight: bold;
+  }
+
+  .note {
+    font-size: 0.85rem;
+    color: rgba(commGateway.$color-text, 0.9);
+  }
+
+  table {
+    border-collapse: collapse;
+
+    th {
+      font-weight: normal;
+      text-align: left;
+    }
+  }
+
+  .schedule-table th,
+  .regulations-table th {
+    width: 9rem;
+  }
+
+  .schedule-table {
+    td {
+      font-family: var(--font-sofia-sans-extra-condensed);
+      font-weight: 800;
+      font-size: 1.6rem;
+
+      .datetime {
+        font-size: 2.1rem;
+        letter-spacing: 0.04em;
+      }
+
+      .time {
+        display: inline-block;
+        margin-left: 0.8rem;
+      }
+    }
+  }
+
+  .regulations-table {
+    td {
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+    }
+
+    tbody tr + tr:not(:last-child) {
+      th,
+      td {
+        padding-bottom: 0.8em;
+      }
+    }
+
+    th[rowspan] {
+      vertical-align: top;
+    }
+  }
+
+  $team-card-gap: 2rem;
+  .team-container {
+    margin-inline: auto;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(2, commGateway.$team-card-width);
+    justify-content: center;
+    gap: $team-card-gap;
+  }
+
+  @media (max-width: calc(commGateway.$team-card-width * 2 + $team-card-gap)) {
+    .team-container {
+      grid-template-columns: minmax(0, commGateway.$team-card-width);
+      gap: 1rem;
+    }
   }
 </style>

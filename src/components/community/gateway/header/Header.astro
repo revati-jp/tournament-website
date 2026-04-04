@@ -1,6 +1,11 @@
 ---
 import { Image } from "astro:assets";
 import MobileDrawer from "./MobileDrawer.svelte";
+import {
+  REVATI_TWITTER_URL,
+  REVATI_WEBSITE_URL,
+  REVATI_YOUTUBE_URL,
+} from "../../../../utils";
 import { BREAKPOINT_HB } from "../../../../utils/community/gateway";
 
 import twitterXIcon from "../../../../assets/logos/x_logo_white.svg";
@@ -19,19 +24,19 @@ export const navItems = [
 export const SOCIALS = [
   {
     label: "X.com",
-    href: "https://x.com/revati_jp",
+    href: REVATI_TWITTER_URL,
     size: 28,
     iconImg: twitterXIcon,
   },
   {
     label: "YouTube",
-    href: "https://www.youtube.com/@revati_jp",
+    href: REVATI_YOUTUBE_URL,
     size: 34,
     iconImg: youtubeIcon,
   },
   {
     label: "REVATI",
-    href: "https://revati.jp",
+    href: REVATI_WEBSITE_URL,
     size: 38,
     iconImg: revatiIcon,
   },
