@@ -96,10 +96,18 @@ const absThumbnailPath = websiteUrl + keyVisual.src;
     color: commGateway.$color-primary;
   }
 
+  :global(html) {
+    // 基準となる文字サイズを定義
+    font-size: 16px;
+
+    @include sp {
+      font-size: 14px;
+    }
+  }
+
   .gateway-container {
     font-family: var(--font-noto-sans-jp), sans-serif;
     font-style: normal;
-    font-size: 16px;
     color: commGateway.$color-text;
   }
 
