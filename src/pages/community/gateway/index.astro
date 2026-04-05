@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import GatewayLayout from "../../../layouts/community/GatewayLayout.astro";
 import SectionTitle from "../../../components/community/gateway/ui/SectionTitle.astro";
+import SectionBody from "../../../components/community/gateway/ui/SectionBody.astro";
 import Button from "../../../components/community/gateway/ui/Button.astro";
 import TeamCard from "../../../components/community/gateway/ui/TeamCard.astro";
 import BoxArrowUpRightIcon from "../../../components/icons/BoxArrowUpRightIcon.astro";
@@ -18,108 +19,128 @@ const sironekos = Array(6).fill("しろねこ");
   <div class="section-container">
     <section id="about">
       <SectionTitle primary="ABOUT" secondary="大会について" />
-      <!-- //TODO: section bodyのインデントが必要 -->
-      REVATI Community Cup "Gateway" は、Overwatchの競技シーンでの活躍を目指す若き才能を育てることを目的とする、REVATI主催のコミュニティ大会です。<br
-      />
-      Overwatchの競技コミュニティへの貢献・定期的な開催を目指しています。
+      <SectionBody>
+        REVATI Community Cup "Gateway"
+        は、Overwatchの競技シーンでの活躍を目指す若き才能を育てることを目的とする、REVATI主催のコミュニティ大会です。<br
+        />
+        Overwatchの競技コミュニティへの貢献・定期的な開催を目指しています。
+      </SectionBody>
     </section>
 
     <section id="schedule">
       <SectionTitle primary="SCHEDULE" secondary="大会スケジュール" />
-      <div class="two-column-list schedule-list">
-        <div class="two-column-row">
-          <p class="two-column-label">[<span class="bold">予選</span> / 配信なし]</p>
-          <p class="two-column-value">
-            <time class="datetime" datetime="2026-05-02">2026.5.2</time>
-            <span class="day">(Sat)</span> -
-            <time class="datetime" datetime="2026-05-03">5.3</time>
-            <span class="day">(Sun)</span>
-          </p>
+      <SectionBody>
+        <div class="two-column-list schedule-list">
+          <div class="two-column-row">
+            <p class="two-column-label">
+              [<span class="bold">予選</span> / 配信なし]
+            </p>
+            <p class="two-column-value">
+              <time class="datetime" datetime="2026-05-02">2026.5.2</time>
+              <span class="day">(Sat)</span> -
+              <time class="datetime" datetime="2026-05-03">5.3</time>
+              <span class="day">(Sun)</span>
+            </p>
+          </div>
+          <div class="two-column-row">
+            <p class="two-column-label">
+              [<span class="bold">本戦</span> / 配信あり]
+            </p>
+            <p class="two-column-value">
+              <time class="datetime" datetime="2026-05-05">2026.5.5</time>
+              <span class="day">(Tue)</span> -
+              <time class="datetime" datetime="2026-05-06">5.6</time>
+              <span class="day">(Wed)</span>
+              <time class="datetime time" datetime="2026-05-06T13:00:00"
+                >13:00~</time
+              >
+            </p>
+          </div>
         </div>
-        <div class="two-column-row">
-          <p class="two-column-label">[<span class="bold">本戦</span> / 配信あり]</p>
-          <p class="two-column-value">
-            <time class="datetime" datetime="2026-05-05">2026.5.5</time>
-            <span class="day">(Tue)</span> -
-            <time class="datetime" datetime="2026-05-06">5.6</time>
-            <span class="day">(Wed)</span>
-            <time class="datetime time" datetime="2026-05-06T13:00:00"
-              >13:00~</time
-            >
-          </p>
-        </div>
-      </div>
-      <p class="note">
-        ※予定時刻のため、変更になる可能性があります。変更の際は <a
-          href={REVATI_TWITTER_URL}
-          target="_blank"
-          ><span class="bold">X</span>
-          <BoxArrowUpRightIcon size={12} /></a
-        > でお知らせいたします。
-      </p>
+        <p class="note">
+          ※予定時刻のため、変更になる可能性があります。変更の際は <a
+            href={REVATI_TWITTER_URL}
+            target="_blank"
+            ><span class="bold">X</span>
+            <BoxArrowUpRightIcon size={12} /></a
+          > でお知らせいたします。
+        </p>
+      </SectionBody>
     </section>
 
     <section id="regulations">
       <SectionTitle primary="REGULATIONS" secondary="大会ルール" />
-      <div class="two-column-list regulations-list">
-        <div class="two-column-row">
-          <p class="two-column-label">[フォーマット]</p>
-          <p class="two-column-value">
-            (予選) <span class="bold">グループ別ラウンドロビン</span>
-          </p>
+      <SectionBody>
+        <div class="two-column-list regulations-list">
+          <div class="two-column-row">
+            <p class="two-column-label">[フォーマット]</p>
+            <p class="two-column-value">
+              (予選) <span class="bold">グループ別ラウンドロビン</span>
+            </p>
+          </div>
+          <div class="two-column-row">
+            <p
+              class="two-column-label two-column-label--empty"
+              aria-hidden="true"
+            >
+            </p>
+            <p class="two-column-value">
+              (本戦) <span class="bold">ダブルエリミネーション</span>
+            </p>
+          </div>
+          <div class="two-column-row">
+            <p class="two-column-label">[マッププール]</p>
+            <p class="two-column-value">
+              <span class="bold">OWCS 2026 Stage 1に準ずる</span>
+            </p>
+          </div>
+          <div class="two-column-row">
+            <p class="two-column-label">[大会配信]</p>
+            <p class="two-column-value"><span class="bold">YouTube</span></p>
+          </div>
         </div>
-        <div class="two-column-row">
-          <p class="two-column-label two-column-label--empty" aria-hidden="true"></p>
-          <p class="two-column-value">
-            (本戦) <span class="bold">ダブルエリミネーション</span>
-          </p>
-        </div>
-        <div class="two-column-row">
-          <p class="two-column-label">[マッププール]</p>
-          <p class="two-column-value"><span class="bold">OWCS 2026 Stage 1に準ずる</span></p>
-        </div>
-        <div class="two-column-row">
-          <p class="two-column-label">[大会配信]</p>
-          <p class="two-column-value"><span class="bold">YouTube</span></p>
-        </div>
-      </div>
-      <p>
-        <Button
-          variant="outlined"
-          color="gray"
-          href="/community/gateway/regulations">詳しいルールはこちら</Button
-        >
-        <Button href={REVATI_YOUTUBE_URL} target="_blank">
-          REVATI YouTube <BoxArrowUpRightIcon />
-        </Button>
-      </p>
+        <p>
+          <Button
+            variant="outlined"
+            color="gray"
+            href="/community/gateway/regulations">詳しいルールはこちら</Button
+          >
+          <Button href={REVATI_YOUTUBE_URL} target="_blank">
+            REVATI YouTube <BoxArrowUpRightIcon />
+          </Button>
+        </p>
+      </SectionBody>
     </section>
 
     <section id="teams">
       <SectionTitle primary="TEAMS" secondary="出場チーム" />
-      <p class="note">※本戦に出場するチームのみ掲載しています。</p>
-      <div class="team-container">
-        <TeamCard number={1} name="しろねこ" members={sironekos} />
-        <TeamCard number={2} name="しろねこ" members={sironekos} />
-        <TeamCard number={3} name="しろねこ" members={sironekos} />
-        <TeamCard number={4} name="しろねこ" members={sironekos} />
-      </div>
+      <SectionBody>
+        <p class="note">※本戦に出場するチームのみ掲載しています。</p>
+        <div class="team-container">
+          <TeamCard number={1} name="しろねこ" members={sironekos} />
+          <TeamCard number={2} name="しろねこ" members={sironekos} />
+          <TeamCard number={3} name="しろねこ" members={sironekos} />
+          <TeamCard number={4} name="しろねこ" members={sironekos} />
+        </div>
+      </SectionBody>
     </section>
 
     <section id="sponsors">
       <SectionTitle primary="SPONSORS" secondary="スポンサー" />
-      <p>
-        {
-          GATEWAY_SPONSORS.map((sponsor) =>
-            typeof sponsor.logoImage === "string" ? (
-              <img src={sponsor.logoImage} alt={sponsor.name} height="50" />
-            ) : (
-              <Image src={sponsor.logoImage} alt={sponsor.name} height="50" />
-            ),
-          )
-        }
-      </p>
-      <p><a href="/community/gateway/sponsors">スポンサーはこちら</a></p>
+      <SectionBody>
+        <p>
+          {
+            GATEWAY_SPONSORS.map((sponsor) =>
+              typeof sponsor.logoImage === "string" ? (
+                <img src={sponsor.logoImage} alt={sponsor.name} height="50" />
+              ) : (
+                <Image src={sponsor.logoImage} alt={sponsor.name} height="50" />
+              ),
+            )
+          }
+        </p>
+        <p><a href="/community/gateway/sponsors">スポンサーはこちら</a></p>
+      </SectionBody>
     </section>
   </div>
 </GatewayLayout>
@@ -228,7 +249,10 @@ const sironekos = Array(6).fill("しろねこ");
   $team-single-column-breakpoint: 980px;
 
   .team-container {
-    width: min(100%, calc(#{commGateway.$team-card-width} * 2 + #{$team-card-gap}));
+    width: min(
+      100%,
+      calc(#{commGateway.$team-card-width} * 2 + #{$team-card-gap})
+    );
     margin-inline: auto;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

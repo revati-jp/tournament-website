@@ -118,12 +118,18 @@ const absThumbnailPath = websiteUrl + keyVisual.src;
     padding-top: commGateway.$header-height;
 
     .inner {
-      width: min(100% - commGateway.$content-spacing-desktop * 2, commGateway.$max-content-width-desktop);
+      width: min(
+        100% - commGateway.$content-spacing-desktop * 2,
+        commGateway.$max-content-width-desktop
+      );
       margin-inline: auto;
       padding-bottom: commGateway.$content-spacing-desktop;
 
       @include sp {
-        width: min(100% - commGateway.$content-spacing-mobile * 2, commGateway.$max-content-width-mobile);
+        width: min(
+          100% - commGateway.$content-spacing-mobile * 2,
+          commGateway.$max-content-width-mobile
+        );
         padding-bottom: commGateway.$content-spacing-mobile;
       }
     }
