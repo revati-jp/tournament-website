@@ -26,31 +26,29 @@ const sironekos = Array(6).fill("しろねこ");
 
     <section id="schedule">
       <SectionTitle primary="SCHEDULE" secondary="大会スケジュール" />
-      <table class="schedule-table">
-        <tbody>
-          <tr>
-            <th scope="row">[<span class="bold">予選</span> / 配信なし]</th>
-            <td>
-              <time class="datetime" datetime="2026-05-02">2026.5.2</time>
-              <span class="day">(Sat)</span> -
-              <time class="datetime" datetime="2026-05-03">5.3</time>
-              <span class="day">(Sun)</span>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">[<span class="bold">本戦</span> / 配信あり]</th>
-            <td>
-              <time class="datetime" datetime="2026-05-05">2026.5.5</time>
-              <span class="day">(Tue)</span> -
-              <time class="datetime" datetime="2026-05-06">5.6</time>
-              <span class="day">(Wed)</span>
-              <time class="datetime time" datetime="2026-05-06T13:00:00"
-                >13:00~</time
-              >
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="two-column-list schedule-list">
+        <div class="two-column-row">
+          <p class="two-column-label">[<span class="bold">予選</span> / 配信なし]</p>
+          <p class="two-column-value">
+            <time class="datetime" datetime="2026-05-02">2026.5.2</time>
+            <span class="day">(Sat)</span> -
+            <time class="datetime" datetime="2026-05-03">5.3</time>
+            <span class="day">(Sun)</span>
+          </p>
+        </div>
+        <div class="two-column-row">
+          <p class="two-column-label">[<span class="bold">本戦</span> / 配信あり]</p>
+          <p class="two-column-value">
+            <time class="datetime" datetime="2026-05-05">2026.5.5</time>
+            <span class="day">(Tue)</span> -
+            <time class="datetime" datetime="2026-05-06">5.6</time>
+            <span class="day">(Wed)</span>
+            <time class="datetime time" datetime="2026-05-06T13:00:00"
+              >13:00~</time
+            >
+          </p>
+        </div>
+      </div>
       <p class="note">
         ※予定時刻のため、変更になる可能性があります。変更の際は <a
           href={REVATI_TWITTER_URL}
@@ -63,25 +61,28 @@ const sironekos = Array(6).fill("しろねこ");
 
     <section id="regulations">
       <SectionTitle primary="REGULATIONS" secondary="大会ルール" />
-      <table class="regulations-table">
-        <tbody>
-          <tr>
-            <th scope="row" rowspan="2">[フォーマット]</th>
-            <td>(予選) <span class="bold">グループ別ラウンドロビン</span></td>
-          </tr>
-          <tr>
-            <td>(本戦) <span class="bold">ダブルエリミネーション</span></td>
-          </tr>
-          <tr>
-            <th scope="row">[マッププール]</th>
-            <td><span class="bold">OWCS 2026 Stage 1に準ずる</span></td>
-          </tr>
-          <tr>
-            <th scope="row">[大会配信]</th>
-            <td><span class="bold">YouTube</span></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="two-column-list regulations-list">
+        <div class="two-column-row">
+          <p class="two-column-label">[フォーマット]</p>
+          <p class="two-column-value">
+            (予選) <span class="bold">グループ別ラウンドロビン</span>
+          </p>
+        </div>
+        <div class="two-column-row">
+          <p class="two-column-label two-column-label--empty" aria-hidden="true"></p>
+          <p class="two-column-value">
+            (本戦) <span class="bold">ダブルエリミネーション</span>
+          </p>
+        </div>
+        <div class="two-column-row">
+          <p class="two-column-label">[マッププール]</p>
+          <p class="two-column-value"><span class="bold">OWCS 2026 Stage 1に準ずる</span></p>
+        </div>
+        <div class="two-column-row">
+          <p class="two-column-label">[大会配信]</p>
+          <p class="two-column-value"><span class="bold">YouTube</span></p>
+        </div>
+      </div>
       <p>
         <Button
           variant="outlined"
@@ -139,22 +140,41 @@ const sironekos = Array(6).fill("しろねこ");
     color: rgba(commGateway.$color-text, 0.9);
   }
 
-  table {
-    border-collapse: collapse;
+  $schedule-collapse-breakpoint: 440px;
+  $regulations-collapse-breakpoint: 380px;
+  $schedule-collapsed-item-gap: 1rem;
 
-    th {
-      font-weight: normal;
-      text-align: left;
-    }
+  .two-column-list {
+    display: grid;
+    row-gap: 0;
   }
 
-  .schedule-table th,
-  .regulations-table th {
-    width: 9rem;
+  .schedule-list {
+    container: schedule-list / inline-size;
   }
 
-  .schedule-table {
-    td {
+  .regulations-list {
+    container: regulations-list / inline-size;
+  }
+
+  .two-column-row {
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    align-items: start;
+    column-gap: 0;
+  }
+
+  .two-column-label,
+  .two-column-value {
+    margin: 0;
+  }
+
+  .two-column-label {
+    font-weight: normal;
+  }
+
+  .schedule-list {
+    .two-column-value {
       font-family: var(--font-sofia-sans-extra-condensed);
       font-weight: 800;
       font-size: 1.6rem;
@@ -171,21 +191,36 @@ const sironekos = Array(6).fill("しろねこ");
     }
   }
 
-  .regulations-table {
-    td {
+  .regulations-list {
+    .two-column-value {
       font-size: 1.1rem;
       letter-spacing: 0.04em;
     }
 
-    tbody tr + tr:not(:last-child) {
-      th,
-      td {
-        padding-bottom: 0.8em;
-      }
+    .two-column-row + .two-column-row:not(:last-child) {
+      padding-bottom: 0.8em;
+    }
+  }
+
+  @container schedule-list (max-width: #{$schedule-collapse-breakpoint}) {
+    .schedule-list .two-column-row {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 0.2rem;
     }
 
-    th[rowspan] {
-      vertical-align: top;
+    .schedule-list .two-column-row + .two-column-row {
+      margin-top: $schedule-collapsed-item-gap;
+    }
+  }
+
+  @container regulations-list (max-width: #{$regulations-collapse-breakpoint}) {
+    .regulations-list .two-column-row {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 0.15rem;
+    }
+
+    .regulations-list .two-column-label--empty {
+      display: none;
     }
   }
 
