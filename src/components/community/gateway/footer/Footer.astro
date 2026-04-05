@@ -71,6 +71,20 @@ import gatewayLogo from "../../../../assets/community/gateway/Gateway-logo_white
 <style lang="scss">
   $spacing-around-border: 16px;
 
+  $bp-footer-top: 1030px;
+  @mixin footer-top-sp {
+    @media screen and (max-width: $bp-footer-top) {
+      @content;
+    }
+  }
+
+  $bp-footer-bottom: 700px;
+  @mixin footer-bottom-sp {
+    @media screen and (max-width: $bp-footer-bottom) {
+      @content;
+    }
+  }
+
   footer {
     background-color: #050507;
     color: commGateway.$color-text;
@@ -78,7 +92,7 @@ import gatewayLogo from "../../../../assets/community/gateway/Gateway-logo_white
     // navが下寄りな分上の空間が広く見えるため調整
     padding: 40px 60px 50px;
 
-    @include commGateway.hb {
+    @include footer-top-sp {
       padding: 30px 16px;
     }
   }
@@ -89,7 +103,7 @@ import gatewayLogo from "../../../../assets/community/gateway/Gateway-logo_white
     padding-inline: 10px;
     max-width: commGateway.$max-content-width-desktop;
 
-    @include commGateway.hb {
+    @include footer-top-sp {
       max-width: commGateway.$max-content-width-mobile;
     }
   }
@@ -103,7 +117,7 @@ import gatewayLogo from "../../../../assets/community/gateway/Gateway-logo_white
       justify-content: space-between;
       gap: 32px;
 
-      @include commGateway.hb {
+      @include footer-top-sp {
         display: none;
       }
 
@@ -151,7 +165,7 @@ import gatewayLogo from "../../../../assets/community/gateway/Gateway-logo_white
     .mobile {
       display: none;
 
-      @include commGateway.hb {
+      @include footer-top-sp {
         display: block;
       }
 
@@ -182,7 +196,7 @@ import gatewayLogo from "../../../../assets/community/gateway/Gateway-logo_white
     flex-wrap: wrap;
     font-size: 14px;
 
-    @include commGateway.footer-stacking {
+    @include footer-bottom-sp {
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -206,7 +220,7 @@ import gatewayLogo from "../../../../assets/community/gateway/Gateway-logo_white
       padding: 0;
       list-style: none;
 
-      @include commGateway.footer-stacking {
+      @include footer-bottom-sp {
         justify-content: center;
       }
     }

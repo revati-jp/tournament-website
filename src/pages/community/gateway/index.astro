@@ -190,17 +190,20 @@ const sironekos = Array(6).fill("しろねこ");
   }
 
   $team-card-gap: 2rem;
+  $team-single-column-breakpoint: 980px;
+
   .team-container {
+    width: min(100%, calc(#{commGateway.$team-card-width} * 2 + #{$team-card-gap}));
     margin-inline: auto;
     display: grid;
-    grid-template-columns: repeat(2, commGateway.$team-card-width);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     justify-content: center;
+    justify-items: center;
     gap: $team-card-gap;
-  }
 
-  @media (max-width: calc(commGateway.$team-card-width * 2 + $team-card-gap)) {
-    .team-container {
-      grid-template-columns: minmax(0, commGateway.$team-card-width);
+    @media screen and (max-width: $team-single-column-breakpoint) {
+      width: min(100%, commGateway.$team-card-width);
+      grid-template-columns: minmax(0, 1fr);
       gap: 1rem;
     }
   }
