@@ -1,16 +1,13 @@
 ---
 import { Image } from "astro:assets";
-import GatewayLayout from "../../../layouts/community/GatewayLayout.astro";
-import SectionTitle from "../../../components/community/gateway/ui/SectionTitle.astro";
-import SectionBody from "../../../components/community/gateway/ui/SectionBody.astro";
-import Button from "../../../components/community/gateway/ui/Button.astro";
-import TeamCard from "../../../components/community/gateway/ui/TeamCard.astro";
-import BoxArrowUpRightIcon from "../../../components/icons/BoxArrowUpRightIcon.astro";
-import { GATEWAY_SPONSORS } from "../../../constants/community/gateway/sponsors";
-import {
-  REVATI_TWITTER_URL,
-  REVATI_YOUTUBE_URL,
-} from "../../../utils/variables";
+import GatewayLayout from "@layouts/community/GatewayLayout.astro";
+import SectionTitle from "@components/community/gateway/ui/SectionTitle.astro";
+import SectionBody from "@components/community/gateway/ui/SectionBody.astro";
+import Button from "@components/community/gateway/ui/Button.astro";
+import TeamCard from "@components/community/gateway/ui/TeamCard.astro";
+import BoxArrowUpRightIcon from "@components/icons/BoxArrowUpRightIcon.astro";
+import { GATEWAY_SPONSORS } from "@constants/community/gateway/sponsors";
+import { REVATI_TWITTER_URL, REVATI_YOUTUBE_URL } from "@utils/variables";
 
 const sironekos = Array(6).fill("しろねこ");
 ---

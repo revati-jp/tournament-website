@@ -21,6 +21,25 @@ REVATI Community CUP という Overwatch の大会の公式ウェブサイト (t
 - ビルド: `pnpm run build`（ビルドでは `licenses.json` が自動で生成される）
 - チェック・整形・Lint: `pnpm run check && pnpm run format && pnpm run lint`
 
+## import エイリアス
+
+TypeScript でのインポート用ショートカットとして、以下のエイリアスを使用可能:
+
+- `@assets/*` → `./src/assets/*`
+- `@components/*` → `./src/components/*`
+- `@constants/*` → `./src/constants/*`
+- `@layouts/*` → `./src/layouts/*`
+- `@types` → `./src/types`
+- `@types/*` → `./src/types/*`
+- `@utils` → `./src/utils`
+- `@utils/*` → `./src/utils/*`
+
+使い方例:
+
+```ts
+import revatiIcon from "@assets/revati/icon_white.svg";
+```
+
 ## コーディングスタイル
 
 - TypeScript は strict モードで使用

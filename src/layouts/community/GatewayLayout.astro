@@ -1,15 +1,12 @@
 ---
 import { Font } from "astro:assets";
 import BaseLayout from "../BaseLayout.astro";
-import Header from "../../components/community/gateway/header/Header.astro";
-import Footer from "../../components/community/gateway/footer/Footer.astro";
-import { WEBSITE_BASE_URL, COPYRIGHT } from "../../utils";
-import {
-  getPathToTournament,
-  getTournament,
-} from "../../constants/tournaments";
+import Header from "@components/community/gateway/header/Header.astro";
+import Footer from "@components/community/gateway/footer/Footer.astro";
+import { WEBSITE_BASE_URL, COPYRIGHT } from "@utils";
+import { getPathToTournament, getTournament } from "@constants/tournaments";
 
-import keyVisual from "../../assets/community/gateway/kv_full.webp";
+import keyVisual from "@assets/community/gateway/kv_full.webp";
 
 interface Props {
   title: string;
