@@ -1,0 +1,18 @@
+---
+import ErrorPageCommGateway from "./community/gateway/ErrorPage.astro";
+
+interface Props {
+  statusCode: number;
+  title: string;
+  message: string;
+  pathname?: string;
+}
+
+const props: Props = Astro.props;
+---
+
+<!--
+  TODO: 非 Gateway 大会サイトに対応
+  いろいろ試したが、方法が思いつかなかった。
+-->
+<ErrorPageCommGateway {...props} />
