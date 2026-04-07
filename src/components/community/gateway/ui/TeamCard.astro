@@ -51,9 +51,8 @@ const { number, name, members } = Astro.props;
         aspect-ratio: 1 / 1;
         background-color: commGateway.$color-primary;
         color: black;
-        font-family: var(--font-sofia-sans-extra-condensed);
+        @include commGateway.font-sofia-sans-extra-condensed-800;
         font-size: 2rem;
-        font-weight: bold;
         border-bottom-right-radius: 5px;
       }
 

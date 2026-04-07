@@ -230,11 +230,10 @@
 			padding: 18px 8px;
 			color: commGateway.$color-text;
 			text-decoration: none;
-			font-family: var(--font-zalando-sans-expanded);
-			font-weight: 500;
 			font-size: 20px;
 			-webkit-tap-highlight-color: transparent;
 			transition: background-color 0.2s ease;
+			@include commGateway.font-zalando-sans-expanded-500;
 
 			span {
 				transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);

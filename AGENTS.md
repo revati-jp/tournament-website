@@ -54,8 +54,9 @@ import revatiIcon from "@assets/revati/icon_white.svg";
 
 ## その他の指示
 
+- フォントを指定する際は専用の mixin を使用すること。
 - `z-index` プロパティを使用する際は、`docs/SPECIFICATION.md` 内の z-index リストを更新すること。
-- コミットメッセージはタイトルと本文を日本語として、Conventional Commits 1.0.0 に準拠
+- コミットメッセージはタイトルと本文を日本語として、Conventional Commits 1.0.0 に準拠すること。
   - 必要に応じてスコープも記述
 
 ## その他ドキュメント

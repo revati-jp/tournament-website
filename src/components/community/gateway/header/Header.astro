@@ -362,8 +362,7 @@ const mobileSocialLinks = SOCIALS.map(({ label, href, size, iconImg }) => ({
   ul {
     display: flex;
     list-style: none;
-    font-family: var(--font-zalando-sans-expanded);
-    font-weight: 500;
+    @include commGateway.font-zalando-sans-expanded-500;
     font-size: 20px;
     justify-content: center;
     padding: 0;
