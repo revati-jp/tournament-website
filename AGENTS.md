@@ -47,8 +47,8 @@ import revatiIcon from "@assets/revati/icon_white.svg";
   - 条件式における暗黙的なブール型の使用を禁止（例: `if (0 < count)` や `if (user !== null)`）
 - バニラ CSS ではなく SCSS を使用
   - `src/styles/` 配下は「全体共通」と「大会専用」で分ける。
-    - 全体共通は `_color.scss` と `_mixin.scss`。
-    - 各大会専用は `src/styles/<tournament-type>/<tournament>/` 配下（例: `src/styles/community/gateway/`）に `_color.scss` / `_mixin.scss` / `_dimension.scss` などを配置する。
+    - 全体共通は `_color.scss` と `_mixin.scss`。（`as *` で自動でインポート済）
+    - 各大会専用は `src/styles/<tournament-type>/<tournament>/` 配下（例: `src/styles/community/gateway/`）に `_color.scss` / `_mixin.scss` / `_dimension.scss` などを配置する。（自動インポート済。例: `as commGateway`）
     - どちらにせよ、複数のコンポーネントやファイルで共有されるもの**のみ**をこれらのファイルに追加する。
 - コメントやドキュメンテーションは日本語で記述
 
