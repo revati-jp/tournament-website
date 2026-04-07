@@ -244,17 +244,16 @@
 				transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 			}
 
-			@media (hover: hover) {
-				&:hover {
-					background-color: rgba(commGateway.$color-text, 0.04);
+			&:hover,
+			&:focus-visible {
+				background-color: rgba(commGateway.$color-text, 0.04);
 
-					span {
-						transform: translateX(8px);
-					}
+				span {
+					transform: translateX(8px);
+				}
 
-					svg {
-						transform: translateX(-4px);
-					}
+				svg {
+					transform: translateX(-4px);
 				}
 			}
 

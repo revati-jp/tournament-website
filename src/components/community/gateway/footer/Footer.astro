@@ -233,10 +233,9 @@ import gatewayLogo from "@assets/community/gateway/Gateway-logo_white_680x448.we
       text-decoration: none;
       transition: color 0.2s ease;
 
-      @media (hover: hover) {
-        &:hover {
-          color: commGateway.$color-primary;
-        }
+      &:hover,
+      &:focus-visible {
+        color: commGateway.$color-primary;
       }
     }
   }
