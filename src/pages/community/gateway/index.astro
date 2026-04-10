@@ -9,10 +9,12 @@ import BoxArrowUpRightIcon from "@components/icons/BoxArrowUpRightIcon.astro";
 import { GATEWAY_SPONSORS } from "@constants/community/gateway/sponsors";
 import { REVATI_TWITTER_URL, REVATI_YOUTUBE_URL } from "@utils/variables";
 
+const description = 'REVATI Community Cup "Gateway" のトップページです。';
+
 const sironekos = Array(6).fill("しろねこ");
 ---
 
-<GatewayLayout title="TOP">
+<GatewayLayout title="TOP" meta={{ description }}>
   <div class="section-container">
     <section id="about">
       <SectionTitle primary="ABOUT" secondary="大会について" />

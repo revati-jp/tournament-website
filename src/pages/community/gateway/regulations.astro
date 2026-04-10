@@ -6,9 +6,12 @@ import SectionBody from "@components/community/gateway/ui/SectionBody.astro";
 
 import scheduleDay1 from "@assets/community/gateway/schedule_day1.webp";
 import scheduleDay2 from "@assets/community/gateway/schedule_day2.webp";
+
+const description =
+  'REVATI Community Cup "Gateway" の大会ルールを掲載しています。';
 ---
 
-<GatewayLayout title="Regulations">
+<GatewayLayout title="Regulations" meta={{ description }}>
   <SectionTitle primary="REGULATIONS" secondary="大会ルール" />
   <SectionBody>
     <div class="schedule-container">
@@ -21,13 +24,13 @@ import scheduleDay2 from "@assets/community/gateway/schedule_day2.webp";
 <style lang="scss">
   .schedule-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    // gap: 1rem;
 
     img {
       display: block;
       width: 100%;
-      max-width: 500px;
+      max-width: 550px;
       margin-inline: auto;
       height: auto;
     }
