@@ -79,6 +79,10 @@ const { sponsor } = Astro.props;
     border: 2px solid rgba(commGateway.$color-text, 0.2);
     border-radius: 6px;
 
+    @include sp {
+      flex-direction: column;
+    }
+
     .logo {
       width: 50%;
       display: flex;
@@ -92,6 +96,14 @@ const { sponsor } = Astro.props;
         max-height: 100px;
         object-fit: contain;
       }
+
+      // 上側
+      @include sp {
+        width: auto;
+        padding-inline: 4rem;
+        border-right: none;
+        border-bottom: 2px solid rgba(commGateway.$color-text, 0.2);
+      }
     }
 
     .body {
@@ -99,6 +111,10 @@ const { sponsor } = Astro.props;
       padding: 1.6rem;
       display: flex;
       flex-direction: column;
+
+      @include sp {
+        width: auto;
+      }
 
       .info {
         flex-grow: 1;
