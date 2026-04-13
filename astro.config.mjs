@@ -10,6 +10,7 @@ export default defineConfig({
       name: "Noto Sans JP",
       cssVariable: "--font-noto-sans-jp",
       provider: fontProviders.fontsource(),
+      subsets: ["japanese", "latin"],
     },
     {
       name: "Zalando Sans Expanded",
