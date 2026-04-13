@@ -160,14 +160,26 @@ const memberTbds = Array(6).fill("TBD");
           {
             GATEWAY_SPONSORS.map((sponsor) =>
               typeof sponsor.logoImage === "string" ? (
-                <img src={sponsor.logoImage} alt={sponsor.name} height="50" />
+                <img
+                  src={sponsor.logoImage}
+                  alt={sponsor.name}
+                  class="sponsor-logo"
+                />
               ) : (
-                <Image src={sponsor.logoImage} alt={sponsor.name} height="50" />
+                <Image
+                  src={sponsor.logoImage}
+                  alt={sponsor.name}
+                  class="sponsor-logo"
+                />
               ),
             )
           }
         </p>
-        <p><a href="/community/gateway/sponsors">スポンサーはこちら</a></p>
+        <Button
+          variant="outlined"
+          color="gray"
+          href="/community/gateway/sponsors">スポンサーはこちら</Button
+        >
       </SectionBody>
     </section>
   </div>
@@ -292,5 +304,11 @@ const memberTbds = Array(6).fill("TBD");
       grid-template-columns: minmax(0, 1fr);
       gap: 1rem;
     }
+  }
+
+  .sponsor-logo {
+    height: 6rem;
+    width: auto;
+    object-fit: contain;
   }
 </style>
