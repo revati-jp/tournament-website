@@ -274,6 +274,13 @@
 		gap: 1rem;
 		pointer-events: auto;
 
+		&::after {
+			content: '';
+			width: 44px;
+			height: 44px;
+			flex-shrink: 0;
+		}
+
 		@include sp {
 			padding: 1.5rem 1.2rem;
 		}
