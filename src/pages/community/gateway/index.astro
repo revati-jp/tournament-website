@@ -212,6 +212,10 @@ const memberTbds = Array(6).fill("TBD");
 
   .schedule-list {
     container: schedule-list / inline-size;
+    .two-column-label {
+      // labelとvalueの高さずれ対策
+      margin-bottom: 0.25em;
+    }
   }
 
   .regulations-list {
@@ -221,7 +225,7 @@ const memberTbds = Array(6).fill("TBD");
   .two-column-row {
     display: grid;
     grid-template-columns: 9rem minmax(0, 1fr);
-    align-items: start;
+    align-items: center;
     column-gap: 0;
   }
 
@@ -263,6 +267,13 @@ const memberTbds = Array(6).fill("TBD");
   }
 
   @container schedule-list (max-width: #{$schedule-collapse-breakpoint}) {
+    .schedule-list {
+      .two-column-label {
+        // labelとvalueの高さずれ対策
+        margin-bottom: 0;
+      }
+    }
+
     .schedule-list .two-column-row {
       grid-template-columns: minmax(0, 1fr);
       row-gap: 0.2rem;
