@@ -25,6 +25,7 @@
 	let activeIndex = $state(0);
 	let isPlaying = $state(true);
 	let advanceTimer: ReturnType<typeof setTimeout> | undefined;
+	let playRequestId = 0;
 	// slides は初期化後に変更されないため、$state を使わない
 	const videoRefs: (HTMLVideoElement | null)[] = Array(slides.length).fill(null);
 
@@ -59,10 +60,8 @@
 
 		const slide = slides[idx];
 		if (slide.type === 'video') {
-			const video = videoRefs[idx];
-			if (video !== null && playing) {
-				video.currentTime = 0;
-				video.play();
+			if (playing) {
+				requestVideoPlayback(idx, true);
 			}
 			// 動画スライドではタイマーを設定しない（ended イベントで次へ遷移）
 		} else if (playing) {
@@ -94,9 +93,46 @@
 		activeIndex = index;
 	}
 
+	function requestVideoPlayback(index: number, resetPosition: boolean) {
+		const video = videoRefs[index];
+		if (video === null) {
+			return;
+		}
+
+		if (resetPosition) {
+			video.currentTime = 0;
+		}
+
+		const requestId = ++playRequestId;
+		const playPromise = video.play();
+		if (playPromise !== undefined) {
+			playPromise.catch(() => {
+				// 最新の再生要求だけを失敗扱いし、該当スライドからフォールバックする
+				if (requestId !== playRequestId) {
+					return;
+				}
+
+				if (isPlaying && activeIndex === index) {
+					goToNext();
+				}
+			});
+		}
+	}
+
 	function handleVideoEnded(index: number) {
 		if (index === activeIndex && isPlaying) {
 			goToNext();
+		}
+	}
+
+	function handleVideoLoadedData(index: number) {
+		if (index !== activeIndex || !isPlaying) {
+			return;
+		}
+
+		const video = videoRefs[index];
+		if (video !== null && video.paused) {
+			requestVideoPlayback(index, false);
 		}
 	}
 
@@ -132,6 +168,7 @@
 						muted
 						playsinline
 						preload="auto"
+						onloadeddata={() => handleVideoLoadedData(index)}
 						onended={() => handleVideoEnded(index)}
 						tabindex="-1"
 					></video>
@@ -185,14 +222,13 @@
 					<time datetime="2026-05-06">5.6</time>
 					<span class="day">(Wed)</span>
 				</p>
-				<div class="indicators" role="tablist" aria-label="スライド切り替え">
+				<div class="indicators" role="group" aria-label="スライド切り替え">
 					{#each slides as _, index}
 						<button
 							class="indicator"
 							class:active={index === activeIndex}
 							onclick={() => goToSlide(index)}
-							role="tab"
-							aria-selected={index === activeIndex}
+							aria-current={index === activeIndex ? 'true' : undefined}
 							aria-label={`スライド ${index + 1}`}
 						></button>
 					{/each}
