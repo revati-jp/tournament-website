@@ -133,6 +133,7 @@
 						playsinline
 						preload="auto"
 						onended={() => handleVideoEnded(index)}
+						tabindex="-1"
 					></video>
 				{:else}
 					<img src={slide.src} alt={slide.alt} />
