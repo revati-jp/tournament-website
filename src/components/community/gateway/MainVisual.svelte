@@ -220,7 +220,7 @@
 			</button>
 
 			<div class="overlay-info">
-				<p class="tagline">まだ見ぬ才能に、輝きの場を ――</p>
+				<p class="tagline">まだ見ぬ才能に、輝きの場を ―――</p>
 				<p class="date">
 					<time datetime="2026-05-05">2026.5.5</time>
 					<span class="day">(Tue)</span>
@@ -306,15 +306,12 @@
 	}
 
 	// オーバーレイ: スライドの上にテキストやコントロールを配置
-	// bottom にヘッダー高さ分のオフセットを付けることで、
-	// margin-top: -header-height で引き上げた分のはみ出しを吸収し、
-	// コンテンツがビューポート内に収まるようにする
 	.overlay {
 		position: absolute;
 		top: 0;
 		left: 0;
 		right: 0;
-		bottom: commGateway.$header-height;
+		bottom: 46px;
 		z-index: 1;
 		pointer-events: none;
 		display: flex;
@@ -335,10 +332,6 @@
 			height: 44px;
 			flex-shrink: 0;
 		}
-
-		@include sp {
-			padding: 1.5rem 1.2rem;
-		}
 	}
 
 	.play-pause-btn {
@@ -346,8 +339,9 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		aspect-ratio: 1;
 		width: 44px;
-		height: 44px;
+		height: auto;
 		background: none;
 		border: none;
 		color: commGateway.$color-text;
@@ -355,11 +349,16 @@
 		-webkit-tap-highlight-color: transparent;
 		opacity: 0.85;
 		transition: opacity 0.2s ease;
+		filter: drop-shadow(0 0 12px black);
 
 		&:hover,
 		&:focus-visible {
 			opacity: 1;
 		}
+	}
+
+	svg {
+		scale: 1.5;
 	}
 
 	.overlay-info {
@@ -370,7 +369,7 @@
 
 	.tagline {
 		@include commGateway.font-noto-sans-jp-400;
-		font-size: 1rem;
+		font-size: 1.4rem;
 		margin: 0 0 0.3rem;
 		color: commGateway.$color-text;
 		text-shadow:
@@ -378,15 +377,11 @@
 			0 0 40px rgba(0, 0, 0, 0.5),
 			0 2px 8px rgba(0, 0, 0, 0.6);
 		letter-spacing: 0.15em;
-
-		@include sp {
-			font-size: 0.85rem;
-		}
 	}
 
 	.date {
 		@include commGateway.font-sofia-sans-extra-condensed-800;
-		font-size: 2.4rem;
+		font-size: 3.5rem;
 		margin: 0 0 0.6rem;
 		color: commGateway.$color-text;
 		text-shadow:
@@ -394,10 +389,6 @@
 			0 0 40px rgba(0, 0, 0, 0.5),
 			0 2px 8px rgba(0, 0, 0, 0.6);
 		letter-spacing: 0.04em;
-
-		@include sp {
-			font-size: 1.8rem;
-		}
 
 		time {
 			font-size: 1.2em;
@@ -411,12 +402,12 @@
 	.indicators {
 		display: flex;
 		justify-content: center;
-		gap: 0.6rem;
+		gap: 1rem;
 	}
 
 	.indicator {
 		width: 3rem;
-		height: 4px;
+		height: 5px;
 		border: none;
 		border-radius: 2px;
 		background-color: rgba(commGateway.$color-text, 0.35);
@@ -433,10 +424,27 @@
 		&:focus-visible {
 			background-color: rgba(commGateway.$color-text, 0.7);
 		}
+	}
 
-		@include sp {
-			width: 2.2rem;
-			height: 3px;
+	@include sp {
+		.overlay {
+			bottom: 18px;
+		}
+
+		.overlay-bottom {
+			padding: 1.5rem 1.2rem;
+		}
+
+		.play-pause-btn {
+			width: 24px;
+		}
+
+		.tagline {
+			font-size: 0.85rem;
+		}
+
+		.date {
+			font-size: 1.6rem;
 		}
 	}
 </style>
