@@ -26,8 +26,8 @@
 	let isPlaying = $state(true);
 	let advanceTimer: ReturnType<typeof setTimeout> | undefined;
 	let playRequestId = 0;
-	// slides は初期化後に変更されないため、$state を使わない
-	const videoRefs: (HTMLVideoElement | null)[] = Array(slides.length).fill(null);
+	// bind:this で必要なインデックスが順次埋まるため、初期サイズは固定しない
+	const videoRefs: (HTMLVideoElement | null)[] = [];
 
 	// --max-vh001: アドレスバー等を考慮した最大ビューポート高さの 1%
 	$effect(() => {
@@ -52,7 +52,7 @@
 
 		// 他の動画を停止・リセット
 		videoRefs.forEach((video, i) => {
-			if (video !== null && i !== idx) {
+			if (video !== null && video !== undefined && i !== idx) {
 				video.pause();
 				video.currentTime = 0;
 			}
@@ -95,7 +95,7 @@
 
 	function requestVideoPlayback(index: number, resetPosition: boolean) {
 		const video = videoRefs[index];
-		if (video === null) {
+		if (video === null || video === undefined) {
 			return;
 		}
 
@@ -131,7 +131,7 @@
 		}
 
 		const video = videoRefs[index];
-		if (video !== null && video.paused) {
+		if (video !== null && video !== undefined && video.paused) {
 			requestVideoPlayback(index, false);
 		}
 	}
@@ -144,7 +144,7 @@
 			const slide = slides[activeIndex];
 			if (slide.type === 'video') {
 				const video = videoRefs[activeIndex];
-				if (video !== null) {
+				if (video !== null && video !== undefined) {
 					video.pause();
 				}
 			}
