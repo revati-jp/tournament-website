@@ -106,3 +106,4 @@ Discord 上の資料を参照。
 | ------: | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 |     256 | ドロワーメニュー | [`src/components/community/gateway/header/MobileDrawer.svelte>style>.drawer-overlay`](../src/components/community/gateway/header/MobileDrawer.svelte) |
 |     255 | ヘッダー         | [`src/components/community/gateway/header/Header.astro>style>header`](../src/components/community/gateway/header/Header.astro)                        |
+|       1 | メインビジュアル | [`src/components/community/gateway/MainVisual.svelte>style>.overlay`](../src/components/community/gateway/MainVisual.svelte)                          |
