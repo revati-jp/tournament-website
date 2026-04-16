@@ -160,7 +160,13 @@
 	<!-- スライド -->
 	<div class="slides-container">
 		{#each slides as slide, index}
-			<div class="slide" class:active={index === activeIndex} class:video={slide.type === 'video'}>
+			<div
+				class="slide"
+				class:active={index === activeIndex}
+				class:video={slide.type === 'video'}
+				aria-hidden={index !== activeIndex ? 'true' : undefined}
+				inert={index !== activeIndex ? true : undefined}
+			>
 				{#if slide.type === 'video'}
 					<video
 						bind:this={videoRefs[index]}
