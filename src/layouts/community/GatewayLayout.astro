@@ -124,6 +124,8 @@ const absThumbnailPath = WEBSITE_BASE_URL + keyVisual.src;
     // この背景色を body に指定すると、ヘッダーのバックドロップのぼかし効果が正常に動作しなくなる。
     background-color: commGateway.$color-background;
     padding-top: commGateway.$header-height;
+    // メインビジュアル等の 100vw ブレイクアウトによる横スクロールを防止
+    overflow-x: clip;
 
     .inner {
       width: min(

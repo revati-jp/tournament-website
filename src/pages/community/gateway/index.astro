@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import GatewayLayout from "@layouts/community/GatewayLayout.astro";
+import MainVisual from "@components/community/gateway/MainVisual.svelte";
 import SectionTitle from "@components/community/gateway/ui/SectionTitle.astro";
 import SectionBody from "@components/community/gateway/ui/SectionBody.astro";
 import Button from "@components/community/gateway/ui/Button.astro";
@@ -9,12 +10,33 @@ import BoxArrowUpRightIcon from "@components/icons/BoxArrowUpRightIcon.astro";
 import { GATEWAY_SPONSORS } from "@constants/community/gateway/sponsors";
 import { REVATI_TWITTER_URL, REVATI_YOUTUBE_URL } from "@utils/variables";
 
-const description = 'REVATI Community Cup "Gateway" のトップページです。';
+import mainVideoSrc from "@assets/community/gateway/main.webm";
+import kvGatewayImg from "@assets/community/gateway/kv_gateway.webp";
+import kvFullImg from "@assets/community/gateway/kv_full.webp";
 
+const description = 'REVATI Community Cup "Gateway" のトップページです。';
 const memberTbds = Array(6).fill("TBD");
+
+/** カルーセルのスライド定義（順番の変更はここで行う） */
+const mainVisualSlides = [
+  { type: "video" as const, src: mainVideoSrc },
+  {
+    type: "image" as const,
+    src: kvGatewayImg.src,
+    alt: "REVATI Community CUP Gateway キービジュアル",
+    duration: 4000,
+  },
+  {
+    type: "image" as const,
+    src: kvFullImg.src,
+    alt: "REVATI Community CUP キービジュアル",
+    duration: 4000,
+  },
+];
 ---
 
 <GatewayLayout title="TOP" meta={{ description }}>
+  <MainVisual client:only="svelte" slides={mainVisualSlides} />
   <div class="section-container">
     <section id="about">
       <SectionTitle primary="ABOUT" secondary="大会について" />
