@@ -124,7 +124,7 @@
 	<!-- スライド -->
 	<div class="slides-container">
 		{#each slides as slide, index}
-			<div class="slide" class:active={index === activeIndex}>
+			<div class="slide" class:active={index === activeIndex} class:video={slide.type === 'video'}>
 				{#if slide.type === 'video'}
 					<video
 						bind:this={videoRefs[index]}
@@ -247,6 +247,16 @@
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
+		}
+
+		&.video::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background:
+				radial-gradient(circle at center, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.45) 100%),
+				rgba(0, 0, 0, 0.28);
+			pointer-events: none;
 		}
 	}
 
