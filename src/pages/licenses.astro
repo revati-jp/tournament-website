@@ -3,8 +3,9 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 
 import licenses from "../../.astro/licenses.json";
 import type { Dependency } from "@types";
+import { OTHER_LICENSES } from "@constants/OTHER_LICENSES";
 
-const dependencies: Dependency[] = licenses;
+const dependencies: Dependency[] = [...licenses, ...OTHER_LICENSES];
 ---
 
 <BaseLayout>
@@ -18,34 +19,38 @@ const dependencies: Dependency[] = licenses;
 
     <ul class="license-list">
       {
-        dependencies.map((item) => (
-          <li class="license-card">
-            {item.homepage !== undefined && item.homepage !== "" ? (
-              <a href={item.homepage} target="_blank" rel="noopener noreferrer">
-                <h2>
-                  {item.name}@{item.version}
-                </h2>
-              </a>
-            ) : (
-              <h2>
-                {item.name}@{item.version}
-              </h2>
-            )}
-            <dl>
-              <div>
-                <dt>ライセンス</dt>
-                <dd>{item.license}</dd>
-              </div>
-            </dl>
+        dependencies.map((item) => {
+          const name =
+            item.version === "" ? item.name : `${item.name}@${item.version}`;
+          return (
+            <li class="license-card">
+              {item.homepage !== undefined && item.homepage !== "" ? (
+                <a
+                  href={item.homepage}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <h2>{name}</h2>
+                </a>
+              ) : (
+                <h2>{name}</h2>
+              )}
+              <dl>
+                <div>
+                  <dt>ライセンス</dt>
+                  <dd>{item.license}</dd>
+                </div>
+              </dl>
 
-            {item.licenseText !== undefined && item.licenseText !== "" ? (
-              <details>
-                <summary>ライセンス全文を表示</summary>
-                <pre>{item.licenseText}</pre>
-              </details>
-            ) : null}
-          </li>
-        ))
+              {item.licenseText !== undefined && item.licenseText !== "" ? (
+                <details>
+                  <summary>ライセンス全文を表示</summary>
+                  <pre>{item.licenseText}</pre>
+                </details>
+              ) : null}
+            </li>
+          );
+        })
       }
     </ul>
   </main>
