@@ -14,7 +14,8 @@ import mainVideoSrc from "@assets/community/gateway/main.webm";
 import kvGatewayImg from "@assets/community/gateway/kv_gateway.webp";
 import kvFullImg from "@assets/community/gateway/kv_full.webp";
 
-const sironekos = Array(6).fill("しろねこ");
+const description = 'REVATI Community Cup "Gateway" のトップページです。';
+const memberTbds = Array(6).fill("TBD");
 
 /** カルーセルのスライド定義（順番の変更はここで行う） */
 const mainVisualSlides = [
@@ -34,16 +35,33 @@ const mainVisualSlides = [
 ];
 ---
 
-<GatewayLayout title="TOP">
+<GatewayLayout title="TOP" meta={{ description }}>
   <MainVisual client:only="svelte" slides={mainVisualSlides} />
   <div class="section-container">
     <section id="about">
       <SectionTitle primary="ABOUT" secondary="大会について" />
       <SectionBody>
-        REVATI Community Cup "Gateway"
-        は、Overwatchの競技シーンでの活躍を目指す若き才能を育てることを目的とする、REVATI主催のコミュニティ大会です。<br
-        />
-        Overwatchの競技コミュニティへの貢献・定期的な開催を目指しています。
+        <p>
+          REVATI Community Cup "GATEWAY"
+          は、Overwatch競技シーンでプロを目指す若き才能達の、出場機会増加を目的とする、REVATI主催のコミュニティ大会です。<br
+          />
+          この大会を「登竜門」（GATEWAY）のような存在にしてもらい、若い選手に経験を積んでもらうことを目指しています。
+        </p>
+        <p>
+          第一回となる昨年の「REVATI Challengers
+          CUP」では招待制という形もあり、すべての若手選手に機会を与えることができませんでした。<br
+          />
+          第二回となる今回は公募制の予選からスタート、全チーム・選手に均等なチャンスがあります。
+        </p>
+        <p>
+          Overwatchシーンの今後を支える若手選手たち、王座に輝くのはいったい誰なのか？<br
+          />
+          ぜひ、ご注目ください！
+        </p>
+        <Button
+          href="https://docs.google.com/forms/d/e/1FAIpQLSfwUQG6DVLpAazcirMGOZJL92F5BdCvFDrsNtkYPN4dNoPBJA/viewform"
+          >エントリーはこちら <BoxArrowUpRightIcon size={14} /></Button
+        >
       </SectionBody>
     </section>
 
@@ -84,6 +102,14 @@ const mainVisualSlides = [
             ><span class="bold">X</span>
             <BoxArrowUpRightIcon size={12} /></a
           > でお知らせいたします。
+        </p>
+        <p>
+          <Button
+            variant="outlined"
+            color="gray"
+            href="/community/gateway/schedules"
+            >タイムスケジュールはこちら</Button
+          >
         </p>
       </SectionBody>
     </section>
@@ -137,10 +163,14 @@ const mainVisualSlides = [
       <SectionBody>
         <p class="note">※本戦に出場するチームのみ掲載しています。</p>
         <div class="team-container">
-          <TeamCard number={1} name="しろねこ" members={sironekos} />
-          <TeamCard number={2} name="しろねこ" members={sironekos} />
-          <TeamCard number={3} name="しろねこ" members={sironekos} />
-          <TeamCard number={4} name="しろねこ" members={sironekos} />
+          <TeamCard number={1} name="TBD" members={memberTbds} />
+          <TeamCard number={2} name="TBD" members={memberTbds} />
+          <TeamCard number={3} name="TBD" members={memberTbds} />
+          <TeamCard number={4} name="TBD" members={memberTbds} />
+          <TeamCard number={5} name="TBD" members={memberTbds} />
+          <TeamCard number={6} name="TBD" members={memberTbds} />
+          <TeamCard number={7} name="TBD" members={memberTbds} />
+          <TeamCard number={8} name="TBD" members={memberTbds} />
         </div>
       </SectionBody>
     </section>
@@ -152,14 +182,26 @@ const mainVisualSlides = [
           {
             GATEWAY_SPONSORS.map((sponsor) =>
               typeof sponsor.logoImage === "string" ? (
-                <img src={sponsor.logoImage} alt={sponsor.name} height="50" />
+                <img
+                  src={sponsor.logoImage}
+                  alt={sponsor.name}
+                  class="sponsor-logo"
+                />
               ) : (
-                <Image src={sponsor.logoImage} alt={sponsor.name} height="50" />
+                <Image
+                  src={sponsor.logoImage}
+                  alt={sponsor.name}
+                  class="sponsor-logo"
+                />
               ),
             )
           }
         </p>
-        <p><a href="/community/gateway/sponsors">スポンサーはこちら</a></p>
+        <Button
+          variant="outlined"
+          color="gray"
+          href="/community/gateway/sponsors">スポンサーはこちら</Button
+        >
       </SectionBody>
     </section>
   </div>
@@ -169,7 +211,7 @@ const mainVisualSlides = [
   .section-container {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
   }
 
   .bold {
@@ -192,6 +234,10 @@ const mainVisualSlides = [
 
   .schedule-list {
     container: schedule-list / inline-size;
+    .two-column-label {
+      // labelとvalueの高さずれ対策
+      margin-bottom: 0.25em;
+    }
   }
 
   .regulations-list {
@@ -201,7 +247,7 @@ const mainVisualSlides = [
   .two-column-row {
     display: grid;
     grid-template-columns: 9rem minmax(0, 1fr);
-    align-items: start;
+    align-items: center;
     column-gap: 0;
   }
 
@@ -243,6 +289,13 @@ const mainVisualSlides = [
   }
 
   @container schedule-list (max-width: #{$schedule-collapse-breakpoint}) {
+    .schedule-list {
+      .two-column-label {
+        // labelとvalueの高さずれ対策
+        margin-bottom: 0;
+      }
+    }
+
     .schedule-list .two-column-row {
       grid-template-columns: minmax(0, 1fr);
       row-gap: 0.2rem;
@@ -284,5 +337,11 @@ const mainVisualSlides = [
       grid-template-columns: minmax(0, 1fr);
       gap: 1rem;
     }
+  }
+
+  .sponsor-logo {
+    height: 6rem;
+    width: auto;
+    object-fit: contain;
   }
 </style>

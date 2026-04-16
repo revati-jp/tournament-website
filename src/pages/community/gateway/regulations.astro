@@ -1,12 +1,45 @@
 ---
+import { Image } from "astro:assets";
 import GatewayLayout from "@layouts/community/GatewayLayout.astro";
 import SectionTitle from "@components/community/gateway/ui/SectionTitle.astro";
 import SectionBody from "@components/community/gateway/ui/SectionBody.astro";
+
+import regulationsQualifier from "@assets/community/gateway/regulations_qualifier.webp";
+import regulationsMain from "@assets/community/gateway/regulations_main.webp";
+import regulationsOthers from "@assets/community/gateway/regulations_others.webp";
+
+const description =
+  'REVATI Community Cup "Gateway" の大会ルールを掲載しています。';
 ---
 
-<GatewayLayout title="Regulations">
+<GatewayLayout title="Regulations" meta={{ description }}>
   <SectionTitle primary="REGULATIONS" secondary="大会ルール" />
-  <SectionBody> TestTestTest </SectionBody>
+  <SectionBody>
+    <div class="title">予選規定</div>
+    <Image src={regulationsQualifier} alt="予選規定" />
+
+    <div class="title">本戦規定</div>
+    <Image src={regulationsMain} alt="本戦規定" />
+
+    <div class="title">その他</div>
+    <Image src={regulationsOthers} alt="その他" />
+  </SectionBody>
 </GatewayLayout>
 
-<style lang="scss"></style>
+<style lang="scss">
+  .title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    margin-inline: auto;
+    height: auto;
+    border-radius: 10px;
+  }
+</style>
