@@ -5,6 +5,7 @@ import svelte from "@astrojs/svelte";
 
 // https://astro.build/config
 export default defineConfig({
+  trailingSlash: "never",
   fonts: [
     {
       name: "Noto Sans JP",
