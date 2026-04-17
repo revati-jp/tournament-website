@@ -2,6 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "tournament",
   "compatibility_date": "2026-03-11",
+  "main": "worker/main.ts",
   "assets": {
     "run_worker_first": true,
     "directory": "./dist",
