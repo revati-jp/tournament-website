@@ -55,6 +55,8 @@
 │   ├── styles
 │   ├── types
 │   └── utils
+├── worker
+│   └── main.ts — Cloudflare Worker のエントリーポイント
 ├── svelte.config.js
 ├── tsconfig.json
 └── wrangler.jsonc
