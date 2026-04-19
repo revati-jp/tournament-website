@@ -8,12 +8,6 @@ export const TOURNAMENTS = [
     type: "community",
     description: "gatewayのdescription",
   },
-  {
-    label: "Temporary-CUP Vol.1",
-    slug: "vol1",
-    type: "tmp-cup",
-    description: "vol1のdescription",
-  },
 ] as const satisfies Tournament[];
 
 export function getLatestTournament(): Tournament {
