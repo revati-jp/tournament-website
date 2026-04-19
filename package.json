@@ -11,7 +11,7 @@
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint \"src/**/*.{js,ts,astro}\"",
     "lint:fix": "prettier --check . && eslint \"src/**/*.{js,ts,astro}\" --fix",
-    "check": "astro sync && astro check --tsconfig ./tsconfig.json"
+    "check": "astro sync && astro check --tsconfig ./tsconfig.json && tsc -p ./worker/tsconfig.json"
   },
   "dependencies": {
     "@astrojs/svelte": "^8.0.4",
