@@ -4,6 +4,19 @@
 - 開発: `https://{ブランチ|デプロイ}-tournament.revati.workers.dev`
   - main ブランチ: https://main-tournament.revati.workers.dev
 
+## 本番ウェブサイトでの URL の選び方
+
+- 常に最新の大会にリンクさせたい  
+  → `https://tournament.revati.jp`
+- 特定の大会種類における、最新の大会にリンクさせたい  
+  → `https://tournament.revati.jp/<大会種類>`
+  - 例: https://tournament.revati.jp/community
+- 特定の大会にリンクさせたい  
+  → `https://tournament.revati.jp/<大会種類>/<大会>`
+  - 例: https://tournament.revati.jp/community/gateway
+- その他任意の URL
+  - 例: https://tournament.revati.jp/community/gateway/regulations
+
 ## 大会一覧
 
 - REVATI Community CUP: `/community`
