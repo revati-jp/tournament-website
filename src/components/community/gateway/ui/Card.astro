@@ -1,65 +1,79 @@
 ---
 import { Image } from "astro:assets";
-import type { Sponsor } from "@types";
-import BoxArrowUpRightIcon from "@components/icons/BoxArrowUpRightIcon.astro";
-import Button from "./Button.astro";
+import type { CardItem } from "@app-types/community/gateway";
 import IconButton from "./IconButton.astro";
 
+import TwitchIcon from "@components/icons/TwitchIcon.astro";
 import TwitterXIcon from "@components/icons/TwitterXIcon.astro";
 import InstagramIcon from "@components/icons/InstagramIcon.astro";
 import LineIcon from "@components/icons/LineIcon.astro";
+import Button from "./Button.astro";
+import BoxArrowUpRightIcon from "@components/icons/BoxArrowUpRightIcon.astro";
 
 interface Props {
-  sponsor: Sponsor;
+  item: CardItem;
 }
 
-const { sponsor } = Astro.props;
+const { item } = Astro.props;
 ---
 
 <div class="card">
   <div class="logo">
     {
-      typeof sponsor.logoImage === "string" ? (
-        <img src={sponsor.logoImage} alt={sponsor.name} />
+      typeof item.logoImage === "string" ? (
+        <img src={item.logoImage} alt={item.name} />
       ) : (
-        <Image src={sponsor.logoImage} alt={sponsor.name} />
+        <Image src={item.logoImage} alt={item.name} />
       )
     }
   </div>
   <div class="body">
     <div class="info">
-      <p class="name">{sponsor.name}</p>
-      <p class="description">{sponsor.description}</p>
+      <p class="name">{item.name}</p>
+      <p class="description">{item.description}</p>
     </div>
     <div class="links">
-      <div class="website">
-        <Button href={sponsor.website} target="_blank"
-          >公式サイト <BoxArrowUpRightIcon /></Button
-        >
-      </div>
+      {
+        item.website && (
+          <div class="website">
+            <Button href={item.website} target="_blank">
+              公式サイト <BoxArrowUpRightIcon />
+            </Button>
+          </div>
+        )
+      }
       <div class="socials">
         {
-          sponsor.socials.twitter && (
+          item.socials.twitch && (
+            <div class="social-twitch">
+              <IconButton href={item.socials.twitch} target="_blank">
+                <TwitchIcon size={24} />
+              </IconButton>
+            </div>
+          )
+        }
+        {
+          item.socials.twitter && (
             <div class="social-x">
-              <IconButton href={sponsor.socials.twitter} target="_blank">
+              <IconButton href={item.socials.twitter} target="_blank">
                 <TwitterXIcon size={24} />
               </IconButton>
             </div>
           )
         }
         {
-          sponsor.socials.instagram && (
+          item.socials.instagram && (
             <div class="social-instagram">
-              <IconButton href={sponsor.socials.instagram} target="_blank">
+              <IconButton href={item.socials.instagram} target="_blank">
                 <InstagramIcon size={24} />
               </IconButton>
             </div>
           )
         }
         {
-          sponsor.socials.line && (
+          item.socials.line && (
             <div class="social-line">
-              <IconButton href={sponsor.socials.line} target="_blank">
+              <IconButton href={item.socials.line} target="_blank">
                 <LineIcon size={24} />
               </IconButton>
             </div>
@@ -146,6 +160,8 @@ const { sponsor } = Astro.props;
         }
 
         .socials {
+          // 右寄せ
+          margin-left: auto;
           display: flex;
           gap: 0.2rem;
         }

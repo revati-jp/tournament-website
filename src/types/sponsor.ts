@@ -1,9 +1,0 @@
-import type { SocialLinks } from "./common";
-
-export interface Sponsor {
-  name: string;
-  description: string;
-  logoImage: string | ImageMetadata;
-  website: string;
-  socials: SocialLinks;
-}

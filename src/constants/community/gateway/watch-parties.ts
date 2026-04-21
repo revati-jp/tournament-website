@@ -1,9 +1,9 @@
-import type { WatchParty } from "@types";
+import type { CardItem } from "@app-types/community/gateway";
 
 import hoshimiIcon from "@assets/community/gateway/watch-parties/hoshimi.webp";
 import placeHolderRevatiIcon from "@assets/community/gateway/watch-parties/revati.webp";
 
-export const GATEWAY_WATCH_PARTIES: WatchParty[] = [
+export const GATEWAY_WATCH_PARTIES: CardItem[] = [
   {
     name: "hoshimi",
     description:

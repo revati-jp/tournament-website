@@ -4,7 +4,7 @@ import {
   getPathToTournament,
   TOURNAMENTS,
 } from "@constants/tournaments";
-import type { TournamentType } from "@types";
+import type { TournamentType } from "@app-types";
 
 const latest = getPathToTournament(getLatestTournament());
 

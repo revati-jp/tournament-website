@@ -1,4 +1,4 @@
-import type { Tournament, TournamentType } from "@types";
+import type { Tournament, TournamentType } from "@app-types";
 
 // より新しい大会が前に来るようにすること。
 export const TOURNAMENTS = [

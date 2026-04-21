@@ -1,4 +1,4 @@
-import type { Dependency } from "@types";
+import type { Dependency } from "@app-types";
 
 export const OTHER_LICENSES: Dependency[] = [
   {

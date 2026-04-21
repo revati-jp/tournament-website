@@ -29,8 +29,8 @@ TypeScript でのインポート用ショートカットとして、以下のエ
 - `@components/*` → `./src/components/*`
 - `@constants/*` → `./src/constants/*`
 - `@layouts/*` → `./src/layouts/*`
-- `@types` → `./src/types`
-- `@types/*` → `./src/types/*`
+- `@app-types` → `./src/types`
+- `@app-types/*` → `./src/types/*`
 - `@utils` → `./src/utils`
 - `@utils/*` → `./src/utils/*`
 

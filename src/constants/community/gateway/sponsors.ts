@@ -1,9 +1,9 @@
-import type { Sponsor } from "@types";
+import type { CardItem } from "@app-types/community/gateway";
 
 import xrayPadLogo from "@assets/community/gateway/sponsors/x-raypad.webp";
 import undercadeLogo from "@assets/community/gateway/sponsors/undercade.webp";
 
-export const GATEWAY_SPONSORS: Sponsor[] = [
+export const GATEWAY_SPONSORS: CardItem[] = [
   {
     name: "X-rayPAD",
     description:
