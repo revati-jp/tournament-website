@@ -30,6 +30,7 @@
 	$effect(() => {
 		const handleOpen = () => {
 			isOpen = true;
+			document.body.style.overflow = 'hidden'; // ドロワー展開中はスクロールを無効化
 		};
 
 		document.addEventListener('open-mobile-drawer', handleOpen);
@@ -40,6 +41,7 @@
 	$effect(() => {
 		const handleClose = () => {
 			isOpen = false;
+			document.body.style.overflow = ''; // ドロワーを閉じたらスクロールを再度有効化
 		};
 
 		document.addEventListener('close-mobile-drawer', handleClose);
@@ -58,42 +60,6 @@
 
 		mq.addEventListener('change', handler);
 		return () => mq.removeEventListener('change', handler);
-	});
-
-	// ドロワー展開中はスクロールを無効化する
-	$effect(() => {
-		if (!isOpen) {
-			return;
-		}
-
-		const html = document.documentElement;
-		const body = document.body;
-		const scrollY = window.scrollY ?? window.pageYOffset ?? 0;
-		const scrollbarWidth = window.innerWidth - html.clientWidth;
-
-		const prevHtmlOverflow = html.style.overflow;
-		const prevBodyPosition = body.style.position;
-		const prevBodyTop = body.style.top;
-		const prevBodyWidth = body.style.width;
-		const prevBodyOverflow = body.style.overflow;
-		const prevBodyPaddingRight = body.style.paddingRight;
-
-		html.style.overflow = 'hidden';
-		body.style.position = 'fixed';
-		body.style.top = `-${scrollY}px`;
-		body.style.width = '100%';
-		body.style.overflow = 'hidden';
-		body.style.paddingRight = scrollbarWidth > 0 ? `${scrollbarWidth}px` : prevBodyPaddingRight;
-
-		return () => {
-			html.style.overflow = prevHtmlOverflow;
-			body.style.position = prevBodyPosition;
-			body.style.top = prevBodyTop;
-			body.style.width = prevBodyWidth;
-			body.style.overflow = prevBodyOverflow;
-			body.style.paddingRight = prevBodyPaddingRight;
-			window.scrollTo(0, scrollY);
-		};
 	});
 
 	/**
