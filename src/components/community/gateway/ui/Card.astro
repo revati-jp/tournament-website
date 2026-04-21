@@ -9,6 +9,7 @@ import InstagramIcon from "@components/icons/InstagramIcon.astro";
 import LineIcon from "@components/icons/LineIcon.astro";
 import Button from "./Button.astro";
 import BoxArrowUpRightIcon from "@components/icons/BoxArrowUpRightIcon.astro";
+import YouTubeIcon from '@components/icons/YouTubeIcon.astro';
 
 interface Props {
   item: CardItem;
@@ -43,6 +44,15 @@ const { item } = Astro.props;
         )
       }
       <div class="socials">
+        {
+          item.socials.youtube && (
+            <div class="social-youtube">
+              <IconButton href={item.socials.youtube} target="_blank">
+                <YouTubeIcon size={24} />
+              </IconButton>
+            </div>
+          )
+        }
         {
           item.socials.twitch && (
             <div class="social-twitch">
@@ -164,6 +174,36 @@ const { item } = Astro.props;
           margin-left: auto;
           display: flex;
           gap: 0.2rem;
+
+          .social-youtube {
+            :global(.icon-button:hover) {
+              color: #ff0000;
+            }
+          }
+
+          .social-twitch {
+            :global(.icon-button:hover) {
+              color: #9146ff;
+            }
+          }
+
+          .social-x {
+            :global(.icon-button:hover) {
+              color: rgba(255, 255, 255, 0.7);
+            }
+          }
+
+          .social-instagram {
+            :global(.icon-button:hover) {
+              color: #e1306c;
+            }
+          }
+
+          .social-line {
+            :global(.icon-button:hover) {
+              color: #00c300;
+            }
+          }
         }
       }
     }

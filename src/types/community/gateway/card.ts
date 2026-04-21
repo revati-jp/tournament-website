@@ -1,4 +1,5 @@
 export interface SocialLinks {
+  youtube?: string;
   twitch?: string;
   twitter?: string;
   instagram?: string;
