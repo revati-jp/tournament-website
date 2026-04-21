@@ -89,6 +89,7 @@
 		}
 
 		const requestId = ++playRequestId;
+		video.load();
 		const playPromise = video.play();
 		if (playPromise !== undefined) {
 			playPromise.catch((err) => {

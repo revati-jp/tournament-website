@@ -37,7 +37,7 @@ const mainVisualSlides = [
 ---
 
 <GatewayLayout title="TOP" meta={{ description }}>
-  <MainVisual client:only="svelte" slides={mainVisualSlides} />
+  <MainVisual client:load slides={mainVisualSlides} />
   <div class="section-container">
     <section id="about">
       <SectionTitle primary="ABOUT" secondary="大会について" />
