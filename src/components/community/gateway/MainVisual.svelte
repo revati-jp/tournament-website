@@ -25,7 +25,9 @@
 	let activeIndex = $state(0);
 	let isPlaying = $state(true);
 	let advanceTimer: ReturnType<typeof setTimeout> | undefined;
+	let playbackRetryTimer: ReturnType<typeof setTimeout> | undefined;
 	let playRequestId = 0;
+	let blockedByAutoplay = $state(false);
 	// bind:this で必要なインデックスが順次埋まるため、初期サイズは固定しない
 	const videoRefs: (HTMLVideoElement | null)[] = [];
 
@@ -34,6 +36,7 @@
 		// activeIndex を参照して依存関係を確立
 		const idx = activeIndex;
 		const playing = isPlaying;
+		blockedByAutoplay = false;
 
 		// 他の動画を停止・リセット
 		videoRefs.forEach((video, i) => {
@@ -53,7 +56,35 @@
 			scheduleNext(slide.duration);
 		}
 
-		return () => clearTimer();
+		return () => {
+			clearTimer();
+			clearPlaybackRetryTimer();
+		};
+	});
+
+	// 自動再生が拒否された場合、最初のユーザー操作で再試行する
+	$effect(() => {
+		const idx = activeIndex;
+		const playing = isPlaying;
+		const blocked = blockedByAutoplay;
+		const slide = slides[idx];
+
+		if (!blocked || !playing || slide.type !== 'video') return;
+
+		const retryOnGesture = () => {
+			if (!isPlaying || activeIndex !== idx) return;
+
+			blockedByAutoplay = false;
+			requestVideoPlayback(idx, false);
+		};
+
+		window.addEventListener('pointerdown', retryOnGesture, { once: true });
+		window.addEventListener('keydown', retryOnGesture, { once: true });
+
+		return () => {
+			window.removeEventListener('pointerdown', retryOnGesture);
+			window.removeEventListener('keydown', retryOnGesture);
+		};
 	});
 
 	function scheduleNext(delay: number) {
@@ -70,11 +101,22 @@
 		}
 	}
 
+	function clearPlaybackRetryTimer() {
+		if (playbackRetryTimer !== undefined) {
+			clearTimeout(playbackRetryTimer);
+			playbackRetryTimer = undefined;
+		}
+	}
+
 	function goToNext() {
+		blockedByAutoplay = false;
+		clearPlaybackRetryTimer();
 		activeIndex = (activeIndex + 1) % slides.length;
 	}
 
 	function goToSlide(index: number) {
+		blockedByAutoplay = false;
+		clearPlaybackRetryTimer();
 		activeIndex = index;
 	}
 
@@ -84,6 +126,8 @@
 			return;
 		}
 
+		clearPlaybackRetryTimer();
+
 		if (resetPosition) {
 			video.currentTime = 0;
 		}
@@ -92,18 +136,44 @@
 		video.load();
 		const playPromise = video.play();
 		if (playPromise !== undefined) {
-			playPromise.catch((err) => {
-				console.warn('動画の再生に失敗:', err);
+			playPromise
+				.then(() => {
+					if (requestId !== playRequestId) {
+						return;
+					}
 
-				// 最新の再生要求だけを失敗扱いし、該当スライドからフォールバックする
-				if (requestId !== playRequestId) {
-					return;
-				}
+					blockedByAutoplay = false;
+				})
+				.catch((err: unknown) => {
+					console.warn('動画の再生に失敗:', err);
 
-				if (isPlaying && activeIndex === index) {
+					// 最新の再生要求だけを失敗扱いし、該当スライドからフォールバックする
+					if (requestId !== playRequestId) {
+						return;
+					}
+
+					if (!isPlaying || activeIndex !== index) {
+						return;
+					}
+
+					if (err instanceof DOMException && err.name === 'NotAllowedError') {
+						blockedByAutoplay = true;
+						return;
+					}
+
+					if (err instanceof DOMException && err.name === 'AbortError') {
+						playbackRetryTimer = setTimeout(() => {
+							if (!isPlaying || activeIndex !== index) {
+								return;
+							}
+
+							requestVideoPlayback(index, false);
+						}, 200);
+						return;
+					}
+
 					goToNext();
-				}
-			});
+				});
 		}
 	}
 
@@ -128,7 +198,9 @@
 		if (isPlaying) {
 			// 一時停止
 			isPlaying = false;
+			blockedByAutoplay = false;
 			clearTimer();
+			clearPlaybackRetryTimer();
 			const slide = slides[activeIndex];
 			if (slide.type === 'video') {
 				const video = videoRefs[activeIndex];
