@@ -191,7 +191,7 @@ const mainVisualSlides = [
     <section id="sponsors">
       <SectionTitle primary="SPONSORS" secondary="スポンサー" />
       <SectionBody>
-        <p>
+        <div class="sponsor-container">
           {
             GATEWAY_SPONSORS.map((sponsor) =>
               typeof sponsor.logoImage === "string" ? (
@@ -209,7 +209,7 @@ const mainVisualSlides = [
               ),
             )
           }
-        </p>
+        </div>
         <Button
           variant="outlined"
           color="gray"
@@ -352,9 +352,15 @@ const mainVisualSlides = [
     }
   }
 
-  .sponsor-logo {
-    height: 6rem;
-    width: auto;
-    object-fit: contain;
+  .sponsor-container {
+    display: flex;
+    gap: 2rem;
+    padding-bottom: 1rem;
+
+    .sponsor-logo {
+      height: 4rem;
+      width: auto;
+      object-fit: contain;
+    }
   }
 </style>

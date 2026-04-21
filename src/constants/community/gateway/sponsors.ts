@@ -1,6 +1,7 @@
 import type { Sponsor } from "@types";
 
-import xrayPadLogo from "@assets/community/gateway/sponsors/x-ray-pad.webp";
+import xrayPadLogo from "@assets/community/gateway/sponsors/x-raypad.webp";
+import undercadeLogo from "@assets/community/gateway/sponsors/undercade.webp";
 
 export const GATEWAY_SPONSORS: Sponsor[] = [
   {
@@ -11,6 +12,16 @@ export const GATEWAY_SPONSORS: Sponsor[] = [
     website: "https://shop.x-raypad.com/",
     socials: {
       twitter: "https://x.com/XraypadOfficial",
+    },
+  },
+  {
+    name: "Undercade",
+    description:
+      "「Undercade（アンダーケード）」、遊び心とファッションを追求したブランド。 e-sportsやオタクカルチャーを元にしたナードカジュアルスタイル「U/D」",
+    logoImage: undercadeLogo,
+    website: "https://undercade.official.ec/",
+    socials: {
+      twitter: "https://x.com/cade_under",
     },
   },
 ];
