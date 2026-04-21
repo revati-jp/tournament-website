@@ -30,18 +30,33 @@
 	$effect(() => {
 		const handleOpen = () => {
 			isOpen = true;
-			document.body.style.overflow = 'hidden'; // ドロワー展開中はスクロールを無効化
+			// document.body.style.overflow = 'hidden'; // ドロワー展開中はスクロールを無効化
 		};
 
 		document.addEventListener('open-mobile-drawer', handleOpen);
 		return () => document.removeEventListener('open-mobile-drawer', handleOpen);
 	});
 
+	// isOpen に連動してスクロール（overflow）を制御する処理
+	$effect(() => {
+		if (isOpen) {
+			// 開く直前の overflow の状態（何も設定されていなければ空文字）を記憶
+			const originalOverflow = document.body.style.overflow;
+
+			// スクロールを無効化
+			document.body.style.overflow = 'hidden';
+
+			// クリーンアップ関数（isOpenがfalseになった時、またはコンポーネントが破棄された時に実行）
+			return () => {
+				document.body.style.overflow = originalOverflow;
+			};
+		}
+	});
+
 	// Header 側でボタンを再クリックしたときの close イベントを購読する
 	$effect(() => {
 		const handleClose = () => {
 			isOpen = false;
-			document.body.style.overflow = ''; // ドロワーを閉じたらスクロールを再度有効化
 		};
 
 		document.addEventListener('close-mobile-drawer', handleClose);
