@@ -183,21 +183,26 @@ const mainVisualSlides = [
       <SectionBody>
         <div class="watch-party-container">
           {
-            GATEWAY_WATCH_PARTIES.map((party) =>
-              typeof party.logoImage === "string" ? (
-                <img
-                  src={party.logoImage}
-                  alt={party.name}
-                  class="watch-party-image"
-                />
-              ) : (
-                <Image
-                  src={party.logoImage}
-                  alt={party.name}
-                  class="watch-party-image"
-                />
-              ),
-            )
+            GATEWAY_WATCH_PARTIES.map((party) => {
+              return (
+                <figure class="watch-party-item">
+                  {typeof party.logoImage === "string" ? (
+                    <img
+                      src={party.logoImage}
+                      alt={party.name}
+                      class="watch-party-image"
+                    />
+                  ) : (
+                    <Image
+                      src={party.logoImage}
+                      alt={party.name}
+                      class="watch-party-image"
+                    />
+                  )}
+                  <figcaption>{party.name}</figcaption>
+                </figure>
+              );
+            })
           }
         </div>
         <Button
@@ -381,6 +386,19 @@ const mainVisualSlides = [
       height: 8rem;
       width: auto;
       object-fit: contain;
+    }
+
+    .watch-party-item {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+
+      figcaption {
+        font-size: 0.9rem;
+        color: rgba(commGateway.$color-text, 0.85);
+      }
     }
   }
 
