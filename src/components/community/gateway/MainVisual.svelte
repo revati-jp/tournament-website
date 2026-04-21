@@ -4,6 +4,7 @@
 	interface VideoSlide {
 		type: 'video';
 		src: string;
+		thumbnail?: string;
 	}
 
 	interface ImageSlide {
@@ -231,6 +232,7 @@
 					<video
 						bind:this={videoRefs[index]}
 						src={slide.src}
+						poster={slide.thumbnail}
 						muted
 						playsinline
 						preload="auto"

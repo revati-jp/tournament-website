@@ -12,6 +12,7 @@ import { GATEWAY_WATCH_PARTIES } from "@constants/community/gateway/watch-partie
 import { REVATI_TWITTER_URL, REVATI_YOUTUBE_URL } from "@utils/variables";
 
 import mainVideoSrc from "@assets/community/gateway/main.webm";
+import mainVideoThumbnail from "@assets/community/gateway/main_thumbnail.webp";
 import kvGatewayImg from "@assets/community/gateway/kv_gateway_for-first-view.webp";
 import kvFullImg from "@assets/community/gateway/kv_full_for-first-view.webp";
 
@@ -20,7 +21,11 @@ const memberTbds = Array(6).fill("TBD");
 
 /** カルーセルのスライド定義（順番の変更はここで行う） */
 const mainVisualSlides = [
-  { type: "video" as const, src: mainVideoSrc },
+  {
+    type: "video" as const,
+    src: mainVideoSrc,
+    thumbnail: mainVideoThumbnail.src,
+  },
   {
     type: "image" as const,
     src: kvGatewayImg.src,
