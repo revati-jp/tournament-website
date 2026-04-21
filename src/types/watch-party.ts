@@ -1,9 +1,8 @@
 import type { SocialLinks } from "./common";
 
-export interface Sponsor {
+export interface WatchParty {
   name: string;
   description: string;
   logoImage: string | ImageMetadata;
-  website: string;
   socials: SocialLinks;
 }
