@@ -71,8 +71,9 @@ const absThumbnailPath = WEBSITE_BASE_URL + keyVisual.src;
   </Fragment>
 
   <div class="gateway-container">
+    <a href="#main-content" class="skip-link">コンテンツへ進む</a>
     <Header />
-    <main transition:animate="fade">
+    <main id="main-content" transition:animate="fade">
       <div class="inner">
         <slot />
       </div>
@@ -117,6 +118,43 @@ const absThumbnailPath = WEBSITE_BASE_URL + keyVisual.src;
     font-style: normal;
     font-optical-sizing: auto;
     color: commGateway.$color-text;
+  }
+
+  .skip-link {
+    $margin: 1rem;
+    position: fixed;
+    top: -$margin;
+    left: 0;
+    z-index: 257;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-top: $margin solid commGateway.$color-primary;
+    padding: 1.1rem 2.5rem;
+    font-size: 1.1rem;
+    color: commGateway.$color-background;
+    background-color: commGateway.$color-primary;
+    text-decoration: none;
+    line-height: 1;
+
+    border-radius: 0 0 12px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+    transform: translateY(-100%);
+    transition:
+      transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+      opacity 0.2s ease-in;
+
+    &:focus-visible {
+      transform: translateY(0);
+      transition-duration: 0.4s;
+    }
+
+    @include commGateway.hb {
+      display: none;
+    }
   }
 
   main {
