@@ -106,7 +106,9 @@
 		const requestId = ++playRequestId;
 		const playPromise = video.play();
 		if (playPromise !== undefined) {
-			playPromise.catch(() => {
+			playPromise.catch((err) => {
+				console.warn('動画の再生に失敗:', err);
+
 				// 最新の再生要求だけを失敗扱いし、該当スライドからフォールバックする
 				if (requestId !== playRequestId) {
 					return;
