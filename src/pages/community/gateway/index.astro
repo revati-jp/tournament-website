@@ -8,6 +8,7 @@ import Button from "@components/community/gateway/ui/Button.astro";
 import TeamCard from "@components/community/gateway/ui/TeamCard.astro";
 import BoxArrowUpRightIcon from "@components/icons/BoxArrowUpRightIcon.astro";
 import { GATEWAY_SPONSORS } from "@constants/community/gateway/sponsors";
+import { GATEWAY_WATCH_PARTIES } from "@constants/community/gateway/watch-parties";
 import { REVATI_TWITTER_URL, REVATI_YOUTUBE_URL } from "@utils/variables";
 
 import mainVideoSrc from "@assets/community/gateway/main.webm";
@@ -180,6 +181,25 @@ const mainVisualSlides = [
     <section id="watch-party">
       <SectionTitle primary="WATCH PARTY" secondary="ウォッチパーティー" />
       <SectionBody>
+        <div class="watch-party-container">
+          {
+            GATEWAY_WATCH_PARTIES.map((party) =>
+              typeof party.logoImage === "string" ? (
+                <img
+                  src={party.logoImage}
+                  alt={party.name}
+                  class="watch-party-image"
+                />
+              ) : (
+                <Image
+                  src={party.logoImage}
+                  alt={party.name}
+                  class="watch-party-image"
+                />
+              ),
+            )
+          }
+        </div>
         <Button
           variant="outlined"
           color="gray"
@@ -349,6 +369,18 @@ const mainVisualSlides = [
       width: min(100%, commGateway.$team-card-width);
       grid-template-columns: minmax(0, 1fr);
       gap: 1rem;
+    }
+  }
+
+  .watch-party-container {
+    display: flex;
+    gap: 1.5rem;
+    padding-bottom: 1rem;
+
+    .watch-party-image {
+      height: 8rem;
+      width: auto;
+      object-fit: contain;
     }
   }
 
