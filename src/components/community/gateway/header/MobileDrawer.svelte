@@ -30,7 +30,6 @@
 	$effect(() => {
 		const handleOpen = () => {
 			isOpen = true;
-			// document.body.style.overflow = 'hidden'; // ドロワー展開中はスクロールを無効化
 		};
 
 		document.addEventListener('open-mobile-drawer', handleOpen);
