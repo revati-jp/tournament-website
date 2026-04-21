@@ -134,7 +134,10 @@
 		}
 
 		const requestId = ++playRequestId;
-		video.load();
+
+		// 動画のメタデータすら取得できていない（初回）場合のみ load() を発火
+		if (video.readyState === 0) video.load();
+
 		const playPromise = video.play();
 		if (playPromise !== undefined) {
 			playPromise
