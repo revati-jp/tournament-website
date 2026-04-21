@@ -36,6 +36,22 @@
 		return () => document.removeEventListener('open-mobile-drawer', handleOpen);
 	});
 
+	// isOpen に連動してスクロール（overflow）を制御する処理
+	$effect(() => {
+		if (isOpen) {
+			// 開く直前の overflow の状態（何も設定されていなければ空文字）を記憶
+			const originalOverflow = document.body.style.overflow;
+
+			// スクロールを無効化
+			document.body.style.overflow = 'hidden';
+
+			// クリーンアップ関数（isOpenがfalseになった時、またはコンポーネントが破棄された時に実行）
+			return () => {
+				document.body.style.overflow = originalOverflow;
+			};
+		}
+	});
+
 	// Header 側でボタンを再クリックしたときの close イベントを購読する
 	$effect(() => {
 		const handleClose = () => {
@@ -58,42 +74,6 @@
 
 		mq.addEventListener('change', handler);
 		return () => mq.removeEventListener('change', handler);
-	});
-
-	// ドロワー展開中はスクロールを無効化する
-	$effect(() => {
-		if (!isOpen) {
-			return;
-		}
-
-		const html = document.documentElement;
-		const body = document.body;
-		const scrollY = window.scrollY ?? window.pageYOffset ?? 0;
-		const scrollbarWidth = window.innerWidth - html.clientWidth;
-
-		const prevHtmlOverflow = html.style.overflow;
-		const prevBodyPosition = body.style.position;
-		const prevBodyTop = body.style.top;
-		const prevBodyWidth = body.style.width;
-		const prevBodyOverflow = body.style.overflow;
-		const prevBodyPaddingRight = body.style.paddingRight;
-
-		html.style.overflow = 'hidden';
-		body.style.position = 'fixed';
-		body.style.top = `-${scrollY}px`;
-		body.style.width = '100%';
-		body.style.overflow = 'hidden';
-		body.style.paddingRight = scrollbarWidth > 0 ? `${scrollbarWidth}px` : prevBodyPaddingRight;
-
-		return () => {
-			html.style.overflow = prevHtmlOverflow;
-			body.style.position = prevBodyPosition;
-			body.style.top = prevBodyTop;
-			body.style.width = prevBodyWidth;
-			body.style.overflow = prevBodyOverflow;
-			body.style.paddingRight = prevBodyPaddingRight;
-			window.scrollTo(0, scrollY);
-		};
 	});
 
 	/**
