@@ -51,6 +51,8 @@ import revatiIcon from "@assets/revati/icon_white.svg";
     - 各大会専用は `src/styles/<tournament-type>/<tournament>/` 配下（例: `src/styles/community/gateway/`）に `_color.scss` / `_mixin.scss` / `_dimension.scss` などを配置する。（自動インポート済。例: `as commGateway`）
     - どちらにせよ、複数のコンポーネントやファイルで共有されるもの**のみ**をこれらのファイルに追加する。
 - コメントやドキュメンテーションは日本語で記述
+- Astro ファイルの HTML 部分でのコメントアウトには原則 JSX スタイル（`{/* コメント */}`）を使用すること。ビルド後に残したい場合はその限りではない。
+  Svelte ファイルの場合は HTML スタイル（`<!-- コメント -->`）を使用すること。
 
 ## その他の指示
 

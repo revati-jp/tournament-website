@@ -56,26 +56,26 @@ const mobileSocialLinks = SOCIALS.map(({ label, href, size, iconImg }) => ({
 }));
 ---
 
-<!--
-  ハンバーガーボタンは Astro の HTML として SSR レンダリングし、
-  ドロワーオーバーレイは Svelte（header の外側）で制御する。
-
-  【header の外にドロワーを置く理由】
-  header に backdrop-filter が設定されているため、その子孫の position: fixed は
-  ビューポートではなく header を基準にしてしまう（CSS stacking context の仕様）。
-
-  【ボタン状態の同期方法】
-  ボタンクリック → document に "open-mobile-drawer" / "close-mobile-drawer" イベントを dispatch
-  → Svelte が受け取り isOpen を更新 / Svelte が閉じるときも同イベントを dispatch
-  → Header の script が受け取り aria-expanded とアイコンを更新
--->
+{
+  // ハンバーガーボタンは Astro の HTML として SSR レンダリングし、
+  // ドロワーオーバーレイは Svelte（header の外側）で制御する。
+  //
+  // 【header の外にドロワーを置く理由】
+  // header に backdrop-filter が設定されているため、その子孫の position: fixed は
+  // ビューポートではなく header を基準にしてしまう（CSS stacking context の仕様）。
+  //
+  // 【ボタン状態の同期方法】
+  // ボタンクリック → document に "open-mobile-drawer" / "close-mobile-drawer" イベントを dispatch
+  // → Svelte が受け取り isOpen を更新 / Svelte が閉じるときも同イベントを dispatch
+  // → Header の script が受け取り aria-expanded とアイコンを更新
+}
 <header transition:name="gateway-header">
   <div class="container">
     <div class="mobile-menu-btn-container">
-      <!--
-        ≡ と × の 2 つのアイコンを持ち、CSS で切り替える。
-        aria-expanded="true" のとき ≡ を非表示にし × を表示する。
-      -->
+      {
+        // ≡ と × の 2 つのアイコンを持ち、CSS で切り替える。
+        // aria-expanded="true" のとき ≡ を非表示にし × を表示する。
+      }
       <button
         id="hamburger-btn"
         class="hamburger-btn"
@@ -165,10 +165,10 @@ const mobileSocialLinks = SOCIALS.map(({ label, href, size, iconImg }) => ({
   </div>
 </header>
 
-<!--
-  ドロワーは header の外側（兄弟要素）に配置する。
-  詳細は上記コメント参照。
--->
+{
+  // ドロワーは header の外側（兄弟要素）に配置する。
+  // 詳細は上記コメント参照。
+}
 <MobileDrawer
   client:media={BREAKPOINT_HB}
   navItems={navItems}
