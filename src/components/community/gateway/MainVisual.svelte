@@ -29,21 +29,6 @@
 	// bind:this で必要なインデックスが順次埋まるため、初期サイズは固定しない
 	const videoRefs: (HTMLVideoElement | null)[] = [];
 
-	// --max-vh001: アドレスバー等を考慮した最大ビューポート高さの 1%
-	$effect(() => {
-		let maxVh = 0;
-		function updateMaxVh() {
-			const vh = window.innerHeight;
-			if (vh > maxVh) {
-				maxVh = vh;
-				document.documentElement.style.setProperty('--max-vh001', `${maxVh * 0.01}px`);
-			}
-		}
-		updateMaxVh();
-		window.addEventListener('resize', updateMaxVh);
-		return () => window.removeEventListener('resize', updateMaxVh);
-	});
-
 	// activeIndex が変わったときにスライドの再生を制御する
 	$effect(() => {
 		// activeIndex を参照して依存関係を確立
@@ -259,8 +244,10 @@
 		margin-left: calc(-50vw + 50%);
 		// main の padding-top 分を引き上げてヘッダー裏まで到達させる
 		margin-top: calc(-1 * commGateway.$header-height);
-		// 最大ビューポート高さを使用（--max-vh001 は JS で設定、フォールバックは 100vh）
-		height: calc(var(--max-vh001, 1vh) * 100);
+		// モバイル UI バー伸縮時の再計算によるアンカー位置ズレを防ぐため、固定的な viewport 単位を使う
+		height: 100vh;
+		height: 100svh;
+		height: 100lvh;
 		overflow: hidden;
 		background-color: commGateway.$color-background;
 		// メインビジュアル直後のセクションとの余白
