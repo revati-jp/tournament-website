@@ -13,9 +13,13 @@ interface Props {
   meta?: {
     description?: string;
   };
+  seo?: {
+    noindex?: boolean;
+    disableCanonical?: boolean;
+  };
 }
 
-const { title, meta } = Astro.props;
+const { title, meta, seo } = Astro.props;
 
 const tournament = getTournament("community", "gateway");
 
@@ -25,7 +29,10 @@ const fullTitle = `${websiteTitle} | ${title}`;
 const absThumbnailPath = WEBSITE_BASE_URL + keyVisual.src;
 ---
 
-<BaseLayout>
+<BaseLayout
+  noindex={seo?.noindex ?? false}
+  disableCanonical={seo?.disableCanonical ?? false}
+>
   <Fragment slot="head">
     <meta name="thumbnail" content={absThumbnailPath} />
 

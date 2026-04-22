@@ -2,6 +2,14 @@
 import { ClientRouter } from "astro:transitions";
 import { WEBSITE_BASE_URL } from "@utils";
 
+interface Props {
+  title?: string;
+  noindex?: boolean;
+  disableCanonical?: boolean;
+}
+
+const { noindex = false, disableCanonical = false } = Astro.props;
+
 const canonicalUrl = WEBSITE_BASE_URL + Astro.url.pathname;
 ---
 
@@ -23,9 +31,10 @@ const canonicalUrl = WEBSITE_BASE_URL + Astro.url.pathname;
       content=""
     /> -->
 
-    <meta property="og:url" content={canonicalUrl} />
+    {!disableCanonical && <meta property="og:url" content={canonicalUrl} />}
     <meta name="twitter:site" content="@revati_jp" />
     <meta property="og:locale" content="ja_JP" />
+    {noindex && <meta name="robots" content="noindex" />}
 
     <meta name="keywords" content="revati" />
     <meta
@@ -33,7 +42,7 @@ const canonicalUrl = WEBSITE_BASE_URL + Astro.url.pathname;
       content="Rinrin.rs <rinrin0413.rs@gmail.com>, RetoRuto9900K <tutinoko2048@gmail.com>"
     />
 
-    <link rel="canonical" href={canonicalUrl} />
+    {!disableCanonical && <link rel="canonical" href={canonicalUrl} />}
 
     <slot name="head" />
 
