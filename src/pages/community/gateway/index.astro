@@ -7,6 +7,7 @@ import SectionBody from "@components/community/gateway/ui/SectionBody.astro";
 import Button from "@components/community/gateway/ui/Button.astro";
 import TeamCard from "@components/community/gateway/ui/TeamCard.astro";
 import BoxArrowUpRightIcon from "@components/icons/BoxArrowUpRightIcon.astro";
+import CastContainer from "@components/community/gateway/cast/CastContainer.astro";
 import { GATEWAY_SPONSORS } from "@constants/community/gateway/sponsors";
 import { GATEWAY_WATCH_PARTIES } from "@constants/community/gateway/watch-parties";
 import { REVATI_TWITTER_URL, REVATI_YOUTUBE_URL } from "@utils/variables";
@@ -163,6 +164,13 @@ const mainVisualSlides = [
             REVATI YouTube <BoxArrowUpRightIcon />
           </Button>
         </p>
+      </SectionBody>
+    </section>
+
+    <section id="cast">
+      <SectionTitle primary="CAST" secondary="実況・解説" />
+      <SectionBody>
+        <CastContainer />
       </SectionBody>
     </section>
 

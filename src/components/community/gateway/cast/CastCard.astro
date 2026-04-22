@@ -1,0 +1,163 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import type { CastData } from "@app-types/community/gateway";
+import IconButton from "@components/community/gateway/ui/IconButton.astro";
+import InstagramIcon from "@components/icons/InstagramIcon.astro";
+import LineIcon from "@components/icons/LineIcon.astro";
+import TwitchIcon from "@components/icons/TwitchIcon.astro";
+import TwitterXIcon from "@components/icons/TwitterXIcon.astro";
+import YouTubeIcon from "@components/icons/YouTubeIcon.astro";
+
+interface Props {
+  cast: Omit<CastData, "desktopImage" | "mobileImage">;
+  image: ImageMetadata;
+  isMobile?: boolean;
+}
+const { cast, image, isMobile } = Astro.props;
+
+const DESKTOP_FOOTER_HEIGHT_RATIO = 0.125;
+const MOBILE_FOOTER_HEIGHT_RATIO = 0.148;
+export const DESKTOP_CARD_WIDTH = "300px";
+const MOBILE_CARD_WIDTH = "350px";
+---
+
+<div class="cast-item">
+  <Image src={image} alt={cast.name} />
+  <div class="footer">
+    {isMobile && <div class="days">{cast.days}</div>}
+    <div class="socials">
+      {
+        cast.socials.youtube && (
+          <div class="social-youtube">
+            <IconButton href={cast.socials.youtube} target="_blank">
+              <YouTubeIcon size={20} />
+            </IconButton>
+          </div>
+        )
+      }
+      {
+        cast.socials.twitch && (
+          <div class="social-twitch">
+            <IconButton href={cast.socials.twitch} target="_blank">
+              <TwitchIcon size={20} />
+            </IconButton>
+          </div>
+        )
+      }
+      {
+        cast.socials.twitter && (
+          <div class="social-x">
+            <IconButton href={cast.socials.twitter} target="_blank">
+              <TwitterXIcon size={20} />
+            </IconButton>
+          </div>
+        )
+      }
+      {
+        cast.socials.instagram && (
+          <div class="social-instagram">
+            <IconButton href={cast.socials.instagram} target="_blank">
+              <InstagramIcon size={20} />
+            </IconButton>
+          </div>
+        )
+      }
+      {
+        cast.socials.line && (
+          <div class="social-line">
+            <IconButton href={cast.socials.line} target="_blank">
+              <LineIcon size={20} />
+            </IconButton>
+          </div>
+        )
+      }
+    </div>
+  </div>
+</div>
+
+<style
+  lang="scss"
+  define:vars={{
+    "footer-height-ratio": isMobile
+      ? MOBILE_FOOTER_HEIGHT_RATIO
+      : DESKTOP_FOOTER_HEIGHT_RATIO,
+    "card-width": isMobile ? MOBILE_CARD_WIDTH : DESKTOP_CARD_WIDTH,
+  }}
+>
+  .cast-item {
+    /* 画像を基準にfooterを重ねるための相対配置 */
+    position: relative;
+    width: var(--card-width);
+    min-width: var(--card-width);
+    max-width: var(--card-width);
+    display: block;
+
+    :global(img) {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      display: block;
+    }
+
+    .footer {
+      position: absolute;
+      inset-inline: 0;
+      bottom: 0;
+      width: 100%;
+      height: calc(100% * var(--footer-height-ratio));
+      min-width: 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 1rem 2rem;
+      box-sizing: border-box;
+
+      .days {
+        @include commGateway.font-sofia-sans-extra-condensed-800;
+        font-size: 1.5rem;
+      }
+
+      .socials {
+        margin-left: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+
+        :global(.icon-button) {
+          flex-shrink: 0;
+        }
+
+        .social-youtube {
+          :global(.icon-button:hover) {
+            color: #ff0000;
+          }
+        }
+
+        .social-twitch {
+          :global(.icon-button:hover) {
+            color: #9146ff;
+          }
+        }
+
+        .social-x {
+          :global(.icon-button:hover) {
+            color: rgba(255, 255, 255, 0.7);
+          }
+        }
+
+        .social-instagram {
+          :global(.icon-button:hover) {
+            color: #e1306c;
+          }
+        }
+
+        .social-line {
+          :global(.icon-button:hover) {
+            color: #00c300;
+          }
+        }
+      }
+    }
+  }
+</style>
