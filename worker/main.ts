@@ -48,6 +48,11 @@ export default {
       }
     }
 
+    // 末尾スラッシュ付きURLは、ルート以外を末尾スラッシュなしへ統一
+    if (url.pathname !== "/" && url.pathname.endsWith("/")) {
+      return redirect(`${url.pathname.slice(0, -1)}${url.search}`);
+    }
+
     // それ以外はAstroの静的ファイルを返す
     return env.ASSETS.fetch(request);
   },
