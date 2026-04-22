@@ -2,6 +2,7 @@ import type { CardItem } from "@app-types/community/gateway";
 
 import xrayPadLogo from "@assets/community/gateway/sponsors/x-raypad.webp";
 import undercadeLogo from "@assets/community/gateway/sponsors/undercade.webp";
+import eKatsuLogo from "@assets/community/gateway/sponsors/ekatsu.webp";
 
 export const GATEWAY_SPONSORS: CardItem[] = [
   {
@@ -22,6 +23,15 @@ export const GATEWAY_SPONSORS: CardItem[] = [
     website: "https://undercade.official.ec/",
     socials: {
       twitter: "https://x.com/cade_under",
+    },
+  },
+  {
+    name: "e活",
+    description:
+      "『e活』は熱量のあるコミュニティ大会へ協賛しています。 シーンを創る主催者様、ぜひご活用ください。",
+    logoImage: eKatsuLogo,
+    socials: {
+      twitter: "https://x.com/e_ekatsu",
     },
   },
 ];
