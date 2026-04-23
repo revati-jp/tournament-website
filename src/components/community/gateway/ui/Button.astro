@@ -5,18 +5,25 @@ interface Props {
   /** hrefが指定された場合はroot要素として`a`が使用される */
   href?: string;
   target?: string;
+  rel?: string;
 }
 
-const { variant = "contained", color = "primary", href, target } = Astro.props;
+const {
+  variant = "contained",
+  color = "primary",
+  href,
+  target,
+  rel,
+} = Astro.props;
 ---
 
 {
   href ? (
-    <a href={href} target={target} class={`button ${variant} ${color}`}>
+    <a {href} {target} {rel} class={`button ${variant} ${color}`}>
       <slot />
     </a>
   ) : (
-    <div class={`button ${variant} ${color}`}>
+    <div class={`button ${variant} ${color}`} role="button" tabindex="0">
       <slot />
     </div>
   )

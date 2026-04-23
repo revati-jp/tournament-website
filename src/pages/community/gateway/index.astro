@@ -67,8 +67,11 @@ const mainVisualSlides = [
         </p>
         <Button
           href="https://docs.google.com/forms/d/e/1FAIpQLSfwUQG6DVLpAazcirMGOZJL92F5BdCvFDrsNtkYPN4dNoPBJA/viewform"
-          >エントリーはこちら <BoxArrowUpRightIcon size={14} /></Button
+          target="_blank"
+          rel="noopener noreferrer"
         >
+          エントリーはこちら <BoxArrowUpRightIcon size={14} />
+        </Button>
       </SectionBody>
     </section>
 
@@ -87,6 +90,18 @@ const mainVisualSlides = [
               <span class="day">(Sun)</span>
             </p>
           </div>
+          <div class="schedule-details">
+            <div class="detail">
+              <div class="heading">予選Day1 グループ別ラウンドロビン</div>
+              開始 15:00～<br />
+              終了予定 18:00
+            </div>
+            <div class="detail">
+              <div class="heading">予選Day2 本戦進出決定戦</div>
+              開始 15:00～<br />
+              終了予定 18:00
+            </div>
+          </div>
           <div class="two-column-row">
             <p class="two-column-label">
               [<span class="bold">本戦</span> / 配信あり]
@@ -96,9 +111,9 @@ const mainVisualSlides = [
               <span class="day">(Tue)</span> -
               <time class="datetime" datetime="2026-05-06">5.6</time>
               <span class="day">(Wed)</span>
-              <time class="datetime time" datetime="2026-05-06T13:00:00"
-                >13:00~</time
-              >
+              <time class="datetime time" datetime="2026-05-06T13:00:00">
+                13:00~
+              </time>
             </p>
           </div>
         </div>
@@ -115,8 +130,9 @@ const mainVisualSlides = [
             variant="outlined"
             color="gray"
             href="/community/gateway/schedules"
-            >タイムスケジュールはこちら</Button
           >
+            本戦タイムスケジュールはこちら
+          </Button>
         </p>
       </SectionBody>
     </section>
@@ -158,9 +174,15 @@ const mainVisualSlides = [
           <Button
             variant="outlined"
             color="gray"
-            href="/community/gateway/regulations">詳しいルールはこちら</Button
+            href="/community/gateway/regulations"
           >
-          <Button href={REVATI_YOUTUBE_URL} target="_blank">
+            詳しいルールはこちら
+          </Button>
+          <Button
+            href={REVATI_YOUTUBE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             REVATI YouTube <BoxArrowUpRightIcon />
           </Button>
         </p>
@@ -251,8 +273,10 @@ const mainVisualSlides = [
         <Button
           variant="outlined"
           color="gray"
-          href="/community/gateway/sponsors">スポンサーはこちら</Button
+          href="/community/gateway/sponsors"
         >
+          スポンサーはこちら
+        </Button>
       </SectionBody>
     </section>
   </div>
@@ -285,14 +309,54 @@ const mainVisualSlides = [
 
   .schedule-list {
     container: schedule-list / inline-size;
+
     .two-column-label {
       // labelとvalueの高さずれ対策
       margin-bottom: 0.25em;
+    }
+
+    .two-column-value {
+      @include commGateway.font-sofia-sans-extra-condensed-800;
+      font-size: 1.6rem;
+
+      .datetime {
+        font-size: 2.1rem;
+        letter-spacing: 0.04em;
+      }
+
+      .time {
+        display: inline-block;
+        margin-left: 0.8rem;
+      }
+    }
+
+    .schedule-details {
+      padding: 0 1rem;
+      border-left: 4px solid rgba(commGateway.$color-text, 0.3);
+      margin-bottom: 1rem;
+
+      .detail {
+        margin: 0.6rem 0;
+
+        .heading {
+          font-weight: bold;
+          margin-bottom: 0.2rem;
+        }
+      }
     }
   }
 
   .regulations-list {
     container: regulations-list / inline-size;
+
+    .two-column-value {
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+    }
+
+    .two-column-row + .two-column-row:not(:last-child) {
+      padding-bottom: 0.8em;
+    }
   }
 
   .two-column-row {
@@ -309,34 +373,6 @@ const mainVisualSlides = [
 
   .two-column-label {
     font-weight: normal;
-  }
-
-  .schedule-list {
-    .two-column-value {
-      @include commGateway.font-sofia-sans-extra-condensed-800;
-      font-size: 1.6rem;
-
-      .datetime {
-        font-size: 2.1rem;
-        letter-spacing: 0.04em;
-      }
-
-      .time {
-        display: inline-block;
-        margin-left: 0.8rem;
-      }
-    }
-  }
-
-  .regulations-list {
-    .two-column-value {
-      font-size: 1.1rem;
-      letter-spacing: 0.04em;
-    }
-
-    .two-column-row + .two-column-row:not(:last-child) {
-      padding-bottom: 0.8em;
-    }
   }
 
   @container schedule-list (max-width: #{$schedule-collapse-breakpoint}) {
