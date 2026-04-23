@@ -67,8 +67,11 @@ const mainVisualSlides = [
         </p>
         <Button
           href="https://docs.google.com/forms/d/e/1FAIpQLSfwUQG6DVLpAazcirMGOZJL92F5BdCvFDrsNtkYPN4dNoPBJA/viewform"
-          >エントリーはこちら <BoxArrowUpRightIcon size={14} /></Button
+          target="_blank"
+          rel="noopener noreferrer"
         >
+          エントリーはこちら <BoxArrowUpRightIcon size={14} />
+        </Button>
       </SectionBody>
     </section>
 
@@ -158,9 +161,15 @@ const mainVisualSlides = [
           <Button
             variant="outlined"
             color="gray"
-            href="/community/gateway/regulations">詳しいルールはこちら</Button
+            href="/community/gateway/regulations"
           >
-          <Button href={REVATI_YOUTUBE_URL} target="_blank">
+            詳しいルールはこちら
+          </Button>
+          <Button
+            href={REVATI_YOUTUBE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             REVATI YouTube <BoxArrowUpRightIcon />
           </Button>
         </p>
@@ -251,8 +260,10 @@ const mainVisualSlides = [
         <Button
           variant="outlined"
           color="gray"
-          href="/community/gateway/sponsors">スポンサーはこちら</Button
+          href="/community/gateway/sponsors"
         >
+          スポンサーはこちら
+        </Button>
       </SectionBody>
     </section>
   </div>

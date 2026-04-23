@@ -37,7 +37,11 @@ const { item } = Astro.props;
       {
         item.website && (
           <div class="website">
-            <Button href={item.website} target="_blank">
+            <Button
+              href={item.website}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               公式サイト <BoxArrowUpRightIcon />
             </Button>
           </div>
@@ -47,7 +51,11 @@ const { item } = Astro.props;
         {
           item.socials.youtube && (
             <div class="social-youtube">
-              <IconButton href={item.socials.youtube} target="_blank">
+              <IconButton
+                href={item.socials.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <YouTubeIcon size={24} />
               </IconButton>
             </div>
@@ -56,7 +64,11 @@ const { item } = Astro.props;
         {
           item.socials.twitch && (
             <div class="social-twitch">
-              <IconButton href={item.socials.twitch} target="_blank">
+              <IconButton
+                href={item.socials.twitch}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <TwitchIcon size={24} />
               </IconButton>
             </div>
@@ -65,7 +77,11 @@ const { item } = Astro.props;
         {
           item.socials.twitter && (
             <div class="social-x">
-              <IconButton href={item.socials.twitter} target="_blank">
+              <IconButton
+                href={item.socials.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <TwitterXIcon size={24} />
               </IconButton>
             </div>
@@ -74,7 +90,11 @@ const { item } = Astro.props;
         {
           item.socials.instagram && (
             <div class="social-instagram">
-              <IconButton href={item.socials.instagram} target="_blank">
+              <IconButton
+                href={item.socials.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <InstagramIcon size={24} />
               </IconButton>
             </div>
@@ -83,7 +103,11 @@ const { item } = Astro.props;
         {
           item.socials.line && (
             <div class="social-line">
-              <IconButton href={item.socials.line} target="_blank">
+              <IconButton
+                href={item.socials.line}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <LineIcon size={24} />
               </IconButton>
             </div>
