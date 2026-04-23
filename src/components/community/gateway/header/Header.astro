@@ -1,0 +1,442 @@
+---
+import { Image } from "astro:assets";
+import MobileDrawer from "./MobileDrawer.svelte";
+import {
+  REVATI_TWITTER_URL,
+  REVATI_WEBSITE_URL,
+  REVATI_YOUTUBE_URL,
+} from "@utils";
+import { BREAKPOINT_HB } from "@utils/community/gateway";
+
+import twitterXIcon from "@assets/logos/x_logo_white.svg";
+import youtubeIcon from "@assets/logos/yt_icon_mono_dark.webp";
+import revatiIcon from "@assets/revati/icon_white.svg";
+import gatewayLogo from "@assets/community/gateway/Gateway-logo_white_680x448.webp";
+
+export const navItems = [
+  { label: "ABOUT", href: "/community/gateway#about" },
+  { label: "SCHEDULE", href: "/community/gateway#schedule" },
+  { label: "REGULATIONS", href: "/community/gateway#regulations" },
+  { label: "CAST", href: "/community/gateway#cast" },
+  { label: "TEAMS", href: "/community/gateway#teams" },
+  { label: "WATCH PARTY", href: "/community/gateway#watch-party" },
+  { label: "SPONSORS", href: "/community/gateway#sponsors" },
+];
+
+export const SOCIALS = [
+  {
+    label: "X.com",
+    href: REVATI_TWITTER_URL,
+    size: 28,
+    iconImg: twitterXIcon,
+  },
+  {
+    label: "YouTube",
+    href: REVATI_YOUTUBE_URL,
+    size: 34,
+    iconImg: youtubeIcon,
+  },
+  {
+    label: "REVATI",
+    href: REVATI_WEBSITE_URL,
+    size: 38,
+    iconImg: revatiIcon,
+  },
+];
+
+// Svelte コンポーネント `MobileDrawer` に渡すためのシリアライズ可能なソーシャルリンクデータ。
+const mobileSocialLinks = SOCIALS.map(({ label, href, size, iconImg }) => ({
+  label,
+  href,
+  size,
+  iconImg: {
+    path: iconImg.src,
+    width: iconImg.width,
+    height: iconImg.height,
+  },
+}));
+---
+
+{
+  // ハンバーガーボタンは Astro の HTML として SSR レンダリングし、
+  // ドロワーオーバーレイは Svelte（header の外側）で制御する。
+  //
+  // 【header の外にドロワーを置く理由】
+  // header に backdrop-filter が設定されているため、その子孫の position: fixed は
+  // ビューポートではなく header を基準にしてしまう（CSS stacking context の仕様）。
+  //
+  // 【ボタン状態の同期方法】
+  // ボタンクリック → document に "open-mobile-drawer" / "close-mobile-drawer" イベントを dispatch
+  // → Svelte が受け取り isOpen を更新 / Svelte が閉じるときも同イベントを dispatch
+  // → Header の script が受け取り aria-expanded とアイコンを更新
+}
+<header transition:name="gateway-header">
+  <div class="container">
+    <div class="mobile-menu-btn-container">
+      {
+        // ≡ と × の 2 つのアイコンを持ち、CSS で切り替える。
+        // aria-expanded="true" のとき ≡ を非表示にし × を表示する。
+      }
+      <button
+        id="hamburger-btn"
+        class="hamburger-btn"
+        aria-label="メニューを開く"
+        aria-expanded="false"
+      >
+        <svg
+          class="icon-menu"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        >
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <svg
+          class="icon-close"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        >
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="logo-container">
+      <a href="/community/gateway" aria-label="ホームへ移動">
+        <Image
+          src={gatewayLogo}
+          alt='REVATI Community CUP "Gateway"'
+          class="logo"
+          loading="eager"
+        />
+      </a>
+    </div>
+    <div class="nav-container">
+      <nav>
+        <ul>
+          {
+            navItems.map((item) => (
+              <li>
+                {/* ↓ 整形によって予期せぬ空白文字が入るため */}
+                {/* prettier-ignore */}
+                <a href={item.href} class="nav-item-inner">{item.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+    <div class="socials-container">
+      <nav>
+        <ul>
+          {
+            SOCIALS.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  aria-label={item.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src={item.iconImg}
+                    alt={item.label}
+                    width={item.size}
+                  />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+{
+  // ドロワーは header の外側（兄弟要素）に配置する。
+  // 詳細は上記コメント参照。
+}
+<MobileDrawer
+  client:media={BREAKPOINT_HB}
+  navItems={navItems}
+  socialLinks={mobileSocialLinks}
+/>
+
+<script>
+  /**
+   * ハンバーガーボタンとドロワーの開閉を連携するセットアップ処理。
+   *
+   * Astro の View Transitions（ClientRouter）使用時、ページ遷移（ページ内リンク含む）の
+   * たびにヘッダーの DOM が入れ替わるため、astro:page-load で毎回ボタンを再登録する。
+   *
+   * document レベルのイベントリスナー（open/close-mobile-drawer）は
+   * 重複登録しないよう AbortController で前回のものをキャンセルしてから再登録する。
+   */
+  type HeaderScriptState = {
+    controller: AbortController | null;
+    onPageLoad: (() => void) | null;
+  };
+
+  const headerWindow = window as Window & {
+    __revatiHeaderScriptState?: HeaderScriptState;
+  };
+
+  const state: HeaderScriptState = headerWindow.__revatiHeaderScriptState ?? {
+    controller: null,
+    onPageLoad: null,
+  };
+
+  // script の再評価時に多重登録しないよう、前回の登録を明示的に解除する。
+  if (state.onPageLoad !== null) {
+    document.removeEventListener("astro:page-load", state.onPageLoad);
+  }
+  state.controller?.abort();
+
+  const onPageLoad = () => {
+    // 前回のリスナーをすべてキャンセルする
+    state.controller?.abort();
+    state.controller = new AbortController();
+    const { signal } = state.controller;
+
+    const btn = document.getElementById("hamburger-btn");
+    if (btn === null) return;
+
+    // ボタンクリック: 現在の開閉状態を aria-expanded で判定してトグルする
+    btn.addEventListener(
+      "click",
+      () => {
+        const isOpen = btn.getAttribute("aria-expanded") === "true";
+        document.dispatchEvent(
+          new CustomEvent(
+            isOpen ? "close-mobile-drawer" : "open-mobile-drawer",
+          ),
+        );
+      },
+      { signal },
+    );
+
+    // ドロワーが開いたとき: ボタンを × に切り替える
+    document.addEventListener(
+      "open-mobile-drawer",
+      () => {
+        btn.setAttribute("aria-expanded", "true");
+        btn.setAttribute("aria-label", "メニューを閉じる");
+      },
+      { signal },
+    );
+
+    // ドロワーが閉じたとき: ボタンを ≡ に戻す
+    // （ESC キー・ナビゲーションクリック・ブレイクポイント超えによる自動クローズも含む）
+    document.addEventListener(
+      "close-mobile-drawer",
+      () => {
+        btn.setAttribute("aria-expanded", "false");
+        btn.setAttribute("aria-label", "メニューを開く");
+      },
+      { signal },
+    );
+  };
+
+  document.addEventListener("astro:page-load", onPageLoad);
+  state.onPageLoad = onPageLoad;
+  headerWindow.__revatiHeaderScriptState = state;
+</script>
+
+<style lang="scss">
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: commGateway.$header-height;
+    $filter: blur(16px);
+    backdrop-filter: $filter;
+    -webkit-backdrop-filter: $filter;
+    background-color: rgba(commGateway.$color-background, 0.75);
+    z-index: 255;
+  }
+
+  .container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+
+    /*
+     * モバイル時: 1fr auto 1fr にすることで
+     * 左（ハンバーガーボタン）と右（空き）が均等になり、ロゴが真に中央に配置される。
+     */
+    @include commGateway.hb {
+      grid-template-columns: 1fr auto 1fr;
+    }
+  }
+
+  .mobile-menu-btn-container {
+    display: none;
+
+    @include commGateway.hb {
+      display: flex;
+      align-items: center;
+      grid-column: 1 / 2;
+    }
+  }
+
+  .hamburger-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 48px;
+    height: 48px;
+    background: none;
+    border: none;
+    color: commGateway.$color-text;
+    cursor: pointer;
+    padding: 8px;
+    margin-left: 14px;
+    -webkit-tap-highlight-color: transparent;
+
+    svg {
+      position: absolute;
+      transition:
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.3s ease;
+    }
+
+    // × アイコンは初期状態で縮小・回転させて見えないようにする
+    .icon-close {
+      opacity: 0;
+      transform: scale(0.5) rotate(-45deg);
+    }
+
+    // 開いたとき: ≡ を弾き飛ばすように消し、× をふわりと出現・回転させる
+    &[aria-expanded="true"] {
+      .icon-menu {
+        opacity: 0;
+        transform: scale(0.5) rotate(45deg);
+      }
+
+      .icon-close {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+      }
+    }
+  }
+
+  .logo-container {
+    grid-column: 1 / 2;
+
+    @include commGateway.hb {
+      grid-column: 2 / 3;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .logo {
+    display: block;
+    height: commGateway.$header-height;
+    width: auto;
+    box-sizing: border-box;
+    padding: 14px;
+    margin-left: 14px;
+
+    @include commGateway.hb {
+      margin-left: 0;
+    }
+  }
+
+  ul {
+    display: flex;
+    list-style: none;
+    @include commGateway.font-zalando-sans-expanded-500;
+    font-size: 20px;
+    justify-content: center;
+    padding: 0;
+    align-items: center;
+  }
+
+  .nav-container {
+    grid-column: 2 / 3;
+
+    ul {
+      gap: 24px;
+    }
+
+    @include commGateway.hb {
+      display: none;
+    }
+  }
+
+  .nav-item-inner {
+    position: relative;
+    display: inline-block;
+    color: commGateway.$color-text;
+    text-decoration: none;
+    margin-right: 12px;
+    padding-bottom: 2px;
+    transition:
+      color 0.3s ease,
+      text-shadow 0.3s ease,
+      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: commGateway.$color-primary;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 10px rgba(commGateway.$color-primary, 0.6);
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: commGateway.$color-primary;
+      text-shadow: 0 0 12px rgba(commGateway.$color-primary, 0.5);
+      transform: translateY(-2px);
+      outline: none;
+
+      &::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+  }
+
+  .socials-container {
+    grid-column: 3 / 4;
+    margin-right: 48px;
+
+    ul {
+      gap: 22px;
+    }
+
+    a {
+      color: commGateway.$color-text;
+    }
+
+    @include commGateway.hb {
+      display: none;
+    }
+  }
+</style>

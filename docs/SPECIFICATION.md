@@ -2,53 +2,117 @@
 
 ## 概要
 
-- 名前: REVATI Community CUP "Gateway"（旧~~REVATI Challengers CUP Vol.2~~）
-- URL: https://gateway.revati.jp （旧 ~~https://challengers.revati.jp~~）
-- リポジトリ: https://github.com/revati-jp/gateway-website
+- 名前:
+  - `/community`: REVATI Community CUP
+- URL: https://tournament.revati.jp
+- リポジトリ: https://github.com/revati-jp/tournament-website
 - 対応言語: 日本語のみ
 
 ## サイトマップ
 
 - `licenses` - **ライセンス情報ページ**
-- `/`: 最新の大会のウェブページのホームにリダイレクト
+- `/`: 最新の大会のホームにリダイレクト
   （ディレクトリ構造を再現してのリダイレクトは特に行わず、無効なページは404に）
-- `/volX-20XX`（`vol1-2025`、`vol2-2026` のように各大会のページ）
-    - `./` **ホーム**: 大会の基本的な情報（名前、日程、ルール、開催地、お問い合わせ、チケット URL への誘導など）
-    - **チーム紹介ページ**: 予選を突破したチームの紹介（チーム名・選手の情報など）
-    - **スポンサーページ**: スポンサー企業の紹介
-    - **REVATIについて**: REVATI の紹介
+- `/<tournament-type>` - **大会種類ディレクトリ**: "community" のように大会種類を分ける
+  （ルートのような感じで、その大会種類の最新の大会のホームにリダイレクト）
+  - `/<tournament>` - **各大会ウェブサイト**: "gateway" や "vol2" のような各大会のウェブサイト
+    - `./` - **ホーム**: 大会の基本的な情報（名前、日程、ルール、開催地、お問い合わせ、チケット URL への誘導など）
+    - `schedules` - **大会スケジュールページ**: 大会のタイムスケジュール
+    - `regulations` - **大会ルールページ**: 大会ルールの詳細の紹介
+    - `teams` - **チーム紹介ページ**: 予選を突破したチームの紹介（チーム名・選手の情報など）
+    - `sponsors` - **スポンサーページ**: スポンサー企業の紹介
 - 404ページ
 - エラーページ
+
+※古い大会のウェブページからの自動リダイレクトは行わない。[後述](#その他要件)の通り軽い誘導は行う。
+
+## ディレクトリ構造（主要）
+
+```
+├── astro.config.mjs
+├── docs
+│   └── SPECIFICATION.md
+├── eslint.config.js
+├── package.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+├── public — 静的ファイル
+├── scripts — ビルドやデプロイ用のスクリプト
+├── src
+│   ├── assets
+│   ├── components — 再利用可能な汎用コンポーネント
+│   │   └── icons — アイコンコンポーネント
+│   ├── constants
+│   │   └── tournaments.ts — 大会の情報や関連するユーティリティを定義
+│   ├── layouts
+│   │   ├── BaseLayout.astro — 全大会サイト共通のレイアウト
+│   │   └── GatewayLayout.astro — Community CUP Gateway 大会のレイアウト
+│   ├── pages
+│   │   ├── community ― 大会種類 "Community CUP" のディレクトリ
+│   │   │   └── gateway ― Community CUP の大会 "Gateway" のディレクトリ
+│   │   └── index.astro — 最新の大会ホームへリダイレクト
+│   ├── styles
+│   ├── types
+│   └── utils
+├── worker
+│   └── main.ts — Cloudflare Worker のエントリーポイント
+├── svelte.config.js
+├── tsconfig.json
+└── wrangler.jsonc
+```
+
+※ `src/assets/` や `public/images/`、`src/components/`、`src/styles/` などのディレクトリについては、
+各大会ウェブサイト専用のものは `src/assets/<tournament-type>/<tournament>/` のように大会ごとにサブディレクトリを切る。
 
 ## 使用技術
 
 - pnpm
-- Astro
-    - Svelte（インテグレーション）
-    - SCSS
-    - TypeScript
+- Astro v6
+  - Svelte（インテグレーション）
+  - SCSS
+  - TypeScript
 
 ## デザイン
 
-Figma 参照。
+Discord 上の資料を参照。
 
 - カラーパレット
-    - 青: `#1b44ad`
-    - 黄: `#e4ff00`
-- フォント
-    - 太さまで
+  - 青: `#1b44ad`
+  - 黄: `#e4ff00`
+- フォント（mixin を使用して指定）
+  - Noto Sans JP (日本語メインフォント)
+    - 太さ: デフォルト (400)
+  - Zalando Sans Expanded (ヘッダー・フッターのナビゲーション用)
+    - 太さ: 500
+  - Sofia Sans Extra Condensed (その他見出し等で使用)
+    - 太さ: 800, 900
 - ブレイクポイント: 788px（従来通り）
 
 ## 運用
 
 - ブランチ
-    - `main`: 開発
-    - `feat/*`, `fix/*`: トピック
-    - `production`: プロダクション
-- 整形等: Prettier + ESLint ? 前に言ってた Oxfmt?
-- デプロイ: Cloudflare Workers（試用）
+  - `main`: 開発
+  - `feat/*`, `fix/*`: トピック
+  - `production`: プロダクション
+- 整形等: Prettier + ESLint
+- デプロイ: Cloudflare Workers
 - バージョニング: 無し
 
 ## その他要件
 
 - 古い大会のページを開いている時は、ページ上部あたりに「最新の大会の特設サイトはこちら」的なことが出るように
+
+## z-index
+
+| z-index | エンティティ           | パス                                                                                                                                                  |
+| ------: | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+|     257 | コンテンツへ進むボタン | [`src/layouts/community/GatewayLayout.astro>style>.skip-link`](../src/layouts/community/GatewayLayout.astro)                                          |
+|     256 | ドロワーメニュー       | [`src/components/community/gateway/header/MobileDrawer.svelte>style>.drawer-overlay`](../src/components/community/gateway/header/MobileDrawer.svelte) |
+|     255 | ヘッダー               | [`src/components/community/gateway/header/Header.astro>style>header`](../src/components/community/gateway/header/Header.astro)                        |
+|       1 | メインビジュアル       | [`src/components/community/gateway/MainVisual.svelte>style>.overlay`](../src/components/community/gateway/MainVisual.svelte)                          |
+
+## CSS 変数
+
+|        変数名 | 説明                                              | 使用可能範囲                                                                                                  |
+| ------------: | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `--max-vh001` | アドレスバー等を考慮した最大ビューポート高さの 1% | [`src/components/community/gateway/MainVisual.svelte`](../src/components/community/gateway/MainVisual.svelte) |

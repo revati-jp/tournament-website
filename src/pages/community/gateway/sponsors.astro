@@ -1,0 +1,40 @@
+---
+import GatewayLayout from "@layouts/community/GatewayLayout.astro";
+import SectionTitle from "@components/community/gateway/ui/SectionTitle.astro";
+import Card from "@components/community/gateway/ui/Card.astro";
+import { GATEWAY_SPONSORS } from "@constants/community/gateway/sponsors";
+import Button from "@components/community/gateway/ui/Button.astro";
+
+const description =
+  'REVATI Community Cup "Gateway" のスポンサー情報を掲載しています。';
+---
+
+<GatewayLayout title="Sponsors" meta={{ description }}>
+  <SectionTitle primary="SPONSORS" secondary="スポンサー" />
+
+  <div class="sponsor-container">
+    {GATEWAY_SPONSORS.map((sponsor) => <Card item={sponsor} />)}
+  </div>
+
+  <div class="back-button">
+    <Button href="/community/gateway#sponsors" variant="outlined" color="gray">
+      TOPへ戻る
+    </Button>
+  </div>
+</GatewayLayout>
+
+<style lang="scss">
+  .sponsor-container {
+    margin: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .back-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2rem;
+  }
+</style>

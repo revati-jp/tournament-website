@@ -1,0 +1,163 @@
+---
+interface Props {
+  variant?: "contained" | "outlined";
+  color?: "primary" | "secondary" | "gray";
+  /** hrefが指定された場合はroot要素として`a`が使用される */
+  href?: string;
+  target?: string;
+}
+
+const { variant = "contained", color = "primary", href, target } = Astro.props;
+---
+
+{
+  href ? (
+    <a href={href} target={target} class={`button ${variant} ${color}`}>
+      <slot />
+    </a>
+  ) : (
+    <div class={`button ${variant} ${color}`}>
+      <slot />
+    </div>
+  )
+}
+
+<style lang="scss">
+  @use "sass:color";
+
+  .button {
+    margin: 2px;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    gap: 0.5rem;
+
+    $pad-y: 0.35rem;
+    $pad-x: 0.6rem;
+    $border-width-contained: 3px;
+    $border-width-outlined: 1px;
+
+    &.contained {
+      padding: $pad-y $pad-x;
+      border: $border-width-contained solid transparent;
+    }
+
+    &.outlined {
+      /* borderの太さの差分をpaddingで補正し、必ず同じサイズになるようにする */
+      padding: calc(
+          #{$pad-y} + #{$border-width-contained} - #{$border-width-outlined}
+        )
+        calc(#{$pad-x} + #{$border-width-contained} - #{$border-width-outlined});
+      border: $border-width-outlined solid transparent;
+      background-color: transparent;
+    }
+
+    &.primary {
+      &.contained {
+        background-color: commGateway.$color-secondary;
+        color: commGateway.$color-text;
+        border-color: color.adjust(
+          commGateway.$color-secondary,
+          $lightness: -15%
+        );
+
+        &:hover {
+          color: color.adjust(commGateway.$color-text, $lightness: -15%);
+          background-color: color.adjust(
+            commGateway.$color-secondary,
+            $lightness: -10%
+          );
+          border-color: color.adjust(
+            commGateway.$color-secondary,
+            $lightness: -20%
+          );
+        }
+      }
+
+      &.outlined {
+        color: commGateway.$color-secondary;
+        border-color: commGateway.$color-secondary;
+
+        &:hover {
+          color: color.adjust(commGateway.$color-secondary, $lightness: -15%);
+          border-color: color.adjust(
+            commGateway.$color-secondary,
+            $lightness: -15%
+          );
+          background-color: rgba(#000, 0.2); // 背景も少し暗く
+        }
+      }
+    }
+
+    &.secondary {
+      &.contained {
+        background-color: commGateway.$color-primary;
+        color: commGateway.$color-background; // 文字が読めるように背景色(暗色)を使用
+        border-color: color.adjust(
+          commGateway.$color-primary,
+          $lightness: -15%
+        );
+
+        &:hover {
+          color: color.adjust(commGateway.$color-background, $lightness: -15%);
+          background-color: color.adjust(
+            commGateway.$color-primary,
+            $lightness: -15%
+          );
+          border-color: color.adjust(
+            commGateway.$color-primary,
+            $lightness: -25%
+          );
+        }
+      }
+
+      &.outlined {
+        color: commGateway.$color-primary;
+        border-color: commGateway.$color-primary;
+
+        &:hover {
+          color: color.adjust(commGateway.$color-primary, $lightness: -15%);
+          border-color: color.adjust(
+            commGateway.$color-primary,
+            $lightness: -15%
+          );
+          background-color: rgba(#000, 0.2);
+        }
+      }
+    }
+
+    &.gray {
+      $color-gray: #71737a;
+      &.contained {
+        background-color: $color-gray;
+        color: commGateway.$color-text;
+        border-color: color.adjust($color-gray, $lightness: -15%);
+
+        &:hover {
+          color: color.adjust(commGateway.$color-text, $lightness: -15%);
+          background-color: color.adjust($color-gray, $lightness: -15%);
+          border-color: color.adjust($color-gray, $lightness: -25%);
+        }
+      }
+
+      &.outlined {
+        border-color: $color-gray;
+        color: commGateway.$color-text;
+
+        &:hover {
+          color: color.adjust(commGateway.$color-text, $lightness: -15%);
+          border-color: color.adjust($color-gray, $lightness: -15%);
+          background-color: rgba(#000, 0.2);
+        }
+      }
+    }
+  }
+</style>

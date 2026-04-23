@@ -1,0 +1,44 @@
+---
+import GatewayLayout from "@layouts/community/GatewayLayout.astro";
+import SectionTitle from "@components/community/gateway/ui/SectionTitle.astro";
+import Card from "@components/community/gateway/ui/Card.astro";
+import { GATEWAY_WATCH_PARTIES } from "@constants/community/gateway/watch-parties";
+import Button from "@components/community/gateway/ui/Button.astro";
+
+const description =
+  'REVATI Community Cup "Gateway" のウォッチパーティー情報を掲載しています。';
+---
+
+<GatewayLayout title="Watch Party" meta={{ description }}>
+  <SectionTitle primary="WATCH PARTY" secondary="ウォッチパーティー" />
+
+  <div class="sponsor-container">
+    {GATEWAY_WATCH_PARTIES.map((watchParty) => <Card item={watchParty} />)}
+  </div>
+
+  <div class="back-button">
+    <Button
+      href="/community/gateway#watch-party"
+      variant="outlined"
+      color="gray"
+    >
+      TOPへ戻る
+    </Button>
+  </div>
+</GatewayLayout>
+
+<style lang="scss">
+  .sponsor-container {
+    margin: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .back-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2rem;
+  }
+</style>

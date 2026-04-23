@@ -1,0 +1,47 @@
+// この Sass 変数 `$bp-hamburger-btn` を更新する際は、`/src/utils/community/gateway/variables.ts` 内の JavaScript 定数 `BREAKPOINT_HB` も更新してください。
+// ※ `$bp-hamburger-btn` = (`BREAKPOINT_HB` の数値) + 1
+$bp-hamburger-btn: 1490px;
+
+@mixin not-hb {
+  @media screen and (min-width: $bp-hamburger-btn) {
+    @content;
+  }
+}
+
+@mixin hb {
+  @media screen and (max-width: #{$bp-hamburger-btn - 1}) {
+    @content;
+  }
+}
+
+// フォント "Noto Sans JP"
+//
+// 日本語メインフォント。（太さ 400）
+@mixin font-noto-sans-jp-400() {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-weight: 400;
+}
+
+// フォント "Zalando Sans Expanded"
+//
+// ヘッダー・フッターのナビゲーション用。（太さ 500）
+@mixin font-zalando-sans-expanded-500() {
+  font-family: var(--font-zalando-sans-expanded), sans-serif;
+  font-weight: 500;
+}
+
+// フォント "Sofia Sans Extra Condensed" 800
+//
+// その他見出し等で使用。（太さ 800）
+@mixin font-sofia-sans-extra-condensed-800() {
+  font-family: var(--font-sofia-sans-extra-condensed), sans-serif;
+  font-weight: 800;
+}
+
+// フォント "Sofia Sans Extra Condensed" 900
+//
+// その他見出し等で使用。（太さ 900）
+@mixin font-sofia-sans-extra-condensed-900() {
+  font-family: var(--font-sofia-sans-extra-condensed), sans-serif;
+  font-weight: 900;
+}

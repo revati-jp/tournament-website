@@ -1,0 +1,240 @@
+---
+import { Image } from "astro:assets";
+import {
+  navItems,
+  SOCIALS,
+} from "@components/community/gateway/header/Header.astro";
+import { COPYRIGHT } from "@utils";
+
+import revatiLogo from "@assets/revati/logo_full_white.webp";
+import gatewayLogo from "@assets/community/gateway/Gateway-logo_white_680x448.webp";
+---
+
+<footer>
+  <div class="top-container">
+    <div class="desktop">
+      <div class="logos">
+        <Image src={revatiLogo} alt="revati logo" class="revati" />
+        <Image src={gatewayLogo} alt="gateway logo" class="gateway" />
+      </div>
+      <nav>
+        <ul>
+          {
+            navItems.map((item) => (
+              <li>
+                {/* ↓ 整形によって予期せぬ空白文字が入るため */}
+                {/* prettier-ignore */}
+                <a href={item.href} class="nav-item-inner">{item.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+    <div class="mobile">
+      <div class="socials">
+        {
+          SOCIALS.map((item) => (
+            <a
+              href={item.href}
+              aria-label={item.label}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image src={item.iconImg} alt={item.label} width={item.size} />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-container">
+    <div class="copyright">{COPYRIGHT}</div>
+    <div class="links">
+      <ul>
+        <li>
+          <a href="https://revati.jp/privacy" target="_blank" rel="noopener"
+            >プライバシーポリシー</a
+          >
+        </li>
+        <li>
+          <a href="https://revati.jp" target="_blank" rel="noopener"
+            >REVATIについて</a
+          >
+        </li>
+        <li>
+          <a href="/licenses">ライセンス情報</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style lang="scss">
+  $spacing-around-border: 16px;
+
+  $bp-footer-top: 1170px;
+  @mixin footer-top-sp {
+    @media screen and (max-width: $bp-footer-top) {
+      @content;
+    }
+  }
+
+  $bp-footer-bottom: 700px;
+  @mixin footer-bottom-sp {
+    @media screen and (max-width: $bp-footer-bottom) {
+      @content;
+    }
+  }
+
+  footer {
+    background-color: #050507;
+    color: commGateway.$color-text;
+    border-top: 1px solid rgba(commGateway.$color-text, 0.1);
+    // navが下寄りな分上の空間が広く見えるため調整
+    padding: 40px 60px 50px;
+
+    @include footer-top-sp {
+      padding: 30px 16px;
+    }
+  }
+
+  .top-container,
+  .bottom-container {
+    margin: 0 auto;
+    padding-inline: 10px;
+    max-width: commGateway.$max-content-width-desktop;
+
+    @include footer-top-sp {
+      max-width: commGateway.$max-content-width-mobile;
+    }
+  }
+
+  .top-container {
+    padding-bottom: 20px;
+
+    .desktop {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 32px;
+
+      @include footer-top-sp {
+        display: none;
+      }
+
+      .logos {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+
+        .revati {
+          width: auto;
+          height: 34px;
+        }
+
+        .gateway {
+          width: auto;
+          height: 55px;
+        }
+      }
+
+      nav ul {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-size: 15px;
+        @include commGateway.font-zalando-sans-expanded-500;
+      }
+
+      .nav-item-inner {
+        color: rgba(commGateway.$color-text, 0.9);
+        text-decoration: none;
+        transition: opacity 0.2s ease;
+
+        &:hover,
+        &:focus-visible {
+          opacity: 0.75;
+        }
+      }
+    }
+
+    .mobile {
+      display: none;
+
+      @include footer-top-sp {
+        display: block;
+      }
+
+      .socials {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+
+        a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: commGateway.$color-text;
+          padding: 8px;
+          -webkit-tap-highlight-color: transparent;
+        }
+      }
+    }
+  }
+
+  .bottom-container {
+    border-top: 2px solid rgba(commGateway.$color-text, 0.2);
+    padding-top: $spacing-around-border;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    font-size: 14px;
+
+    @include footer-bottom-sp {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .copyright {
+      color: rgba(commGateway.$color-text, 0.7);
+      letter-spacing: 0.02em;
+    }
+
+    .links ul {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end; // 右寄せ
+      flex-wrap: wrap;
+      // スマホで縦方向に積みあがることがあるため
+      gap: calc($spacing-around-border - 6px) 18px;
+
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      @include footer-bottom-sp {
+        justify-content: center;
+      }
+    }
+
+    .links a {
+      color: rgba(commGateway.$color-text, 0.8);
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover,
+      &:focus-visible {
+        color: commGateway.$color-primary;
+      }
+    }
+  }
+</style>

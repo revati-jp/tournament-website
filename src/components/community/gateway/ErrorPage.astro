@@ -1,0 +1,83 @@
+---
+import GatewayLayout from "@layouts/community/GatewayLayout.astro";
+import Button from "./ui/Button.astro";
+
+interface Props {
+  statusCode: number;
+  title: string;
+  message: string;
+}
+
+const { statusCode, title, message } = Astro.props;
+---
+
+<GatewayLayout
+  title={`${statusCode} - ${title}`}
+  seo={{ noindex: true, disableCanonical: true }}
+>
+  <div class="error-page">
+    <div class="container">
+      <h1>{statusCode}</h1>
+      <h2>{title}</h2>
+      <p>{message}</p>
+      <div class="actions">
+        <Button variant="outlined" color="secondary" href="/community/gateway"
+          >ホームへ戻る</Button
+        >
+      </div>
+    </div>
+  </div>
+</GatewayLayout>
+
+<style lang="scss">
+  .error-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    @include commGateway.font-sofia-sans-extra-condensed-900;
+    line-height: 1;
+    margin: 0;
+    color: commGateway.$color-primary;
+    text-shadow: 0 0 20px rgba(commGateway.$color-primary, 0.4);
+  }
+
+  h2 {
+    @include commGateway.font-zalando-sans-expanded-500;
+    margin: 1rem 0;
+  }
+
+  p {
+    margin-bottom: 2.5rem;
+    opacity: 0.8;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+  }
+
+  @include commGateway.hb {
+    h1 {
+      font-size: 6rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+</style>

@@ -1,0 +1,17 @@
+---
+import {
+  getLatestTournament,
+  getPathToTournament,
+} from "@constants/tournaments";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const latestTournament = getLatestTournament();
+---
+
+<BaseLayout title="Home">
+  <p>
+    最新の大会: <a href={getPathToTournament(latestTournament)}
+      >{latestTournament.label}</a
+    >
+  </p>
+</BaseLayout>

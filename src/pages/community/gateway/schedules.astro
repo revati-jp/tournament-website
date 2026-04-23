@@ -1,0 +1,50 @@
+---
+import { Image } from "astro:assets";
+import GatewayLayout from "@layouts/community/GatewayLayout.astro";
+import SectionTitle from "@components/community/gateway/ui/SectionTitle.astro";
+import SectionBody from "@components/community/gateway/ui/SectionBody.astro";
+import Button from "@components/community/gateway/ui/Button.astro";
+
+import scheduleDay1 from "@assets/community/gateway/schedule_day1.webp";
+import scheduleDay2 from "@assets/community/gateway/schedule_day2.webp";
+
+const description =
+  'REVATI Community Cup "Gateway" のタイムスケジュールを掲載しています。';
+---
+
+<GatewayLayout title="Schedules" meta={{ description }}>
+  <SectionTitle primary="SCHEDULES" secondary="タイムスケジュール" />
+  <SectionBody>
+    <div class="schedule-container">
+      <Image src={scheduleDay1} alt="day1 schedule" />
+      <Image src={scheduleDay2} alt="day2 schedule" />
+    </div>
+  </SectionBody>
+
+  <div class="back-button">
+    <Button href="/community/gateway#schedules" variant="outlined" color="gray">
+      TOPへ戻る
+    </Button>
+  </div>
+</GatewayLayout>
+
+<style lang="scss">
+  .schedule-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+
+    img {
+      display: block;
+      width: 100%;
+      max-width: 550px;
+      margin-inline: auto;
+      height: auto;
+    }
+  }
+
+  .back-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2rem;
+  }
+</style>

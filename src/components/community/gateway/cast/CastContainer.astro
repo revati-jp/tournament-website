@@ -1,0 +1,112 @@
+---
+import type { CastData } from "@app-types/community/gateway";
+import { Image } from "astro:assets";
+import CastCard, { DESKTOP_CARD_WIDTH } from "./CastCard.astro";
+
+import koreniteItomaDesktop01 from "@assets/community/gateway/cast/desktop_01_korenite_itoma.webp";
+import gappo3Desktop02 from "@assets/community/gateway/cast/desktop_02_gappo3.webp";
+import kayDesktop03 from "@assets/community/gateway/cast/desktop_03_kay.webp";
+import koreniteItomaMobile01 from "@assets/community/gateway/cast/mobile_01_korenite_itoma.webp";
+import gappo3Mobile02 from "@assets/community/gateway/cast/mobile_02_gappo3.webp";
+import kayMobile03 from "@assets/community/gateway/cast/mobile_03_kay.webp";
+import day04 from "@assets/community/gateway/cast/desktop_04_day.webp";
+
+const CASTS: CastData[] = [
+  {
+    name: "是以いとま",
+    desktopImage: koreniteItomaDesktop01,
+    mobileImage: koreniteItomaMobile01,
+    days: "DAY1",
+    socials: {
+      twitch: "https://www.twitch.tv/kn_itoma",
+      twitter: "https://x.com/koretoma_",
+    },
+  },
+  {
+    name: "gappo3",
+    desktopImage: gappo3Desktop02,
+    mobileImage: gappo3Mobile02,
+    days: "DAY1 / DAY2",
+    socials: {
+      twitch: "https://www.twitch.tv/gappo3",
+      twitter: "https://x.com/gappo3gappo3",
+    },
+  },
+  {
+    name: "Kay",
+    desktopImage: kayDesktop03,
+    mobileImage: kayMobile03,
+    days: "DAY2",
+    socials: {
+      twitter: "https://x.com/Kaynora43",
+    },
+  },
+];
+---
+
+<div class="cast-container">
+  <div class="desktop">
+    <div class="desktop-cards">
+      {CASTS.map((cast) => <CastCard cast={cast} image={cast.desktopImage} />)}
+    </div>
+    <div class="day-banner">
+      <Image src={day04} alt="DAY4" class="day-image" />
+    </div>
+  </div>
+  <div class="mobile">
+    {
+      CASTS.map((cast) => (
+        <CastCard cast={cast} image={cast.mobileImage} isMobile />
+      ))
+    }
+  </div>
+</div>
+
+<style lang="scss" define:vars={{ "card-width": DESKTOP_CARD_WIDTH }}>
+  $cast-layout-switch-breakpoint: 1080px;
+  $card-gap: 0.6rem;
+
+  .cast-container {
+    .desktop {
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      .desktop-cards {
+        display: grid;
+        grid-template-columns: repeat(3, max-content);
+        gap: $card-gap;
+        align-items: start;
+      }
+
+      .day-banner {
+        width: calc(3 * var(--card-width) + 2 * $card-gap - 4px);
+        margin-top: -0.5rem;
+
+        .day-image {
+          width: 100%;
+          height: auto;
+          max-width: none;
+          display: block;
+        }
+      }
+    }
+
+    .mobile {
+      display: none;
+      grid-template-columns: max-content;
+      justify-content: center;
+    }
+
+    @media screen and (max-width: $cast-layout-switch-breakpoint) {
+      .desktop {
+        display: none;
+      }
+
+      .mobile {
+        display: grid;
+      }
+    }
+  }
+</style>

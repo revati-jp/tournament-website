@@ -1,0 +1,192 @@
+---
+import { Font } from "astro:assets";
+import BaseLayout from "../BaseLayout.astro";
+import Header from "@components/community/gateway/header/Header.astro";
+import Footer from "@components/community/gateway/footer/Footer.astro";
+import { WEBSITE_BASE_URL, COPYRIGHT } from "@utils";
+import { getTournament } from "@constants/tournaments";
+
+import keyVisual from "@assets/community/gateway/kv_full.webp";
+
+interface Props {
+  title: string;
+  meta?: {
+    description?: string;
+  };
+  seo?: {
+    noindex?: boolean;
+    disableCanonical?: boolean;
+  };
+}
+
+const { title, meta, seo } = Astro.props;
+
+const tournament = getTournament("community", "gateway");
+
+const websiteTitle = tournament.label;
+const fullTitle = `${websiteTitle} | ${title}`;
+
+const absThumbnailPath = WEBSITE_BASE_URL + keyVisual.src;
+---
+
+<BaseLayout
+  noindex={seo?.noindex ?? false}
+  disableCanonical={seo?.disableCanonical ?? false}
+>
+  <Fragment slot="head">
+    <meta name="thumbnail" content={absThumbnailPath} />
+
+    <meta property="og:site_name" content={websiteTitle} />
+    {/* ↓ Sass 変数 `commGateway.$color-primary` */}
+    <meta name="theme-color" content="#e4ff00" />
+
+    <title>{fullTitle}</title>
+    <meta name="title" content={title} />
+    <meta
+      name="description"
+      content={meta?.description ?? tournament.description}
+    />
+    <meta name="copyright" content={COPYRIGHT} />
+
+    <meta property="og:title" content={title} />
+    <meta
+      property="og:description"
+      content={meta?.description ?? tournament.description}
+    />
+
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:image" content={absThumbnailPath} />
+
+    <Font cssVariable="--font-noto-sans-jp" />
+    <Font cssVariable="--font-zalando-sans-expanded" />
+    <Font cssVariable="--font-sofia-sans-extra-condensed" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/community/gateway/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/community/gateway/favicon-16x16.png"
+    />
+
+    <slot name="head" />
+  </Fragment>
+
+  <div class="gateway-container">
+    <a href="#main-content" class="skip-link">コンテンツへ進む</a>
+    <Header />
+    <main id="main-content" transition:animate="fade">
+      <div class="inner">
+        <slot />
+      </div>
+    </main>
+    <Footer />
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+  :global(*) {
+    scrollbar-color: commGateway.$color-primary commGateway.$color-background;
+    scroll-margin-top: calc(commGateway.$header-height + 12px);
+  }
+
+  :global(:focus-visible) {
+    outline: 3px solid #ffc400;
+    outline-offset: 3px;
+  }
+
+  :global(::selection) {
+    color: commGateway.$color-background;
+    background: commGateway.$color-primary;
+  }
+
+  :global(a) {
+    color: commGateway.$color-primary;
+  }
+
+  :global(html) {
+    // 基準となる文字サイズを定義
+    font-size: 16px;
+    background-color: commGateway.$color-background;
+    scroll-behavior: smooth;
+
+    @include sp {
+      font-size: 14px;
+    }
+  }
+
+  .gateway-container {
+    @include commGateway.font-noto-sans-jp-400;
+    font-style: normal;
+    font-optical-sizing: auto;
+    color: commGateway.$color-text;
+  }
+
+  .skip-link {
+    $margin: 1rem;
+    position: fixed;
+    top: -$margin;
+    left: 0;
+    z-index: 257;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-top: $margin solid commGateway.$color-primary;
+    padding: 1.1rem 2.5rem;
+    font-size: 1.1rem;
+    color: commGateway.$color-background;
+    background-color: commGateway.$color-primary;
+    text-decoration: none;
+    line-height: 1;
+
+    border-radius: 0 0 12px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+    transform: translateY(-100%);
+    transition:
+      transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+      opacity 0.2s ease-in;
+
+    &:focus-visible {
+      transform: translateY(0);
+      transition-duration: 0.4s;
+    }
+
+    @include commGateway.hb {
+      display: none;
+    }
+  }
+
+  main {
+    min-height: calc(100vh - commGateway.$header-height);
+    // この背景色を body に指定すると、ヘッダーのバックドロップのぼかし効果が正常に動作しなくなる。
+    background-color: commGateway.$color-background;
+    padding-top: commGateway.$header-height;
+    // メインビジュアル等の 100vw ブレイクアウトによる横スクロールを防止
+    overflow-x: clip;
+
+    .inner {
+      width: min(
+        100% - commGateway.$content-spacing-desktop * 2,
+        commGateway.$max-content-width-desktop
+      );
+      margin-inline: auto;
+      padding-bottom: commGateway.$content-spacing-desktop;
+
+      @include sp {
+        width: min(
+          100% - commGateway.$content-spacing-mobile * 2,
+          commGateway.$max-content-width-mobile
+        );
+        padding-bottom: commGateway.$content-spacing-mobile;
+      }
+    }
+  }
+</style>

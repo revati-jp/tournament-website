@@ -1,0 +1,163 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+import licenses from "../../.astro/licenses.json";
+import type { Dependency } from "@app-types";
+import { OTHER_LICENSES } from "@constants/OTHER_LICENSES";
+
+const dependencies: Dependency[] = [...licenses, ...OTHER_LICENSES];
+---
+
+<BaseLayout>
+  <main class="licenses">
+    <header class="header">
+      <h1>ライセンス情報</h1>
+      <p>
+        本ウェブサイトの開発に使用しているライブラリとそのライセンスを以下に示します。
+      </p>
+    </header>
+
+    <ul class="license-list">
+      {
+        dependencies.map((item) => {
+          const name =
+            item.version === "" ? item.name : `${item.name}@${item.version}`;
+          return (
+            <li class="license-card">
+              {item.homepage !== undefined && item.homepage !== "" ? (
+                <a
+                  href={item.homepage}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <h2>{name}</h2>
+                </a>
+              ) : (
+                <h2>{name}</h2>
+              )}
+              <dl>
+                <div>
+                  <dt>ライセンス</dt>
+                  <dd>{item.license}</dd>
+                </div>
+              </dl>
+
+              {item.licenseText !== undefined && item.licenseText !== "" ? (
+                <details>
+                  <summary>ライセンス全文を表示</summary>
+                  <pre>{item.licenseText}</pre>
+                </details>
+              ) : null}
+            </li>
+          );
+        })
+      }
+    </ul>
+  </main>
+</BaseLayout>
+
+<style lang="scss">
+  main {
+    font-family: sans-serif;
+  }
+
+  .licenses {
+    box-sizing: border-box;
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 48px 20px 64px;
+    color: #1b1b1b;
+
+    .header {
+      margin-bottom: 28px;
+
+      h1 {
+        margin: 0;
+        font-size: clamp(1.8rem, 3.6vw, 2.4rem);
+      }
+
+      p {
+        margin: 12px 0 0;
+        line-height: 1.7;
+      }
+    }
+
+    .license-list {
+      display: grid;
+      gap: 16px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+  }
+
+  .license-card {
+    padding: 18px;
+    border: 1px solid #d9d9d9;
+    border-radius: 12px;
+    background: #fff;
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    dl {
+      margin: 14px 0 0;
+
+      div {
+        display: flex;
+        gap: 10px;
+        margin-top: 8px;
+      }
+
+      dt {
+        flex: 0 0 6.2em;
+        font-weight: 700;
+      }
+
+      dd {
+        margin: 0;
+        overflow-wrap: anywhere;
+      }
+    }
+
+    details {
+      margin-top: 14px;
+      padding: 10px 12px;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      background: #fafafa;
+
+      summary {
+        cursor: pointer;
+        font-weight: 700;
+      }
+
+      pre {
+        margin: 12px 0 0;
+        white-space: pre-wrap;
+        word-break: break-word;
+        line-height: 1.55;
+        font-size: 0.9rem;
+        font-family: monospace;
+      }
+    }
+
+    a {
+      color: #005db5;
+    }
+  }
+
+  @media (width <= 640px) {
+    .licenses {
+      padding: 36px 14px 48px;
+    }
+
+    .license-card {
+      padding: 14px;
+    }
+  }
+</style>

@@ -1,0 +1,433 @@
+---
+import { Image } from "astro:assets";
+import GatewayLayout from "@layouts/community/GatewayLayout.astro";
+import MainVisual from "@components/community/gateway/MainVisual.svelte";
+import SectionTitle from "@components/community/gateway/ui/SectionTitle.astro";
+import SectionBody from "@components/community/gateway/ui/SectionBody.astro";
+import Button from "@components/community/gateway/ui/Button.astro";
+import TeamCard from "@components/community/gateway/ui/TeamCard.astro";
+import BoxArrowUpRightIcon from "@components/icons/BoxArrowUpRightIcon.astro";
+import CastContainer from "@components/community/gateway/cast/CastContainer.astro";
+import { GATEWAY_SPONSORS } from "@constants/community/gateway/sponsors";
+import { GATEWAY_WATCH_PARTIES } from "@constants/community/gateway/watch-parties";
+import { REVATI_TWITTER_URL, REVATI_YOUTUBE_URL } from "@utils/variables";
+
+import mainVideoSrc from "@assets/community/gateway/main.webm";
+import mainVideoThumbnail from "@assets/community/gateway/main_thumbnail.webp";
+import kvGatewayImg from "@assets/community/gateway/kv_gateway_for-first-view.webp";
+import kvFullImg from "@assets/community/gateway/kv_full_for-first-view.webp";
+
+const description = 'REVATI Community Cup "Gateway" のトップページです。';
+const memberTbds = Array(6).fill("TBD");
+
+/** カルーセルのスライド定義（順番の変更はここで行う） */
+const mainVisualSlides = [
+  {
+    type: "video" as const,
+    src: mainVideoSrc,
+    thumbnail: mainVideoThumbnail.src,
+  },
+  {
+    type: "image" as const,
+    src: kvGatewayImg.src,
+    alt: "REVATI Community CUP Gateway キービジュアル",
+    duration: 4000,
+  },
+  {
+    type: "image" as const,
+    src: kvFullImg.src,
+    alt: "REVATI Community CUP キービジュアル",
+    duration: 4000,
+  },
+];
+---
+
+<GatewayLayout title="TOP" meta={{ description }}>
+  <MainVisual client:load slides={mainVisualSlides} />
+  <div class="section-container">
+    <section id="about">
+      <SectionTitle primary="ABOUT" secondary="大会について" />
+      <SectionBody>
+        <p>
+          REVATI Community Cup "GATEWAY"
+          は、Overwatch競技シーンでプロを目指す若き才能達の出場機会増加を目的とする、REVATI主催のコミュニティ大会です。<br
+          />
+          この大会を「登竜門」（GATEWAY）のような存在にしてもらい、若い選手に経験を積んでもらうことを目指しています。
+        </p>
+        <p>
+          第一回となる昨年の「REVATI Challengers
+          CUP」では招待制という形もあり、すべての若手選手に機会を与えることができませんでした。<br
+          />
+          第二回となる今回は公募制の予選からスタート、全チーム・選手に均等なチャンスがあります。
+        </p>
+        <p>
+          Overwatchシーンの今後を支える若手選手たち、王座に輝くのはいったい誰なのか？<br
+          />
+          ぜひ、ご注目ください！
+        </p>
+        <Button
+          href="https://docs.google.com/forms/d/e/1FAIpQLSfwUQG6DVLpAazcirMGOZJL92F5BdCvFDrsNtkYPN4dNoPBJA/viewform"
+          >エントリーはこちら <BoxArrowUpRightIcon size={14} /></Button
+        >
+      </SectionBody>
+    </section>
+
+    <section id="schedule">
+      <SectionTitle primary="SCHEDULE" secondary="大会スケジュール" />
+      <SectionBody>
+        <div class="two-column-list schedule-list">
+          <div class="two-column-row">
+            <p class="two-column-label">
+              [<span class="bold">予選</span> / 配信なし]
+            </p>
+            <p class="two-column-value">
+              <time class="datetime" datetime="2026-05-02">2026.5.2</time>
+              <span class="day">(Sat)</span> -
+              <time class="datetime" datetime="2026-05-03">5.3</time>
+              <span class="day">(Sun)</span>
+            </p>
+          </div>
+          <div class="two-column-row">
+            <p class="two-column-label">
+              [<span class="bold">本戦</span> / 配信あり]
+            </p>
+            <p class="two-column-value">
+              <time class="datetime" datetime="2026-05-05">2026.5.5</time>
+              <span class="day">(Tue)</span> -
+              <time class="datetime" datetime="2026-05-06">5.6</time>
+              <span class="day">(Wed)</span>
+              <time class="datetime time" datetime="2026-05-06T13:00:00"
+                >13:00~</time
+              >
+            </p>
+          </div>
+        </div>
+        <p class="note">
+          ※予定時刻のため、変更になる可能性があります。変更の際は <a
+            href={REVATI_TWITTER_URL}
+            target="_blank"
+            ><span class="bold">X</span>
+            <BoxArrowUpRightIcon size={12} /></a
+          > でお知らせいたします。
+        </p>
+        <p>
+          <Button
+            variant="outlined"
+            color="gray"
+            href="/community/gateway/schedules"
+            >タイムスケジュールはこちら</Button
+          >
+        </p>
+      </SectionBody>
+    </section>
+
+    <section id="regulations">
+      <SectionTitle primary="REGULATIONS" secondary="大会ルール" />
+      <SectionBody>
+        <div class="two-column-list regulations-list">
+          <div class="two-column-row">
+            <p class="two-column-label">[フォーマット]</p>
+            <p class="two-column-value">
+              (予選) <span class="bold"
+                >グループ別ラウンドロビン / シングルエリミネーション</span
+              >
+            </p>
+          </div>
+          <div class="two-column-row">
+            <p
+              class="two-column-label two-column-label--empty"
+              aria-hidden="true"
+            >
+            </p>
+            <p class="two-column-value">
+              (本戦) <span class="bold">ダブルエリミネーション</span>
+            </p>
+          </div>
+          <div class="two-column-row">
+            <p class="two-column-label">[マッププール]</p>
+            <p class="two-column-value">
+              <span class="bold">OWCS 2026 Stage 1に準ずる</span>
+            </p>
+          </div>
+          <div class="two-column-row">
+            <p class="two-column-label">[大会配信]</p>
+            <p class="two-column-value"><span class="bold">YouTube</span></p>
+          </div>
+        </div>
+        <p>
+          <Button
+            variant="outlined"
+            color="gray"
+            href="/community/gateway/regulations">詳しいルールはこちら</Button
+          >
+          <Button href={REVATI_YOUTUBE_URL} target="_blank">
+            REVATI YouTube <BoxArrowUpRightIcon />
+          </Button>
+        </p>
+      </SectionBody>
+    </section>
+
+    <section id="cast">
+      <SectionTitle primary="CAST" secondary="実況・解説" />
+      <SectionBody>
+        <CastContainer />
+      </SectionBody>
+    </section>
+
+    <section id="teams">
+      <SectionTitle primary="TEAMS" secondary="出場チーム" />
+      <SectionBody>
+        <p class="note">※本戦に出場するチームのみ掲載しています。</p>
+        <div class="team-container">
+          <TeamCard number={1} name="TBD" members={memberTbds} />
+          <TeamCard number={2} name="TBD" members={memberTbds} />
+          <TeamCard number={3} name="TBD" members={memberTbds} />
+          <TeamCard number={4} name="TBD" members={memberTbds} />
+          <TeamCard number={5} name="TBD" members={memberTbds} />
+          <TeamCard number={6} name="TBD" members={memberTbds} />
+          <TeamCard number={7} name="TBD" members={memberTbds} />
+          <TeamCard number={8} name="TBD" members={memberTbds} />
+        </div>
+      </SectionBody>
+    </section>
+
+    <section id="watch-party">
+      <SectionTitle primary="WATCH PARTY" secondary="ウォッチパーティー" />
+      <SectionBody>
+        <div class="watch-party-container">
+          {
+            GATEWAY_WATCH_PARTIES.map((party) => {
+              return (
+                <figure class="watch-party-item">
+                  {typeof party.logoImage === "string" ? (
+                    <img
+                      src={party.logoImage}
+                      alt={party.name}
+                      class="watch-party-image"
+                    />
+                  ) : (
+                    <Image
+                      src={party.logoImage}
+                      alt={party.name}
+                      class="watch-party-image"
+                    />
+                  )}
+                  <figcaption>{party.name}</figcaption>
+                </figure>
+              );
+            })
+          }
+        </div>
+        <Button
+          variant="outlined"
+          color="gray"
+          href="/community/gateway/watch-party">詳細はこちら</Button
+        >
+      </SectionBody>
+    </section>
+
+    <section id="sponsors">
+      <SectionTitle primary="SPONSORS" secondary="スポンサー" />
+      <SectionBody>
+        <div class="sponsor-container">
+          {
+            GATEWAY_SPONSORS.map((sponsor) =>
+              typeof sponsor.logoImage === "string" ? (
+                <img
+                  src={sponsor.logoImage}
+                  alt={sponsor.name}
+                  class="sponsor-logo"
+                />
+              ) : (
+                <Image
+                  src={sponsor.logoImage}
+                  alt={sponsor.name}
+                  class="sponsor-logo"
+                />
+              ),
+            )
+          }
+        </div>
+        <Button
+          variant="outlined"
+          color="gray"
+          href="/community/gateway/sponsors">スポンサーはこちら</Button
+        >
+      </SectionBody>
+    </section>
+  </div>
+</GatewayLayout>
+
+<style lang="scss">
+  .section-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+  .note {
+    font-size: 0.85rem;
+    color: rgba(commGateway.$color-text, 0.9);
+  }
+
+  $schedule-collapse-breakpoint: 440px;
+  $regulations-collapse-breakpoint: 380px;
+  $schedule-collapsed-item-gap: 1rem;
+
+  .two-column-list {
+    display: grid;
+    row-gap: 0;
+  }
+
+  .schedule-list {
+    container: schedule-list / inline-size;
+    .two-column-label {
+      // labelとvalueの高さずれ対策
+      margin-bottom: 0.25em;
+    }
+  }
+
+  .regulations-list {
+    container: regulations-list / inline-size;
+  }
+
+  .two-column-row {
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    align-items: center;
+    column-gap: 0;
+  }
+
+  .two-column-label,
+  .two-column-value {
+    margin: 0;
+  }
+
+  .two-column-label {
+    font-weight: normal;
+  }
+
+  .schedule-list {
+    .two-column-value {
+      @include commGateway.font-sofia-sans-extra-condensed-800;
+      font-size: 1.6rem;
+
+      .datetime {
+        font-size: 2.1rem;
+        letter-spacing: 0.04em;
+      }
+
+      .time {
+        display: inline-block;
+        margin-left: 0.8rem;
+      }
+    }
+  }
+
+  .regulations-list {
+    .two-column-value {
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+    }
+
+    .two-column-row + .two-column-row:not(:last-child) {
+      padding-bottom: 0.8em;
+    }
+  }
+
+  @container schedule-list (max-width: #{$schedule-collapse-breakpoint}) {
+    .schedule-list {
+      .two-column-label {
+        // labelとvalueの高さずれ対策
+        margin-bottom: 0;
+      }
+    }
+
+    .schedule-list .two-column-row {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 0.2rem;
+    }
+
+    .schedule-list .two-column-row + .two-column-row {
+      margin-top: $schedule-collapsed-item-gap;
+    }
+  }
+
+  @container regulations-list (max-width: #{$regulations-collapse-breakpoint}) {
+    .regulations-list .two-column-row {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 0.15rem;
+    }
+
+    .regulations-list .two-column-label--empty {
+      display: none;
+    }
+  }
+
+  $team-card-gap: 2rem;
+  $team-single-column-breakpoint: 980px;
+
+  .team-container {
+    width: min(
+      100%,
+      calc(#{commGateway.$team-card-width} * 2 + #{$team-card-gap})
+    );
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: center;
+    justify-items: center;
+    gap: $team-card-gap;
+
+    @media screen and (max-width: $team-single-column-breakpoint) {
+      width: min(100%, commGateway.$team-card-width);
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+    }
+  }
+
+  .watch-party-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding-bottom: 1rem;
+
+    .watch-party-image {
+      height: 8rem;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .watch-party-item {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+
+      figcaption {
+        font-size: 0.9rem;
+        color: rgba(commGateway.$color-text, 0.85);
+      }
+    }
+  }
+
+  .sponsor-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding-bottom: 1rem;
+
+    .sponsor-logo {
+      height: 4rem;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+    }
+  }
+</style>
