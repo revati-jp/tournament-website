@@ -1,7 +1,7 @@
 import type { CardItem } from "@app-types/community/gateway";
 
 import hoshimiIcon from "@assets/community/gateway/watch-parties/hoshimi.webp";
-import placeHolderRevatiIcon from "@assets/community/gateway/watch-parties/revati.webp";
+import tallemiEllaIcon from "@assets/community/gateway/watch-parties/tallemi-ella.webp";
 
 export const GATEWAY_WATCH_PARTIES: CardItem[] = [
   {
@@ -16,9 +16,14 @@ export const GATEWAY_WATCH_PARTIES: CardItem[] = [
     },
   },
   {
-    name: "？？？",
-    description: "",
-    logoImage: placeHolderRevatiIcon,
-    socials: {},
+    name: "タルレミ・エラ",
+    description:
+      "Overwatchの伝道師として多大な人気を誇るVtuber。影響力も非常に大きく、彼女の配信を通じて競技シーンに興味を持つファンも数多い。本大会では、若手プレイヤーたちの活躍を視聴者と一緒に見届けます！",
+    logoImage: tallemiEllaIcon,
+    socials: {
+      twitch: "https://www.twitch.tv/tallemi_ella",
+      twitter: "https://x.com/Tallemi_Ella",
+      youtube: "https://www.youtube.com/@Tallemi_Ella",
+    },
   },
 ];
