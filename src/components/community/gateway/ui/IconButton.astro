@@ -4,19 +4,21 @@ interface Props {
   href?: string;
   target?: string;
   rel?: string;
+  /** アイコンの代替テキスト（スクリーンリーダー向け） */
+  ariaLabel?: string;
 }
-const { href, target, rel } = Astro.props;
+const { href, target, rel, ariaLabel } = Astro.props;
 ---
 
 {
   href ? (
-    <a {href} {target} {rel} class="icon-button">
+    <a {href} {target} {rel} aria-label={ariaLabel} class="icon-button">
       <slot />
     </a>
   ) : (
-    <div class="icon-button" role="button" tabindex="0">
+    <button type="button" aria-label={ariaLabel} class="icon-button">
       <slot />
-    </div>
+    </button>
   )
 }
 
