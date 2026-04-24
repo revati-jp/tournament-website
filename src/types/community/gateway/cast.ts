@@ -1,7 +1,7 @@
 import type { SocialLinks } from "./card";
 
 export interface CastData {
-  name: string;
+  altText: string;
   desktopImage: ImageMetadata;
   mobileImage: ImageMetadata;
   days: string;
