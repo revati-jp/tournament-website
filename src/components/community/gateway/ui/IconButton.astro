@@ -5,7 +5,7 @@ interface Props {
   target?: string;
   rel?: string;
   /** アイコンの代替テキスト（スクリーンリーダー向け） */
-  ariaLabel?: string;
+  ariaLabel: string;
 }
 const { href, target, rel, ariaLabel } = Astro.props;
 ---
@@ -34,6 +34,9 @@ const { href, target, rel, ariaLabel } = Astro.props;
     text-decoration: none;
     padding: 0.6rem;
     color: commGateway.$color-text;
+    background: transparent;
+    border: none;
+    font: inherit;
 
     &:hover {
       background-color: rgba(commGateway.$color-text, 0.1);

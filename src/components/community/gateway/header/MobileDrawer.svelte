@@ -127,7 +127,6 @@
 	元のヘッダーをそのまま表示させる。
 -->
 {#if isOpen}
-	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div class="drawer-overlay">
 		<div
 			class="drawer"
