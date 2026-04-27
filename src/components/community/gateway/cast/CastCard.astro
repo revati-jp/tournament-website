@@ -23,7 +23,7 @@ const MOBILE_CARD_WIDTH = "350px";
 ---
 
 <div class="cast-item">
-  <Image src={image} alt={cast.name} />
+  <Image src={image} alt={cast.altText} />
   <div class="footer">
     {isMobile && <div class="days">{cast.days}</div>}
     <div class="socials">
@@ -34,6 +34,7 @@ const MOBILE_CARD_WIDTH = "350px";
               href={cast.socials.youtube}
               target="_blank"
               rel="noopener noreferrer"
+              ariaLabel="YouTube"
             >
               <YouTubeIcon size={20} />
             </IconButton>
@@ -47,6 +48,7 @@ const MOBILE_CARD_WIDTH = "350px";
               href={cast.socials.twitch}
               target="_blank"
               rel="noopener noreferrer"
+              ariaLabel="Twitch"
             >
               <TwitchIcon size={20} />
             </IconButton>
@@ -60,6 +62,7 @@ const MOBILE_CARD_WIDTH = "350px";
               href={cast.socials.twitter}
               target="_blank"
               rel="noopener noreferrer"
+              ariaLabel="X"
             >
               <TwitterXIcon size={20} />
             </IconButton>
@@ -73,6 +76,7 @@ const MOBILE_CARD_WIDTH = "350px";
               href={cast.socials.instagram}
               target="_blank"
               rel="noopener noreferrer"
+              ariaLabel="Instagram"
             >
               <InstagramIcon size={20} />
             </IconButton>
@@ -86,6 +90,7 @@ const MOBILE_CARD_WIDTH = "350px";
               href={cast.socials.line}
               target="_blank"
               rel="noopener noreferrer"
+              ariaLabel="LINE"
             >
               <LineIcon size={20} />
             </IconButton>

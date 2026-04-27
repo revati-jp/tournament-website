@@ -13,7 +13,8 @@ import day04 from "@assets/community/gateway/cast/desktop_04_day.webp";
 
 const CASTS: CastData[] = [
   {
-    name: "是以いとま",
+    altText:
+      "DAY1で実況を担当する是以いとまのプロフィール。Lazuli所属のクリエイター、OWCS JAPAN初の女性公式キャスター。大会実況を担当しながらストリーマーとしても活動しており、「熱血系ギャル」として明るい声色やトークで人気を集める。",
     desktopImage: koreniteItomaDesktop01,
     mobileImage: koreniteItomaMobile01,
     days: "DAY1",
@@ -23,7 +24,8 @@ const CASTS: CastData[] = [
     },
   },
   {
-    name: "gappo3",
+    altText:
+      "DAY1とDAY2で解説を担当するgappo3のプロフィール。Overwatch黎明期に、日本最高峰のチーム「Green Leaves」の選手として活動したのち、公式解説としてデビュー。Overwatchワールドカップでも公式キャスターに選出されており、どんなプレイも見逃さず、ハイレベルな解説を提供する。",
     desktopImage: gappo3Desktop02,
     mobileImage: gappo3Mobile02,
     days: "DAY1 / DAY2",
@@ -33,7 +35,8 @@ const CASTS: CastData[] = [
     },
   },
   {
-    name: "Kay",
+    altText:
+      "DAY2で実況を担当するKayのプロフィール。99DIVINEの運営スタッフでもあり、前回大会「REVATI Challengers CUP」を始め、多くのコミュニティ大会で実況を務める。Overwatchコミュニティで名が知れており、まさに「安心安全」の実況をお届け。",
     desktopImage: kayDesktop03,
     mobileImage: kayMobile03,
     days: "DAY2",
@@ -50,7 +53,10 @@ const CASTS: CastData[] = [
       {CASTS.map((cast) => <CastCard cast={cast} image={cast.desktopImage} />)}
     </div>
     <div class="day-banner">
-      <Image src={day04} alt="DAY4" class="day-image" />
+      {
+        /* `display: none` で読まれなくなるため、この画像のための代替テキストは各プロフィールに分散して記載。 */
+      }
+      <Image src={day04} alt="" class="day-image" />
     </div>
   </div>
   <div class="mobile">

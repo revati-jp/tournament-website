@@ -25,10 +25,12 @@
 	let { navItems, socialLinks }: Props = $props();
 
 	let isOpen = $state(false);
+	let triggerElement: HTMLElement | null = null;
 
 	// Header 側から発火するカスタムイベントを購読してドロワーを開く
 	$effect(() => {
 		const handleOpen = () => {
+			triggerElement = document.activeElement as HTMLElement;
 			isOpen = true;
 		};
 
@@ -50,6 +52,34 @@
 				document.body.style.overflow = originalOverflow;
 			};
 		}
+	});
+
+	// isOpen に連動して ESC キーでドロワーを閉じる
+	let drawerEl = $state<HTMLElement | null>(null);
+
+	$effect(() => {
+		if (!isOpen) return;
+
+		// ドロワーにフォーカスを移動
+		drawerEl?.focus();
+
+		const handleKeydown = (event: KeyboardEvent) => {
+			if (event.key === 'Escape') {
+				dispatchClose();
+			}
+		};
+
+		document.addEventListener('keydown', handleKeydown);
+
+		return () => {
+			document.removeEventListener('keydown', handleKeydown);
+			drawerEl?.blur();
+
+			// トリガー要素にフォーカスを戻す
+			if (triggerElement && typeof triggerElement.focus === 'function') {
+				triggerElement.focus();
+			}
+		};
 	});
 
 	// Header 側でボタンを再クリックしたときの close イベントを購読する
@@ -87,12 +117,6 @@
 	function handleNavClick() {
 		dispatchClose();
 	}
-
-	function handleKeydown(event: KeyboardEvent) {
-		if (event.key === 'Escape') {
-			dispatchClose();
-		}
-	}
 </script>
 
 <!--
@@ -104,8 +128,15 @@
 -->
 {#if isOpen}
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<div class="drawer-overlay" onkeydown={handleKeydown}>
-		<div class="drawer" role="dialog" aria-modal="true" aria-label="ナビゲーションメニュー">
+	<div class="drawer-overlay">
+		<div
+			class="drawer"
+			role="dialog"
+			aria-modal="true"
+			aria-label="ナビゲーションメニュー"
+			tabindex="-1"
+			bind:this={drawerEl}
+		>
 			<!-- ナビゲーション -->
 			<nav class="drawer-nav">
 				<ul>
