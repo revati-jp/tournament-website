@@ -28,7 +28,7 @@ export const GATEWAY_SPONSORS: CardItem[] = [
   {
     name: "e活",
     description:
-      "『e活』は熱量のあるコミュニティ大会へ協賛しています。 シーンを創る主催者様、ぜひご活用ください。",
+      "「e活」は、ゲーム大会への支援を行いながら、活発なゲームコミュニティを育て、eスポーツを「生活の一部」として社会に根付かせることをビジョンとしています。熱量のあるゲーム大会へ、資金提供や技術提供など、幅広い分野の提供を行っています。",
     logoImage: eKatsuLogo,
     socials: {
       twitter: "https://x.com/e_ekatsu",
