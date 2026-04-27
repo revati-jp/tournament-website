@@ -25,6 +25,7 @@
 ## ドキュメント
 
 - 仕様書: [docs/SPECIFICATION.md](./docs/SPECIFICATION.md)
+- AGENTS.md: [AGENTS.md](./AGENTS.md)
 
 ## 環境構築
 
