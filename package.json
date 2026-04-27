@@ -18,14 +18,14 @@
     "astro": "^6.1.9",
     "sass": "^1.99.0",
     "sharp": "^0.34.5",
-    "svelte": "^5.55.4"
+    "svelte": "^5.55.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.8",
-    "@cloudflare/workers-types": "^4.20260423.1",
+    "@cloudflare/workers-types": "^4.20260426.1",
     "@eslint/js": "^9.39.4",
     "@quantco/pnpm-licenses": "2.2.4-0",
-    "@sveltejs/kit": "^2.57.1",
+    "@sveltejs/kit": "^2.58.0",
     "@types/node": "^25.6.0",
     "@typescript-eslint/parser": "^8.59.0",
     "eslint": "^9.39.4",
@@ -38,7 +38,7 @@
     "svelte-preprocess": "^6.0.3",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.59.0",
-    "wrangler": "^4.84.1"
+    "wrangler": "^4.85.0"
   },
   "packageManager": "pnpm@10.32.1",
   "devEngines": {
