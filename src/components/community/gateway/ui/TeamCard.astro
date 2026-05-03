@@ -1,11 +1,11 @@
 ---
+import type { Team } from "@app-types/community/gateway/Team";
+
 interface Props {
-  number: number;
-  name: string;
-  members: string[];
+  team: Team;
 }
 
-const { number, name, members } = Astro.props;
+const { number, name, members }: Team = Astro.props.team;
 ---
 
 <div class="card">
