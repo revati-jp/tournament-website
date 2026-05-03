@@ -55,7 +55,7 @@ export const TEAMS: Team[] = [
   },
   {
     number: 7,
-    name: "REV Chilling Chicken",
+    name: "REVATI Chilling Chicken",
     members: ["GInkgo", "RIMK", "Halu", "Mashiro", "Yukino", "しのたん"],
   },
   {
