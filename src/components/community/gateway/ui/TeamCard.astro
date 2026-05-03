@@ -5,7 +5,8 @@ interface Props {
   team: Team;
 }
 
-const { number, name, members }: Team = Astro.props.team;
+const { team }: Props = Astro.props;
+const { number, name, members } = team;
 ---
 
 <div class="card">
