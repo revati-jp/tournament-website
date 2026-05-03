@@ -1,6 +1,6 @@
 import type { Team } from "@app-types/community/gateway/Team";
 
-export const TEAMS: Team[] = [
+export const GATEWAY_TEAMS: Team[] = [
   {
     number: 1,
     name: "ばさおTTVファンクラブ",

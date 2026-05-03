@@ -11,7 +11,7 @@ import CastContainer from "@components/community/gateway/cast/CastContainer.astr
 import { GATEWAY_SPONSORS } from "@constants/community/gateway/sponsors";
 import { GATEWAY_WATCH_PARTIES } from "@constants/community/gateway/watch-parties";
 import { REVATI_TWITTER_URL, REVATI_YOUTUBE_URL } from "@utils/variables";
-import { TEAMS } from "@constants/community/gateway/TEAMS";
+import { GATEWAY_TEAMS } from "@constants/community/gateway/TEAMS";
 
 import mainVideoSrc from "@assets/community/gateway/main.webm";
 import mainVideoThumbnail from "@assets/community/gateway/main_thumbnail.webp";
@@ -201,7 +201,7 @@ const mainVisualSlides = [
       <SectionBody>
         <p class="note">※本戦に出場するチームのみ掲載しています。</p>
         <div class="team-container">
-          {TEAMS.map((team) => <TeamCard team={team} />)}
+          {GATEWAY_TEAMS.map((team) => <TeamCard team={team} />)}
         </div>
       </SectionBody>
     </section>
