@@ -1,11 +1,12 @@
 ---
+import type { Team } from "@app-types/community/gateway/Team";
+
 interface Props {
-  number: number;
-  name: string;
-  members: string[];
+  team: Team;
 }
 
-const { number, name, members } = Astro.props;
+const { team }: Props = Astro.props;
+const { number, name, members } = team;
 ---
 
 <div class="card">
@@ -68,7 +69,7 @@ const { number, name, members } = Astro.props;
     }
 
     .body {
-      width: 70%;
+      width: 75%;
 
       .members {
         margin: 0;
@@ -102,6 +103,8 @@ const { number, name, members } = Astro.props;
       pointer-events: none;
       white-space: nowrap;
       user-select: none;
+      // TODO: 一旦オーバーレイ文字を無効化。後ほど要調整
+      display: none;
     }
   }
 </style>

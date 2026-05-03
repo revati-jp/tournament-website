@@ -11,6 +11,7 @@ import CastContainer from "@components/community/gateway/cast/CastContainer.astr
 import { GATEWAY_SPONSORS } from "@constants/community/gateway/sponsors";
 import { GATEWAY_WATCH_PARTIES } from "@constants/community/gateway/watch-parties";
 import { REVATI_TWITTER_URL, REVATI_YOUTUBE_URL } from "@utils/variables";
+import { GATEWAY_TEAMS } from "@constants/community/gateway/TEAMS";
 
 import mainVideoSrc from "@assets/community/gateway/main.webm";
 import mainVideoThumbnail from "@assets/community/gateway/main_thumbnail.webp";
@@ -18,7 +19,6 @@ import kvGatewayImg from "@assets/community/gateway/kv_gateway_for-first-view.we
 import kvFullImg from "@assets/community/gateway/kv_full_for-first-view.webp";
 
 const description = "REVATIが開催する大会「Gateway」の公式サイトです。";
-const memberTbds = Array(6).fill("TBD");
 
 /** カルーセルのスライド定義（順番の変更はここで行う） */
 const mainVisualSlides = [
@@ -201,14 +201,7 @@ const mainVisualSlides = [
       <SectionBody>
         <p class="note">※本戦に出場するチームのみ掲載しています。</p>
         <div class="team-container">
-          <TeamCard number={1} name="TBD" members={memberTbds} />
-          <TeamCard number={2} name="TBD" members={memberTbds} />
-          <TeamCard number={3} name="TBD" members={memberTbds} />
-          <TeamCard number={4} name="TBD" members={memberTbds} />
-          <TeamCard number={5} name="TBD" members={memberTbds} />
-          <TeamCard number={6} name="TBD" members={memberTbds} />
-          <TeamCard number={7} name="TBD" members={memberTbds} />
-          <TeamCard number={8} name="TBD" members={memberTbds} />
+          {GATEWAY_TEAMS.map((team) => <TeamCard team={team} />)}
         </div>
       </SectionBody>
     </section>
