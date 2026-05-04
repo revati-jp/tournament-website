@@ -56,7 +56,7 @@ export const GATEWAY_TEAMS: Team[] = [
   {
     number: 7,
     name: "REVATI Chilling Chicken",
-    members: ["GInkgo", "RIMK", "Halu", "Mashiro", "Yukino", "しのたん"],
+    members: ["Ginkgo", "RIMK", "HALU", "√mas1ro", "yukino66", "しのたん"],
   },
   {
     number: 8,
