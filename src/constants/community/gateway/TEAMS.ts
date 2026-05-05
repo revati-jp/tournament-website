@@ -61,6 +61,6 @@ export const GATEWAY_TEAMS: Team[] = [
   {
     number: 8,
     name: "lucky shot",
-    members: ["みみみ", "ゆき", "ぱぶろ", "わらやま", "りゅーほ", "天"],
+    members: ["みみみ", "ゆき", "わらやま", "りゅーほ", "天"],
   },
 ];
