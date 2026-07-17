@@ -16,6 +16,7 @@ const ALLOWED_LICENSES: string[] = [
   "LGPL-3.0-or-later",
   "MIT",
   "MIT OR CC0-1.0",
+  "MPL-2.0",
   "OFL-1.1",
   "Python-2.0",
   "BlueOak-1.0.0",
